@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +69,261 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('src/assets/fonts/PretendardVariable.ttf');
+}
+
+.xlregular {
+  font-size: 3.625rem;
+  line-height: 5.4375rem;
+  letter-spacing: -1.5%;
+  font-weight: 400;
+}
+
+.xlmedium {
+  font-size: 3.625rem;
+  line-height: 5.4375rem;
+  letter-spacing: -1.5%;
+  font-weight: 500;
+}
+
+.xlsemibold {
+  font-size: 3.625rem;
+  line-height: 5.4375rem;
+  letter-spacing: -1.5%;
+  font-weight: 600;
+}
+
+.xlbold {
+  font-size: 3.625rem;
+  line-height: 5.4375rem;
+  letter-spacing: -1.5%;
+  font-weight: 700;
+}
+
+.lgregular {
+  font-size: 3rem;
+  line-height: 4.5rem;
+  letter-spacing: 0%;
+  font-weight: 400;
+}
+
+.lgmedium {
+  font-size: 3rem;
+  line-height: 4.5rem;
+  letter-spacing: 0%;
+  font-weight: 500;
+}
+
+.lgsemibold {
+  font-size: 3rem;
+  line-height: 4.5rem;
+  letter-spacing: 0%;
+  font-weight: 600;
+}
+
+.lgbold {
+  font-size: 3rem;
+  line-height: 4.5rem;
+  letter-spacing: 0%;
+  font-weight: 700;
+}
+
+.mdregular {
+  font-size: 2rem;
+  line-height: 3rem;
+  letter-spacing: 0.25%;
+  font-weight: 400;
+}
+
+.mdmedium {
+  font-size: 2rem;
+  line-height: 3rem;
+  letter-spacing: 0.25%;
+  font-weight: 500;
+}
+
+.mdsemibold {
+  font-size: 2rem;
+  line-height: 3rem;
+  letter-spacing: 0.25%;
+  font-weight: 600;
+}
+
+.mdbold {
+  font-size: 2rem;
+  line-height: 3rem;
+  letter-spacing: 0.25%;
+  font-weight: 700;
+}
+
+.smregular {
+  font-size: 1.75rem;
+  line-height: 2.625rem;
+  letter-spacing: 0%;
+  font-weight: 400;
+}
+
+.smmedium {
+  font-size: 1.75rem;
+  line-height: 2.625rem;
+  letter-spacing: 0%;
+  font-weight: 500;
+}
+
+.smsemibold {
+  font-size: 1.75rem;
+  line-height: 2.625rem;
+  letter-spacing: 0%;
+  font-weight: 600;
+}
+
+.smbold {
+  font-size: 1.75rem;
+  line-height: 2.625rem;
+  letter-spacing: 0%;
+  font-weight: 700;
+}
+
+.xsregular {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  letter-spacing: 0%;
+  font-weight: 400;
+}
+
+.xsmedium {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  letter-spacing: 0%;
+  font-weight: 500;
+}
+
+.xssemibold {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  letter-spacing: 0%;
+  font-weight: 600;
+}
+
+.xsbold {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  letter-spacing: 0%;
+  font-weight: 700;
+}
+
+.bodylregular {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0.15%;
+  font-weight: 400;
+}
+
+.bodylmedium {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0.15%;
+  font-weight: 500;
+}
+
+.bodylsemibold {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0.15%;
+  font-weight: 600;
+}
+
+.bodylbold {
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0.15%;
+  font-weight: 700;
+}
+
+.bodymdregular {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.15%;
+  font-weight: 400;
+}
+
+.bodymdmedium {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.15%;
+  font-weight: 500;
+}
+
+.bodymdsemibold {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.15%;
+  font-weight: 600;
+}
+
+.bodymdbold {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  letter-spacing: 0.15%;
+  font-weight: 700;
+}
+
+.bodysmregular {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.25%;
+  font-weight: 400;
+}
+
+.bodysmmedium {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.25%;
+  font-weight: 500;
+}
+
+.bodysmsemibold {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.25%;
+  font-weight: 600;
+}
+
+.bodysmbold {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.25%;
+  font-weight: 700;
+}
+
+.bodyxsregular {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.25%;
+  font-weight: 400;
+}
+
+.bodyxsmedium {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.25%;
+  font-weight: 500;
+}
+
+.bodyxssemibold {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.25%;
+  font-weight: 600;
+}
+
+.bodyxsbold {
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.25%;
+  font-weight: 700;
 }
