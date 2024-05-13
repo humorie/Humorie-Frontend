@@ -1,7 +1,7 @@
 import './index.css'
 
 function App() {
-  return <div className="text-primary-600 xlmedium">휴모리 앤데이</div>
+  return <div className="text-gray-300 bodysmmedium">아이디</div>
 }
 
 export default App
