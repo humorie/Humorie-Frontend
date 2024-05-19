@@ -1,4 +1,4 @@
-import './index.css'
+import '../index.css'
 
 const Main: React.FC = () => {
   return <div>main</div>
