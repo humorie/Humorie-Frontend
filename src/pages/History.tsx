@@ -1,4 +1,4 @@
-import './index.css'
+import '../index.css'
 
 const History: React.FC = () => {
   return <div>history</div>
