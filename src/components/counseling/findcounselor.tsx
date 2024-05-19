@@ -1,5 +1,4 @@
-import './index.css'
-
+import '../../index.css'
 
 const FindCounselor = () => {
   return (
@@ -8,12 +7,11 @@ const FindCounselor = () => {
         <p>맞춤 전문가 찾기</p>
         <p>이름, 증상을 입력하고 나에게 맞는 전문가를 찾아보세요.</p>
         <div>
-          <img src='' alt='search'/>
-          <input 
-            type="search" />
+          <img src="" alt="search" />
+          <input type="search" />
         </div>
       </div>
-      <img src='' alt='character' />
+      <img src="" alt="character" />
     </div>
   )
 }
