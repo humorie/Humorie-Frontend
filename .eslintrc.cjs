@@ -43,5 +43,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'no-nested-ternary': 'off',
     camelcase: 'off',
+    'react/no-unused-prop-types': 'off',
   },
 }
