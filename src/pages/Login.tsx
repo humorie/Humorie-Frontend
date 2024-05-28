@@ -1,7 +1,8 @@
 import '../index.css'
+import Loginpage from '../components/login/firstpage'
 
 const Login: React.FC = () => {
-  return <div>login</div>
+  return <Loginpage />
 }
 
 export default Login
