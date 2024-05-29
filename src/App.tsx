@@ -5,6 +5,7 @@ import History from './pages/History'
 import Counseling from './pages/Counseling'
 import Review from './components/history/Review'
 import Main from './pages/Main'
+import Counselor from './pages/Counselor'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/history/review" element={<Review />} />
         <Route path="/counseling" element={<Counseling />} />
+        <Route path="/counseling/counselor" element={<Counselor />} />
       </Routes>
     </Router>
   )
