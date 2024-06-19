@@ -1,7 +1,13 @@
-import '../index.css'
+import Footer from '../components/Footer'
+import Header from '../components/header/Header'
 
 const Main: React.FC = () => {
-  return <div>main</div>
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  )
 }
 
 export default Main
