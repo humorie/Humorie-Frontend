@@ -8,7 +8,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react', 'prettier'], // 사용할 ESLint 플러그인을 지정
   extends: [
     // 다른 config를 사용하더라도 prettier를 맨 마지막에 넣어야 모든 중복 규칙을 비활성화 시킬 수 있다.
-    'airbnb', // Airbnb 스타일 가이드를 기반으로 하는 ESLint 규칙을 사용한다는 의미
+    // 'airbnb', // Airbnb 스타일 가이드를 기반으로 하는 ESLint 규칙을 사용한다는 의미
     'prettier', // Prettier와 관련된 ESLint 규칙을 사용한다는 의미
     'plugin:import/errors', // import 구문에 대한 오류를 감지하기 위한 규칙을 사용한다는 의미
     'plugin:import/warnings', // import 구문에 대한 경고를 감지하기 위한 규칙을 사용한다는 의미
