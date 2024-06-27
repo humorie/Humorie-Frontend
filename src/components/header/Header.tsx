@@ -29,7 +29,7 @@ const Header: React.FC = () => {
   }
 
   return (
-    <div className="absolute left-0 top-0 flex h-[60px] w-screen flex-col items-center justify-center bg-white">
+    <div className="relative left-0 top-0 z-10 flex h-[60px] w-screen flex-col items-center justify-center bg-white">
       <div className="relative h-[60px] w-[1100px] " onMouseLeave={handleCloseMenu}>
         {/* 로고 */}
         <img
