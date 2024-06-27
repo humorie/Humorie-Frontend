@@ -1,7 +1,11 @@
-import '../index.css'
+import CounselingList from '../components/history/CounselingList'
 
 const History: React.FC = () => {
-  return <div>history</div>
+  return (
+    <div>
+      <CounselingList />
+    </div>
+  )
 }
 
 export default History
