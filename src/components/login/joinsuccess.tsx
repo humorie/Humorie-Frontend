@@ -1,4 +1,6 @@
-const joinsuccess = () => {
+import '../../index.css'
+
+const Joinsuccess = () => {
   return (
     <div className="relative w-screen flex items-center justify-center w-[1440px] h-[960px] bg-gray-50 overflow-hidden">
       <div className="absolute top-0 w-[1100px] h-[960px]">
@@ -52,4 +54,4 @@ const joinsuccess = () => {
   )
 }
 
-export default joinsuccess
+export default Joinsuccess

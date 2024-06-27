@@ -1,7 +1,9 @@
-const join = () => {
+import '../../index.css'
+
+const Join = () => {
   return (
     // 회원가입
-    <div className="w-[1440px] w-screen flex items-center justify-center h-[2010px] relative bg-gray-50 overflow-hidden">
+    <div className="w-screen flex items-center justify-center h-[2010px] relative bg-gray-50 overflow-hidden">
       <div className="w-[1100px] h-[1950px] top-[60px] absolute">
         <div className="left-[110px] top-[650px] absolute bg-gray-100 border border-gray-200 flex-col justify-start items-start inline-flex">
           <div className="w-[880px] h-24 px-12 py-6 border-b border-gray-200 justify-start items-center gap-2 inline-flex">
@@ -12,7 +14,7 @@ const join = () => {
             <div className="w-[312px] h-12 bg-white border border-gray-200 justify-center items-center gap-1 flex focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium leading-tight tracking-tight p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
+                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
                 placeholder="이메일"
               />
             </div>
@@ -25,19 +27,19 @@ const join = () => {
             <div className="w-[312px] h-12 bg-white border border-gray-200 justify-center items-center gap-1.5 flex focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="id"
-                className="ml-2 w-[280px] h-full text-gray-900 bodysmmedium leading-tight tracking-tight p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 rounded-none hover:border-none focus:outline-none focus:bg-primary-100"
+                className="ml-2 w-[280px] h-full text-gray-900 bodysmmedium p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 rounded-none hover:border-none focus:outline-none focus:bg-primary-100"
                 placeholder="아이디"
               />
               <button
                 type="button"
                 className="border-none rounded-none px-0 mr-4 w-[75px] h-[32px] bg-primary-600 justify-center items-center gap-2 flex hover:bg-primary-700 hover:border-none focus:outline-none">
-                <span className="w-[44px] px-0 text-center text-white bodyxssemibold leading-[14px] tracking-tight hover:bg-primary-700 hover:border-none">
+                <span className="w-[44px] px-0 text-center text-white bodyxssemibold hover:bg-primary-700 hover:border-none">
                   중복검사
                 </span>
               </button>
             </div>
 
-            <div className="text-center text-gray-500 bodyxsregular leading-[18px] tracking-tight">
+            <div className="text-center text-gray-500 bodyxsregular">
               6자 이상, 영어 소문자와 숫자만 허용합니다.
             </div>
           </div>
@@ -49,11 +51,11 @@ const join = () => {
             <div className="w-[312px] h-12 bg-white border border-gray-200 justify-center items-center gap-1.5 flex focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium leading-tight tracking-tight p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
+                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
                 placeholder="비밀번호"
               />
             </div>
-            <div className="text-center text-gray-500 bodyxsregular leading-[18px] tracking-tight">
+            <div className="text-center text-gray-500 bodyxsregular">
               8~16자 이상, 영문자, 숫자, 특수문자를 모두 포함합니다.
             </div>
           </div>
@@ -65,7 +67,7 @@ const join = () => {
             <div className="w-[312px] h-12 bg-white border border-gray-200 justify-center items-center gap-1.5 flex focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium leading-tight tracking-tight p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
+                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
                 placeholder="비밀번호 확인"
               />
             </div>
@@ -78,11 +80,11 @@ const join = () => {
             <div className="w-[312px] h-12 bg-white border border-gray-200 justify-center items-center gap-1.5 flex focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium leading-tight tracking-tight p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
+                className="pl-[0.125rem] w-[280px] h-full text-gray-900 bodysmmedium p-2 border-none outline-none text-gray-900 bg-white placeholder-gray-200 caret-primary-700 focus:outline-none focus:bg-primary-100"
                 placeholder="이름"
               />
             </div>
-            <div className="text-center text-gray-500 bodyxsregular leading-[18px] tracking-tight">
+            <div className="text-center text-gray-500 bodyxsregular">
               공개적으로 사용될 이름입니다.
             </div>
           </div>
@@ -102,7 +104,7 @@ const join = () => {
                           border-2 border-gray-400 bg-center caret-color:primary-700"
               />
               <div className="justify-start items-start flex">
-                <div className="text-center text-gray-400 text-base font-semibold font-['Pretendard Variable'] leading-normal tracking-tight">
+                <div className="text-center text-gray-400 text-base bodymdsemibold">
                   동의
                 </div>
               </div>
@@ -127,7 +129,7 @@ const join = () => {
                           border-2 border-gray-400 bg-center caret-color:primary-700"
               />
               <div className="justify-start items-start flex">
-                <div className="text-center text-gray-400 text-base font-semibold font-['Pretendard Variable'] leading-normal tracking-tight">
+                <div className="text-center text-gray-400 text-base bodymdsemibold">                  
                   동의
                 </div>
               </div>
@@ -152,7 +154,7 @@ const join = () => {
                           border-2 border-gray-400 bg-center caret-color:primary-700"
               />
               <div className="justify-start items-start flex">
-                <div className="text-center text-gray-400 text-base font-semibold font-['Pretendard Variable'] leading-normal tracking-tight">
+                <div className="text-center text-gray-400 text-base bodymdsemibold">                  
                   동의
                 </div>
               </div>
@@ -177,7 +179,7 @@ const join = () => {
                           border-2 border-gray-400 bg-center caret-color:primary-700"
               />
               <div className="justify-start items-start flex">
-                <div className="text-center text-gray-400 text-base font-semibold font-['Pretendard Variable'] leading-normal tracking-tight">
+                <div className="text-center text-gray-400 text-base bodymdsemibold">                  
                   동의
                 </div>
               </div>
@@ -216,7 +218,7 @@ const join = () => {
           <button
             type="button"
             className="border-none w-[312px] h-[48px] shrink-0 flex flex-row items-center justify-center bg-primary-600 rounded-none hover:bg-primary-700 hover:border-none focus:outline-none">
-            <span className="w-[268px] text-[16px] leading-[24px] tracking-[0em] bodymdsemibold text-[#fff] text-center hover:bg-primary-700 hover:border-none ">
+            <span className="w-[268px] bodymdsemibold text-[#fff] text-center hover:bg-primary-700 hover:border-none ">
               다음
             </span>
           </button>
@@ -224,13 +226,13 @@ const join = () => {
         <div className="absolute -translate-x-1/2 left-1/2 top-[1884px] flex flex-row items-center justify-start gap-[16px]">
           <button
             type="button"
-            className="border-none bg-transparent w-[73px] h-[18px] shrink-0 flex flex-row items-center justify-center text-[12px] leading-[18px] tracking-[0em] bodyxsmedium text-gray-400 text-center hover:text-primary-700 focus:outline-none">
+            className="border-none bg-transparent w-[73px] h-[18px] shrink-0 flex flex-row items-center justify-center text-[12px] bodyxsmedium text-gray-400 text-center hover:text-primary-700 focus:outline-none">
             고객센터
           </button>
           <img src="src/assets/images/login/divide_login.svg" alt="" />
           <button
             type="button"
-            className="border-none bg-transparent w-[73px] h-[18px] shrink-0 flex flex-row items-center justify-center text-[12px] leading-[18px] tracking-[0em] bodyxsmedium text-[#9ca3af] text-center hover:text-primary-700 focus:outline-none">
+            className="border-none bg-transparent w-[73px] h-[18px] shrink-0 flex flex-row items-center justify-center text-[12px] bodyxsmedium text-[#9ca3af] text-center hover:text-primary-700 focus:outline-none">
             이용약관
           </button>
         </div>
@@ -271,4 +273,4 @@ const join = () => {
   )
 }
 
-export default join
+export default Join
