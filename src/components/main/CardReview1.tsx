@@ -1,4 +1,4 @@
-import BtnXSmall from '../buttons/BtnXSmall'
+import Button from '../buttons/button'
 
 const CardReview: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const CardReview: React.FC = () => {
       </div>
       {/* 바로가기 버튼 */}
       <div className="absolute top-[282px] inline-flex h-[58px] w-[260px] items-center justify-end gap-4 px-6">
-        <BtnXSmall label="바로가기" />
+        <Button size="XSmall" label="바로가기" onClick={() => console.log('Button Clicked')} />
       </div>
       <img
         className="absolute left-[8px] top-[172px] h-[160px] w-[160px]"
