@@ -1,4 +1,4 @@
-import Button from '../buttons/button'
+import Button from '../Button'
 
 const CardReview: React.FC = () => {
   return (
