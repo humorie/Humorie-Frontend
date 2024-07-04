@@ -8,6 +8,7 @@ export default {
       },
       colors: {
         primary: {
+          50: '#FFF9FB',
           100: '#FEF2F6',
           200: '#FDE5ED',
           300: '#FBCCDB',
