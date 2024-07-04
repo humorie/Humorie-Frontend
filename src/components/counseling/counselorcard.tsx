@@ -24,7 +24,7 @@ const CounselorCard = () => {
           </div>
           <div className="flex justify-between">
             <div className="flex justify-center space-x-[34px]">
-              <img src="src/assets/images/counseling/이솔비상담가.svg" alt="counselorimage" />
+              <img src="src/assets/images/counseling/image_이솔비상담가.svg" alt="counselorimage" />
               <div className="flex flex-col justify-between h-[125px]">
                 <div className="flex space-x-[8px] items-end">
                   <p className="mdsemibold">이솔비</p>
