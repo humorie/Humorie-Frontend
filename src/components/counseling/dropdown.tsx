@@ -6,7 +6,7 @@ import DropdownViews from './dropdownViews'
 
 const Dropdown = () => {
   return (
-    <div className="flex flex-row space-x-[21px]">
+    <div className="flex flex-row items-center justify-end space-x-[9px] mt-[40px] mb-[52px]">
       <DropdownMethod />
       <DropdownRegion />
       <DropdownGender />

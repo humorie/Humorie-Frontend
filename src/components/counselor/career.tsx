@@ -3,7 +3,7 @@ import '../../index.css'
 const Career = () => {
   return (
     <div className="flex flex-col items-start space-y-[36px] ps-[88px] pb-[135px] w-[1050px]">
-      <p className="xsmedium">임솔비 상담사님의 상세경력</p>
+      <p className="smsemibold">임솔비 상담사님의 상세경력</p>
       <div className="space-y-[24px]">
         <div className="flex flex-row space-x-[14px]">
           <img src="/src/assets/images/counseling/career.svg" alt="career" />
