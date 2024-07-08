@@ -4,10 +4,13 @@ import Review from './review'
 const Introduction = () => {
   return (
     <div className="flex flex-col justify-between">
-      <p className="mdbold mt-[33px]">
-        심리상담사 앤데이 김솔비입니다. <br />
-        내담자의 든든한 심리파트너가 되어드리겠습니다.
-      </p>
+      <div className="flex flex-col text-black space-y-[37px]">
+        <div className="flex flex-row items-center justify-center w-[202px] h-[40px] space-x-[10px] bg-gray-200 rounded-[6px]">
+          <img src="/src/assets/images/counseling/icon_shield.svg" alt="icon" />
+          <p className="bodysmbold text-gray-500">공인 의료 서비스 제공자</p>
+        </div>
+        <p className="mdbold">내담자의 든든한 심리파트너가 되어드리겠습니다.</p>
+      </div>
       <div className="flex flex-col bodymdmedium space-y-[14px]">
         <div className="flex flex-row space-x-[55px]">
           <p className="text-primary-800">대표업무</p>
