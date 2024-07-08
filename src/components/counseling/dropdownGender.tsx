@@ -10,7 +10,7 @@ const DropdownGender = () => {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="relative">
-        <MenuButton className="flex w-[100px] h-[40px] p-0 text-gray-700 justify-center items-center gap-x-[8px] rounded-[4px] bg-gray-100 bodymdregular hover:bg-gray-100">
+        <MenuButton className="bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0 text-gray-700 hover:bg-gray-100">
           성별
           <img src="src/assets/images/counseling/dropdown.svg" alt="dropdown" />
         </MenuButton>
@@ -25,14 +25,14 @@ const DropdownGender = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95">
         <MenuItems className="absolute z-10 mt-2 w-[84px] origin-top-right rounded-md bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1 flex flex-col items-center">
+          <div className="flex flex-col items-center py-1">
             <MenuItem>
               {({ active }: { active: boolean }) => (
                 <button
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bg-gray-100 bodysmregular w-[62px] rounded-none border-b-[0.5px] border-x-0 border-t-0 border-gray-300',
+                    'bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}>
                   남성
                 </button>
@@ -44,7 +44,7 @@ const DropdownGender = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 w-[62px] bodysmregular rounded-none',
+                    'bodysmregular block w-[62px] rounded-none bg-gray-100',
                   )}>
                   여성
                 </button>

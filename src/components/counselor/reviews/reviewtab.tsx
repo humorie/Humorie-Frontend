@@ -1,8 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react'
 import '../../../index.css'
-import Review from '../review'
-import Reviewscard from './reviews_reviewcard_all'
 import ReviewsAll from './reviews_reviews_all'
 import ReviewsStress from './reviews_reviews_stress'
 
@@ -17,11 +14,11 @@ const ReviewTabs: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <ul className="flex justify-center items-center mb-[56px] space-x-[117px]">
+      <ul className="mb-[56px] flex items-center justify-center space-x-[117px]">
         {tabs.map((tab, index) => (
           <li
             key={index}
-            className={`cursor-pointer bodylmedium text-black ${activeTab === tab ? 'bodylbold text-black border-b-[3px] border-black' : ''}`}
+            className={`bodylmedium cursor-pointer text-black ${activeTab === tab ? 'bodylbold border-b-[3px] border-black text-black' : ''}`}
             onClick={() => handleTabClick(tab)}>
             {tab}
           </li>
