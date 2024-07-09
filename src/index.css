@@ -29,9 +29,13 @@ a {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
+  flex-direction: column; /* 요소들을 세로로 정렬 */
+  align-items: center; /* 수직 방향 중앙 정렬 */
+  justify-content: center; /* 수평 방향 중앙 정렬 */
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffffff; /* 모든 페이지의 배경색을 흰색으로 설정 */
 }
 
 h1 {
