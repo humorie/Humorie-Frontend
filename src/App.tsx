@@ -9,6 +9,8 @@ import Review from './pages/Review'
 import Post from './pages/Post'
 import Complete from './pages/Complete'
 import MoreReviews from './pages/Reviews'
+import FindId from './pages/FindId'
+import FindPw from './pages/FindPw'
 
 function App() {
   return (
