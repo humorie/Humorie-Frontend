@@ -1,7 +1,7 @@
 import React from 'react'
 import RadioButton from '../RadioButton'
 import { useMeetingStore } from '../../store/store'
-import KakaoMap from './KakaoMap'
+import KakaoMapApi from '../../services/KakaoMapApi'
 
 const Place: React.FC = () => {
   const { meetingType, setMeetingType, onlineOption, setOnlineOption } = useMeetingStore()
@@ -51,7 +51,7 @@ const Place: React.FC = () => {
           />
         </div>
       )}
-      {meetingType === '오프라인' && <KakaoMap />}
+      {meetingType === '오프라인' && <KakaoMapApi />}
     </div>
   )
 }
