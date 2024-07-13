@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import Footer from '../components/Footer'
-import Table from '../components/counseling/Modal/table'
 import Career from '../components/counselor/career'
 import Introduction from '../components/counselor/introduction'
 import Profile from '../components/counselor/profile'
