@@ -49,6 +49,7 @@ export default {
         status: {
           1: '#3385FF',
           2: '#FF6363',
+          4: '#FF6363',
         },
       },
     },
