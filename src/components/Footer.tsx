@@ -5,6 +5,9 @@ const Footer: React.FC = () => {
   const onClickCustomerServicehandler = () => {
     navigate('/customerservice')
   }
+  const onClickPolicyhandler = () => {
+    navigate('/policy')
+  }
 
   return (
     <div className="flex h-[200px] w-[1440px] items-center justify-center bg-white">
@@ -15,11 +18,13 @@ const Footer: React.FC = () => {
               {/* 고객센터, 이용약관 */}
               <div className="bodysmbold flex items-center justify-start text-center text-gray-800">
                 <div
-                  className="flex h-[60px] w-[100px] cursor-pointer items-center justify-center text-center"
+                  className="flex h-[60px] w-[100px] cursor-pointer items-center justify-center text-center hover:text-primary-700 active:text-primary-800"
                   onClick={onClickCustomerServicehandler}>
                   고객센터
                 </div>
-                <div className="flex h-[60px] w-[100px] items-center justify-center text-center">
+                <div
+                  className="flex h-[60px] w-[100px] cursor-pointer items-center justify-center text-center hover:text-primary-700 active:text-primary-800"
+                  onClick={onClickPolicyhandler}>
                   이용약관
                 </div>
               </div>
