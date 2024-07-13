@@ -15,6 +15,8 @@ import Reservation from './pages/Reservation'
 import Info from './pages/Info'
 import FindId from './pages/FindId'
 import FindPw from './pages/FindPw'
+import MyPage from './pages/MyPage'
+import DeleteAccount from './pages/DeleteAccount'
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/info" element={<Info />} />
         <Route path="/findid" element={<FindId />} />
         <Route path="/findpw" element={<FindPw />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/deleteaccount" element={<DeleteAccount />} />
       </Routes>
     </Router>
   )
