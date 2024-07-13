@@ -3,10 +3,13 @@ import '../../index.css'
 import SearchinModal from './Modal/searchmodal'
 import Table from './Modal/table'
 import Button from '../Button'
+import { useTagsStore, Tag } from '../../store/store'
 
 const SearchBar = () => {
   const [modalOpen, setModalOpen] = useState(false)
+  const [searchTags, setSearchTags] = useState<Tag[]>([])
   const modalBackground = useRef(null)
+  const { tags, removeTag, removeSelectedSymptom } = useTagsStore()
 
   useEffect(() => {
     if (modalOpen) {
@@ -19,14 +22,41 @@ const SearchBar = () => {
     }
   }, [modalOpen])
 
+  const handleConfirm = () => {
+    setSearchTags(tags)
+    setModalOpen(false)
+  }
+
+  const handleRemoveTag = (tagContent: string) => {
+    removeTag(tagContent)
+    removeSelectedSymptom(tagContent)
+  }
+
   return (
     <div className="flex flex-row bg-gray-50 px-[23px] py-[19px]">
       <img src="src/assets/images/counseling/search.svg" alt="search" className="mr-[36px]" />
-      <button
-        className="bodylregular flex h-[30px] w-[1006px] justify-start bg-gray-50 p-0 text-gray-500"
+      <div
+        className="bodylregular flex h-[30px] w-[1006px] cursor-pointer items-center justify-start bg-gray-50 p-0 text-gray-500"
         onClick={() => setModalOpen(true)}>
-        이름, 상황으로 전문가를 검색해보세요!
-      </button>
+        {searchTags.length > 0 ? (
+          <div className="flex flex-wrap justify-center space-x-[12px]">
+            {searchTags.map((tag, index) => (
+              <div
+                key={index}
+                className="bodymdsemibold flex cursor-pointer flex-row rounded-[4px] border-[1px] border-primary-600 bg-primary-100 px-[10px] py-[6px] text-primary-600">
+                {tag.content}
+                <img
+                  src="src/assets/images/counseling/icon_close.svg"
+                  alt="close"
+                  className="ms-[2px]"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          '이름, 상황으로 전문가를 검색해보세요!'
+        )}
+      </div>
       {modalOpen && (
         <div
           ref={modalBackground}
@@ -39,9 +69,25 @@ const SearchBar = () => {
           <div className="flex h-[655px] w-[540px] flex-col flex-col items-center bg-white">
             <SearchinModal />
             <Table />
-            <div className="mt-[96px] flex space-x-[28px]">
+            <div className="h-150px ms-[45px] mt-[25px] flex w-full  flex-wrap justify-start space-x-[12px] overflow-y-auto">
+              {tags.map((tag, index) => (
+                <div
+                  key={index}
+                  className="bodymdsemibold flex cursor-pointer flex-row rounded-[4px] border-[1px] border-primary-600 bg-primary-100 px-[10px] py-[6px] text-primary-600 hover:border-primary-700 hover:bg-primary-200 "
+                  onClick={() => handleRemoveTag(tag.content)}>
+                  {tag.content}
+                  <img
+                    src="src/assets/images/counseling/icon_close.svg"
+                    alt="close"
+                    className="ms-[2px]"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex-grow"></div>
+            <div className="mb-[24px] flex space-x-[28px]">
               <Button label="취소" size="Large" color="line" onClick={() => setModalOpen(false)} />
-              <Button label="확인" size="XLarge" color="pink" />
+              <Button label="확인" size="XLarge" color="pink" onClick={handleConfirm} />
             </div>
           </div>
         </div>

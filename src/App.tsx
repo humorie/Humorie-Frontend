@@ -11,6 +11,8 @@ import Review from './pages/Review'
 import Post from './pages/Post'
 import Complete from './pages/Complete'
 import MoreReviews from './pages/Reviews'
+import Reservation from './pages/Reservation'
+import Info from './pages/Info'
 import FindId from './pages/FindId'
 import FindPw from './pages/FindPw'
 
@@ -30,6 +32,8 @@ function App() {
         <Route path="/counseling" element={<Counseling />} />
         <Route path="/counseling/counselor" element={<Counselor />} />
         <Route path="/counseling/counselor/reviews" element={<MoreReviews />} />
+        <Route path="/counseling/reservation" element={<Reservation />} />
+        <Route path="/info" element={<Info />} />
         <Route path="/findid" element={<FindId />} />
         <Route path="/findpw" element={<FindPw />} />
       </Routes>
