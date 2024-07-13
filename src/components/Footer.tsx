@@ -1,4 +1,11 @@
+import { useNavigate } from 'react-router-dom'
+
 const Footer: React.FC = () => {
+  const navigate = useNavigate()
+  const onClickCustomerServicehandler = () => {
+    navigate('/customerservice')
+  }
+
   return (
     <div className="flex h-[200px] w-[1440px] items-center justify-center bg-white">
       <div className="flex w-[1060px] flex-col items-center justify-center ">
@@ -7,7 +14,9 @@ const Footer: React.FC = () => {
             <div className="flex flex-row items-center justify-between self-stretch">
               {/* 고객센터, 이용약관 */}
               <div className="bodysmbold flex items-center justify-start text-center text-gray-800">
-                <div className="flex h-[60px] w-[100px] items-center justify-center text-center">
+                <div
+                  className="flex h-[60px] w-[100px] cursor-pointer items-center justify-center text-center"
+                  onClick={onClickCustomerServicehandler}>
                   고객센터
                 </div>
                 <div className="flex h-[60px] w-[100px] items-center justify-center text-center">
