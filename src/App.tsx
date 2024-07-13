@@ -18,7 +18,7 @@ import Reservation from './pages/Reservation'
 import Info from './pages/Info'
 import FindId from './pages/FindId'
 import FindPw from './pages/FindPw'
-
+import Policy from './pages/Policy'
 
 function App() {
   return (
@@ -36,15 +36,12 @@ function App() {
         <Route path="/counseling" element={<Counseling />} />
         <Route path="/counseling/counselor" element={<Counselor />} />
         <Route path="/counseling/counselor/reviews" element={<MoreReviews />} />
-
         <Route path="/customerservice" element={<CustomerServcie />} />
-
         <Route path="/counseling/reservation" element={<Reservation />} />
         <Route path="/info" element={<Info />} />
-
         <Route path="/findid" element={<FindId />} />
         <Route path="/findpw" element={<FindPw />} />
-
+        <Route path="/policy" element={<Policy />} />
       </Routes>
     </Router>
   )
