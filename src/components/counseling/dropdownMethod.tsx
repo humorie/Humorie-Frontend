@@ -1,17 +1,25 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import '../../index.css'
 import { Fragment } from 'react'
+import useDropdownStore from '../../store/store'
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
   return classes.filter(Boolean).join(' ')
 }
 
 const DropdownMethod = () => {
+  const { selectedDropdowns, setSelectedDropdown } = useDropdownStore()
+  const selectedMethod = selectedDropdowns['method'] || '상담방식'
+
+  const handleSelectedMedthod = (method: string) => {
+    setSelectedDropdown('method', method)
+  }
+
   return (
     <Menu as="div" className="relative inline-block">
       <div className="relative">
-        <MenuButton className="flex w-[100px] h-[40px] p-0 text-gray-700 justify-center items-center gap-x-[8px] rounded-[4px] bg-gray-100 bodymdregular hover:bg-gray-100">
-          상담방식
+        <MenuButton className="bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0 text-gray-700 hover:bg-gray-100">
+          {selectedMethod}
           <img src="src/assets/images/counseling/dropdown.svg" alt="dropdown" />
         </MenuButton>
       </div>
@@ -24,16 +32,17 @@ const DropdownMethod = () => {
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95">
-        <MenuItems className="absolute z-10 mt-2 w-[110px] items-center origin-top-right rounded-md bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1 flex flex-col items-center">
+        <MenuItems className="absolute z-10 mt-2 w-[110px] origin-top-right items-center rounded-md bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="flex flex-col items-center py-1">
             <MenuItem>
               {({ active }: { active: boolean }) => (
                 <button
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bg-gray-100 bodysmregular w-[85px] rounded-none border-b-[0.5px] border-x-0 border-t-0 border-gray-300',
-                  )}>
+                    ' bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedMedthod('전화상담')}>
                   전화상담
                 </button>
               )}
@@ -44,8 +53,9 @@ const DropdownMethod = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 bodysmregular w-[85px] rounded-none border-b-[0.5px] border-x-0 border-t-0 border-gray-300',
-                  )}>
+                    'bodysmregular block w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedMedthod('문자상담')}>
                   문자상담
                 </button>
               )}
@@ -56,8 +66,9 @@ const DropdownMethod = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 bodysmregular w-[85px]  rounded-none border-b-[0.5px] border-x-0 border-t-0 border-gray-300 px-0',
-                  )}>
+                    'bodysmregular block w-[85px] rounded-none  border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100 px-0',
+                  )}
+                  onClick={() => handleSelectedMedthod('텍스트테라피')}>
                   텍스트테라피
                 </button>
               )}
@@ -68,8 +79,9 @@ const DropdownMethod = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 bodysmregular w-[85px] rounded-none border-b-[0.5px] border-x-0 border-t-0 border-gray-300 ',
-                  )}>
+                    'bodysmregular block w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100 ',
+                  )}
+                  onClick={() => handleSelectedMedthod('화상상담')}>
                   화상상담
                 </button>
               )}
@@ -80,8 +92,9 @@ const DropdownMethod = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 bodysmregular w-[85px] rounded-none',
-                  )}>
+                    'bodysmregular block w-[85px] rounded-none bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedMedthod('대면상담')}>
                   대면상담
                 </button>
               )}
