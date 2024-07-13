@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './index.css'
 import Login from './pages/Login'
+import Join from './pages/Join'
+import JoinSuccess from './pages/JoinSuccess'
 import History from './pages/History'
 import Main from './pages/Main'
 import Counselor from './pages/Counselor'
@@ -11,13 +13,18 @@ import Complete from './pages/Complete'
 import MoreReviews from './pages/Reviews'
 import Reservation from './pages/Reservation'
 import Info from './pages/Info'
+import FindId from './pages/FindId'
+import FindPw from './pages/FindPw'
 
 function App() {
   return (
+    // <JoinForm />
     <Router>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/joinsuccess" element={<JoinSuccess />} />
         <Route path="/history" element={<History />} />
         <Route path="/review" element={<Review />} />
         <Route path="/review/complete" element={<Complete />} />
@@ -27,6 +34,8 @@ function App() {
         <Route path="/counseling/counselor/reviews" element={<MoreReviews />} />
         <Route path="/counseling/reservation" element={<Reservation />} />
         <Route path="/info" element={<Info />} />
+        <Route path="/findid" element={<FindId />} />
+        <Route path="/findpw" element={<FindPw />} />
       </Routes>
     </Router>
   )
