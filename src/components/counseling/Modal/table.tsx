@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTagsStore } from '../../../store/store'
 
 const Table = () => {
   const [activeMainTab, setActiveMainTab] = useState<string>('개인') // 개인 탭이 기본으로 선택되도록 설정
   const [activeSubTab, setActiveSubTab] = useState<string>('개인 문제') // 개인 문제 탭이 기본으로 선택되도록 설정
   const overflowRef = useRef<HTMLDivElement>(null)
+  const { addTag, selectedSymptoms, addSelectedSymptom, removeSelectedSymptom } = useTagsStore()
   const mainTabs = ['개인', '가족']
   const privatetabs = ['개인 문제']
   const privatesymptoms = [
@@ -81,6 +83,15 @@ const Table = () => {
   // 서브 탭을 클릭할 때 실행되는 함수
   const handleSubTabClick = (tab: string) => {
     setActiveSubTab(tab)
+  }
+
+  const handleSymptomClick = (symptom: string) => {
+    if (selectedSymptoms.includes(symptom)) {
+      removeSelectedSymptom(symptom)
+    } else {
+      addSelectedSymptom(symptom)
+    }
+    addTag({ title: activeSubTab, content: symptom })
   }
 
   useEffect(() => {
@@ -161,32 +172,48 @@ const Table = () => {
                   privatesymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] items-center border-b-[1px] border-gray-300 bg-white px-[20px]">
+                      className={`bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center justify-between border-b-[1px] border-gray-300 bg-white px-[20px] ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : ''}`}
+                      onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
+                      {selectedSymptoms.includes(symptom) && (
+                        <img src="src/assets/images/counseling/icon_checkmark.svg" alt="selected" />
+                      )}
                     </div>
                   ))}
                 {activeSubTab === '가족 문제' &&
                   familysymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] items-center border-b-[1px] border-gray-300 bg-white px-[20px] ">
+                      className="bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center border-b-[1px] border-gray-300 bg-white px-[20px] "
+                      onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
+                      {selectedSymptoms.includes(symptom) && (
+                        <img src="src/assets/images/counseling/icon_checkmark.svg" alt="selected" />
+                      )}
                     </div>
                   ))}
                 {activeSubTab === '부부 문제' &&
                   couplesymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] items-center border-b-[1px] border-gray-300 bg-white px-[20px] ">
+                      className="bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center border-b-[1px] border-gray-300 bg-white px-[20px] "
+                      onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
+                      {selectedSymptoms.includes(symptom) && (
+                        <img src="src/assets/images/counseling/icon_checkmark.svg" alt="selected" />
+                      )}
                     </div>
                   ))}
                 {activeSubTab === '자녀 문제' &&
                   childsymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] items-center border-b-[1px] border-gray-300 bg-white px-[20px] ">
+                      className="bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center border-b-[1px] border-gray-300 bg-white px-[20px] "
+                      onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
+                      {selectedSymptoms.includes(symptom) && (
+                        <img src="src/assets/images/counseling/icon_checkmark.svg" alt="selected" />
+                      )}
                     </div>
                   ))}
               </div>
