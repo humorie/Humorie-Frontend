@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import Footer from '../components/Footer'
 import Counselorlist from '../components/counseling/counselorlist'
 import Dropdown from '../components/counseling/dropdown'
