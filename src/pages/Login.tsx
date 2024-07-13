@@ -1,8 +1,8 @@
 import '../index.css'
-import Loginpage from '../components/login/join'
+import LoginForm from '../components/login/LoginForm'
 
 const Login: React.FC = () => {
-  return <Loginpage />
+  return <LoginForm />
 }
 
 export default Login
