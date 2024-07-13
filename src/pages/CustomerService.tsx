@@ -2,7 +2,6 @@ import SearchinCS from '../components/cs/search'
 import Footer from '../components/Footer'
 import Header from '../components/header/Header'
 import '../index.css'
-import listCS from '../components/cs/list'
 import ListinCS from '../components/cs/list'
 
 const CustomerServcie: React.FC = () => {
