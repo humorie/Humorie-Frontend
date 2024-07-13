@@ -3,8 +3,15 @@ import Footer from '../components/Footer'
 import Header from '../components/header/Header'
 import '../index.css'
 import ListinCS from '../components/cs/list'
+import { useEffect } from 'react'
 
 const CustomerServcie: React.FC = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo(0, 0)
+    }, 0)
+  }, [])
+
   return (
     <div className="flex w-screen flex-col items-center justify-center  bg-white">
       <Header />
