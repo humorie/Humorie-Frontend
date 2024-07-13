@@ -11,14 +11,15 @@ import Review from './pages/Review'
 import Post from './pages/Post'
 import Complete from './pages/Complete'
 import MoreReviews from './pages/Reviews'
-
 import CustomerServcie from './pages/CustomerService'
-
 import Reservation from './pages/Reservation'
 import Info from './pages/Info'
 import FindId from './pages/FindId'
 import FindPw from './pages/FindPw'
 import Policy from './pages/Policy'
+import MyPage from './pages/MyPage'
+import DeleteAccount from './pages/DeleteAccount'
+
 
 function App() {
   return (
@@ -42,6 +43,8 @@ function App() {
         <Route path="/findid" element={<FindId />} />
         <Route path="/findpw" element={<FindPw />} />
         <Route path="/policy" element={<Policy />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/deleteaccount" element={<DeleteAccount />} />
       </Routes>
     </Router>
   )
