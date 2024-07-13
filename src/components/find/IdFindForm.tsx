@@ -21,7 +21,7 @@ const IdFindForm: React.FC = () => {
                 placeholder="이메일"
               />
             </div>
-            <div className="relative text-center text-xs leading-[18px] text-gray-500">
+            <div className="bodyxsregular relative text-center text-gray-500">
               가입에 사용한 이메일을 입력해주세요.
             </div>
           </div>
