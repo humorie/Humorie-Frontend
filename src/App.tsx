@@ -9,6 +9,7 @@ import Review from './pages/Review'
 import Post from './pages/Post'
 import Complete from './pages/Complete'
 import MoreReviews from './pages/Reviews'
+import CustomerServcie from './pages/CustomerService'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/counseling" element={<Counseling />} />
         <Route path="/counseling/counselor" element={<Counselor />} />
         <Route path="/counseling/counselor/reviews" element={<MoreReviews />} />
+        <Route path="/customerservice" element={<CustomerServcie />} />
       </Routes>
     </Router>
   )
