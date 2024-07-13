@@ -1,17 +1,25 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import '../../index.css'
 import { Fragment } from 'react'
+import useDropdownStore from '../../store/store'
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
   return classes.filter(Boolean).join(' ')
 }
 
 const DropdownViews = () => {
+  const { selectedDropdowns, setSelectedDropdown } = useDropdownStore()
+  const selectedViews = selectedDropdowns['views'] || '리뷰'
+
+  const handleSelectedViews = (views: string) => {
+    setSelectedDropdown('views', views)
+  }
+
   return (
     <Menu as="div" className="relative inline-block">
       <div className="relative">
-        <MenuButton className="flex w-[100px] h-[40px] p-0 text-gray-800 justify-center items-center gap-x-[8px] rounded-[4px] bg-gray-100 bodymdregular  hover:bg-gray-100">
-          리뷰
+        <MenuButton className="bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0  text-gray-700  hover:bg-gray-100">
+          {selectedViews}
           <img src="src/assets/images/counseling/dropdown.svg" alt="dropdown" />
         </MenuButton>
       </div>
@@ -25,15 +33,16 @@ const DropdownViews = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95">
         <MenuItems className="absolute z-10 mt-2 w-[100px] origin-top-right rounded-[4px] bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1 flex flex-col bg-gray-100 justify-center">
+          <div className="flex flex-col items-center justify-center bg-gray-100 py-1">
             <MenuItem>
               {({ active }: { active: boolean }) => (
                 <button
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bg-gray-100 px-4 py-2 bodysmregular',
-                  )}>
+                    ' bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedViews('조회순')}>
                   조회순
                 </button>
               )}
@@ -44,8 +53,9 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 px-4 py-2 bodysmregular',
-                  )}>
+                    'bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedViews('추천순')}>
                   추천순
                 </button>
               )}
@@ -56,8 +66,9 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 px-4 py-2 bodysmregular',
-                  )}>
+                    'bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedViews('인기순')}>
                   인기순
                 </button>
               )}
@@ -68,8 +79,9 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'block bg-gray-100 px-4 py-2 bodysmregular',
-                  )}>
+                    'bodysmregular rounded-none bg-gray-100',
+                  )}
+                  onClick={() => handleSelectedViews('최신순')}>
                   최신순
                 </button>
               )}
