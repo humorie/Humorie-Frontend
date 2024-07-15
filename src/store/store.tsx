@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import Calendar from '../components/reservation/Calendar'
 
 interface ModalState {
   modalOpen: boolean
@@ -40,7 +39,6 @@ export const useTagsStore = create<TagsState>((set) => ({
   removeSelectedSymptom: (symptom) =>
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
-
 
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
@@ -93,4 +91,3 @@ export const useMeetingStore = create<MeetingState>((set) => ({
   setOnlineOption: (option) => set({ onlineOption: option }),
 }))
 /* ------------------------------------------------------------ */
-

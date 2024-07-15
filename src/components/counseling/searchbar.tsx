@@ -66,7 +66,7 @@ const SearchBar = () => {
               setModalOpen(false)
             }
           }}>
-          <div className="flex h-[655px] w-[540px] flex-col flex-col items-center bg-white">
+          <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
             <SearchinModal />
             <Table />
             <div className="h-150px ms-[45px] mt-[25px] flex w-full  flex-wrap justify-start space-x-[12px] overflow-y-auto">

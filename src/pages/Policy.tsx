@@ -13,7 +13,7 @@ const Policy: React.FC = () => {
   }, [])
 
   return (
-    <div className="justify-top flex w-screen flex-col items-center bg-white ">
+    <div className="justify-top flex flex-col items-center text-black ">
       <PolicyHeader />
       <div className="mb-[340px] mt-[48px] w-[1100px] space-y-[40px] px-[20px]">
         <div className="bodymdmedium text-gray-400">

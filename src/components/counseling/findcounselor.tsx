@@ -3,7 +3,7 @@ import Recommendation from './recommendation'
 
 const FindCounselor = () => {
   return (
-    <div className="flex h-[380px] w-screen items-center justify-center bg-primary-50">
+    <div className="flex h-[380px] w-full items-center justify-center bg-primary-50">
       <div className="flex w-[1006px] flex-row justify-between">
         <div className="flex flex-col content-center justify-center space-y-[9px]">
           <p className="lgbold text-black">상담하기</p>
