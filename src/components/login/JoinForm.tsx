@@ -14,7 +14,7 @@ const JoinForm = () => {
             <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
+                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                 placeholder="이메일"
               />
             </div>
@@ -27,7 +27,7 @@ const JoinForm = () => {
             <div className="flex h-12 w-[312px] items-center justify-center gap-1.5 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="id"
-                className="bodysmmedium ml-2 h-full w-[280px] rounded-none border-none bg-white p-2 text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none hover:border-none focus:bg-primary-100 focus:outline-none"
+                className="bodysmmedium ml-2 h-full w-[280px] rounded-none border-none bg-white p-2 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none hover:border-none focus:bg-primary-100 focus:outline-none"
                 placeholder="아이디"
               />
               <button
@@ -51,7 +51,7 @@ const JoinForm = () => {
             <div className="flex h-12 w-[312px] items-center justify-center gap-1.5 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
+                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem]  text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                 placeholder="비밀번호"
               />
             </div>
@@ -67,7 +67,7 @@ const JoinForm = () => {
             <div className="flex h-12 w-[312px] items-center justify-center gap-1.5 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
+                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem]  text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                 placeholder="비밀번호 확인"
               />
             </div>
@@ -80,7 +80,7 @@ const JoinForm = () => {
             <div className="flex h-12 w-[312px] items-center justify-center gap-1.5 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
               <input
                 type="email"
-                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
+                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem]  text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                 placeholder="이름"
               />
             </div>

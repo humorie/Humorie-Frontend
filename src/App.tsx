@@ -20,10 +20,8 @@ import Policy from './pages/Policy'
 import MyPage from './pages/MyPage'
 import DeleteAccount from './pages/DeleteAccount'
 
-
 function App() {
   return (
-    // <JoinForm />
     <Router>
       <Routes>
         <Route path="/" element={<Main />} />

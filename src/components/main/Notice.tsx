@@ -1,6 +1,12 @@
+import { useNavigate } from 'react-router-dom'
+
 const Notice: React.FC = () => {
+  const navigate = useNavigate()
+
   return (
-    <div className="relative h-[356px] w-[356px] rounded-lg bg-white shadow">
+    <div
+      className="relative h-[356px] w-[356px] rounded-lg bg-white shadow"
+      onClick={() => navigate('/customerservice')}>
       <div className="absolute left-0 top-0 inline-flex h-28 flex-col items-start justify-start p-6">
         <div className="flex flex-col items-start justify-start gap-4">
           <p className="mdbold text-gray-900">공지사항</p>

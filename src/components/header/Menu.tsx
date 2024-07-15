@@ -1,5 +1,5 @@
 interface MenuProps {
-  items: { id: number; label: string }[]
+  items: { id: number; label: string; onClick: () => void }[]
 }
 
 const Menu: React.FC<MenuProps> = ({ items }) => {
@@ -8,7 +8,8 @@ const Menu: React.FC<MenuProps> = ({ items }) => {
       {items.map((item) => (
         <div
           key={item.id}
-          className="inline-flex h-[40px] w-[160px] cursor-pointer items-center justify-center gap-2 bg-white hover:bg-gray-100">
+          className="inline-flex h-[40px] w-[160px] cursor-pointer items-center justify-center gap-2 bg-white hover:bg-gray-100"
+          onClick={item.onClick}>
           <div className="bodysmbold text-center text-gray-900">{item.label}</div>
         </div>
       ))}

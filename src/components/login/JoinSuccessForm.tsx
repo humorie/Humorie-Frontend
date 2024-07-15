@@ -2,7 +2,7 @@ import '../../index.css'
 
 const JoinSuccess = () => {
   return (
-    <div className="relative flex h-[960px] w-[1440px] w-screen items-center justify-center overflow-hidden bg-gray-50">
+    <div className="relative flex h-[960px] w-[1440px] items-center justify-center overflow-hidden bg-gray-50">
       <div className="absolute top-0 h-[960px] w-[1100px]">
         <div className="absolute left-1/2 top-[357px] flex h-[48px] w-[312px] -translate-x-1/2 flex-row items-center justify-center bg-primary-600">
           <button
