@@ -1,31 +1,30 @@
 import '../../index.css'
+import Button from '../Button'
+import { useNavigate } from 'react-router-dom'
 
 const JoinSuccess = () => {
+  const navigate = useNavigate()
+  // 시작하기 버튼
+  const handleStartButtonClick = () => {
+    navigate('/login')
+  }
+
+  // 고객센터 버튼
+  const handleCustomerServiceClick = () => {
+    navigate('/customerservice')
+  }
+
+  // 이용약관 버튼
+  const handlePolicyClick = () => {
+    navigate('/policy')
+  }
   return (
     <div className="relative flex h-[960px] w-[1440px] items-center justify-center overflow-hidden bg-gray-50">
       <div className="absolute top-0 h-[960px] w-[1100px]">
-        <div className="absolute left-1/2 top-[357px] flex h-[48px] w-[312px] -translate-x-1/2 flex-row items-center justify-center bg-primary-600">
-          <button
-            type="button"
-            className="flex h-[48px] w-[312px] shrink-0 flex-row items-center justify-center rounded-none border-none bg-primary-600 hover:border-none hover:bg-primary-700 focus:outline-none">
-            <span className="bodymdsemibold w-[268px] text-[#fff] hover:border-none hover:bg-primary-700">
-              시작하기
-            </span>
-          </button>
+        <div className="absolute left-1/2 top-[357px] flex h-[48px] w-[312px] -translate-x-1/2 flex-row items-center justify-center ">
+          <Button label="시작하기" size="XLarge" color="pink" onClick={handleStartButtonClick} />
         </div>
-        <div className="absolute left-1/2 top-[894px] flex -translate-x-1/2 flex-row items-center justify-start gap-[16px]">
-          <button
-            type="button"
-            className="bodyxsmedium flex h-[18px] w-[73px] shrink-0 flex-row items-center border-none bg-transparent text-gray-400 hover:text-primary-700 focus:outline-none">
-            고객센터
-          </button>
-          <img src="src/assets/images/login/divide_login.svg" alt="" />
-          <button
-            type="button"
-            className="bodyxsmedium flex h-[18px] w-[73px] shrink-0 flex-row items-center border-none bg-transparent text-gray-400 hover:text-primary-700 focus:outline-none">
-            이용약관
-          </button>
-        </div>
+
         <div className="absolute left-[363px] top-[128px] flex flex-col items-start justify-start gap-[40px]">
           <div className="relative h-[35px] w-[375px] shrink-0">
             <img
@@ -48,6 +47,21 @@ const JoinSuccess = () => {
               </span>
             </div>
           </div>
+        </div>
+        <div className="absolute left-1/2 top-[894px] flex -translate-x-1/2 flex-row items-center justify-start gap-[16px]">
+          <button
+            type="button"
+            className="bodysmsemibold flex h-[20px] w-[49px] shrink-0 flex-row items-center justify-center whitespace-nowrap border-none bg-transparent text-center text-gray-400 hover:text-primary-700 focus:outline-none"
+            onClick={handleCustomerServiceClick}>
+            고객센터
+          </button>
+          <img src="src/assets/images/login/divide_login.svg" alt="" />
+          <button
+            type="button"
+            className="bodysmsemibold flex h-[20px] w-[49px] shrink-0 flex-row items-center justify-center whitespace-nowrap border-none bg-transparent text-center text-gray-400 hover:text-primary-700 focus:outline-none"
+            onClick={handlePolicyClick}>
+            이용약관
+          </button>
         </div>
       </div>
     </div>
