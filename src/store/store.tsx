@@ -41,6 +41,7 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
+
 interface SearchState {
   searchTerm: string
   setSearchTerm: (term: string) => void
@@ -57,6 +58,7 @@ export const useSearchStore = create<SearchState>((set) => ({
 /* ------------------------------------------------------ */
 
 /* -------------------- 드롭다운 Store --------------------- */
+
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
   setSelectedDropdown: (dropdownKey: string, value: string) => void

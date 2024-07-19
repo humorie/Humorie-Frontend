@@ -73,10 +73,12 @@ const SearchBar = () => {
             }
           }}>
           <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
+
             <SearchinModal onSearchInputChange={handleSearchInputhChange} />
             {searchQuery ? <SearchResults query={searchQuery} /> : <Table />}
 
             <div className="  overflow-x ms-[45px] mt-[25px]  flex w-full flex-row flex-wrap justify-start space-x-[12px]">
+
               {tags.map((tag, index) => (
                 <div
                   key={index}

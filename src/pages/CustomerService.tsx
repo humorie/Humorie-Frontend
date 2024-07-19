@@ -13,7 +13,7 @@ const CustomerServcie: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex w-screen flex-col items-center justify-center  bg-white">
+    <div className="flex w-[1440px] flex-col items-center justify-center bg-white  text-black">
       <Header />
       <div className="mt-[148px] flex w-[1100px] flex-col">
         <div className="ms-[200px] flex items-center">

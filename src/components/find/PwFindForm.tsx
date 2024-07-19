@@ -17,7 +17,7 @@ const PwFindForm: React.FC = () => {
             <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-[1px] border-solid border-gray-200 bg-white text-sm">
               <input
                 type="email"
-                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 outline-none focus:outline-none"
+                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 placeholder-gray-200 outline-none focus:outline-none"
                 placeholder="이메일"
               />
             </div>

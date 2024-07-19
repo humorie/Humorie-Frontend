@@ -1,4 +1,32 @@
+import { useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useModalStore, useTagsStore } from '../../store/store'
+import SearchinModal from '../counseling/Modal/searchmodal'
+import Table from '../counseling/Modal/table'
+import Button from '../Button'
+
 const Rending: React.FC = () => {
+  const { modalOpen, openModal, closeModal } = useModalStore()
+  const modalBackground = useRef(null)
+  const { tags, removeTag, removeSelectedSymptom } = useTagsStore()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [modalOpen])
+
+  const handleRemoveTag = (tagContent: string) => {
+    removeTag(tagContent)
+    removeSelectedSymptom(tagContent)
+  }
+
   const stickers = [
     { src: 'src/assets/images/sticker/sticker6_3.svg', alt: '스티커6-3' },
     { src: 'src/assets/images/sticker/sticker11_2.svg', alt: '스티커11-2' },
@@ -34,7 +62,9 @@ const Rending: React.FC = () => {
       </div>
 
       {/* 검색창 */}
-      <div className="absolute left-[190px] top-[452px] inline-flex h-[68px] flex-col items-start justify-start gap-2.5 bg-gray-50 px-6 py-[19px]">
+      <div
+        className="absolute left-[190px] top-[452px] inline-flex h-[68px] cursor-pointer flex-col items-start justify-start gap-2.5 bg-gray-50 px-6 py-[19px]"
+        onClick={() => openModal()}>
         <div className="inline-flex items-center justify-start gap-9">
           <img
             className="relative h-6 w-6  "
@@ -58,6 +88,50 @@ const Rending: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {modalOpen && (
+        <div
+          ref={modalBackground}
+          className="fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-40"
+          onClick={(e) => {
+            if (e.target === modalBackground.current) {
+              closeModal()
+            }
+          }}>
+          <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
+            <SearchinModal />
+            <Table />
+            <div className="h-150px ms-[45px] mt-[25px] flex w-full  flex-wrap justify-start space-x-[12px] overflow-y-auto">
+              {tags.map((tag, index) => (
+                <div
+                  key={index}
+                  className="bodymdsemibold flex cursor-pointer flex-row rounded-[4px] border-[1px] border-primary-600 bg-primary-100 px-[10px] py-[6px] text-primary-600 hover:border-primary-700 hover:bg-primary-200 "
+                  onClick={() => handleRemoveTag(tag.content)}>
+                  {tag.content}
+                  <img
+                    src="src/assets/images/counseling/icon_close.svg"
+                    alt="close"
+                    className="ms-[2px]"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex-grow"></div>
+            <div className="mb-[24px] flex space-x-[28px]">
+              <Button label="취소" size="Large" color="line" onClick={() => closeModal()} />
+              <Button
+                label="확인"
+                size="XLarge"
+                color="pink"
+                onClick={() => {
+                  closeModal()
+                  navigate('/counseling')
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

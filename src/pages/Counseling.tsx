@@ -15,7 +15,7 @@ const Counseling: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex w-screen flex-col items-center justify-center scroll-auto bg-white">
+    <div className="flex flex-col items-center justify-center scroll-auto text-black">
       <Header />
       <FindCounselor />
       <div className="h-[40px]"> </div>
