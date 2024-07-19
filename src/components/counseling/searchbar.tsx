@@ -1,13 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 import '../../index.css'
-import SearchinModal from './Modal/searchmodal'
+import SearchinModal from './Modal/searchinmodal'
 import Table from './Modal/table'
 import Button from '../Button'
 import { useTagsStore, Tag } from '../../store/store'
+import SearchResults from './Modal/searchResults'
 
 const SearchBar = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [searchTags, setSearchTags] = useState<Tag[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
   const modalBackground = useRef(null)
   const { tags, removeTag, removeSelectedSymptom } = useTagsStore()
 
@@ -30,6 +32,10 @@ const SearchBar = () => {
   const handleRemoveTag = (tagContent: string) => {
     removeTag(tagContent)
     removeSelectedSymptom(tagContent)
+  }
+
+  const handleSearchInputhChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value)
   }
 
   return (
@@ -66,14 +72,15 @@ const SearchBar = () => {
               setModalOpen(false)
             }
           }}>
-          <div className="flex h-[655px] w-[540px] flex-col flex-col items-center bg-white">
-            <SearchinModal />
-            <Table />
-            <div className="h-150px ms-[45px] mt-[25px] flex w-full  flex-wrap justify-start space-x-[12px] overflow-y-auto">
+          <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
+            <SearchinModal onSearchInputChange={handleSearchInputhChange} />
+            {searchQuery ? <SearchResults query={searchQuery} /> : <Table />}
+
+            <div className="  overflow-x ms-[45px] mt-[25px]  flex w-full flex-row flex-wrap justify-start space-x-[12px]">
               {tags.map((tag, index) => (
                 <div
                   key={index}
-                  className="bodymdsemibold flex cursor-pointer flex-row rounded-[4px] border-[1px] border-primary-600 bg-primary-100 px-[10px] py-[6px] text-primary-600 hover:border-primary-700 hover:bg-primary-200 "
+                  className="bodymdsemibold flex h-auto cursor-pointer flex-row rounded-[4px] border-[1px] border-primary-600 bg-primary-100 px-[10px] py-[6px] text-primary-600 hover:border-primary-700 hover:bg-primary-200 "
                   onClick={() => handleRemoveTag(tag.content)}>
                   {tag.content}
                   <img
