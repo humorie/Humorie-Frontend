@@ -21,14 +21,14 @@ const CustomerServcie: React.FC = () => {
         </div>
         <div className="mt-[82px] flex space-x-[48px] px-[20px]">
           <div className="flex flex-col">
-            <div className="bodylsemibold mb-[23px] mt-[6px]">고객센터</div>
+            <div className="bodylbold mb-[23px] mt-[6px] text-gray-800">고객센터</div>
             <div className="mb-[19px] h-[1px] w-[130px] bg-black"></div>
-            <div className="bodysmsemibold">공지사항</div>
+            <div className="bodymdmedium text-gray-600">공지사항</div>
           </div>
           <div className="flex flex-col">
             <div className="mb-[23px] flex items-end space-x-[25px]">
-              <div className="xsbold">공지사항</div>
-              <div className="bodysmsemibold">
+              <div className="xsbold text-gray-800">공지사항</div>
+              <div className="bodysmmedium text-gray-500">
                 검증된 상담사들이 정확하고 신뢰성있는 정보를 제공합니다.
               </div>
             </div>
