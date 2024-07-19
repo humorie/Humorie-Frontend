@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Details from './Details'
 import Profile from './Profile'
 
 const Contents: React.FC = () => {
   const [selectTab, setSelectTab] = useState('Details')
+  const navigate = useNavigate()
 
   return (
     <div className="taxt-black flex w-[1100px] flex-row items-start justify-between bg-white text-black">
       <div className="flex w-[770px] flex-col items-center justify-center">
         {/* 목록으로 */}
-        <div className="bodylmedium mt-[105px] flex h-[87px] w-full flex-row items-center justify-start text-center">
+        <div className="bodylmedium mt-[105px] flex h-[87px] w-full flex-row items-center justify-start">
           <img
             className="mr-[4px] h-[24px] w-[24px]"
             src="src/assets/images/icon/icon_arrow_left.svg"
-            alt="왼쪽 화살표"
+            alt="뒤로가기"
+            onClick={() => navigate(-1)} // 뒤로가기 이벤트
           />
           목록으로
         </div>
@@ -55,18 +58,22 @@ const Contents: React.FC = () => {
       </div>
 
       {/* 오른쪽 카드 */}
-      <div className="mt-[190px] flex h-[300px] w-[160px] flex-col items-start justify-evenly gap-[35px] rounded-[10px] bg-white p-5 shadow">
-        <div className="flex  w-full flex-col items-start justify-center">
-          <p className=" bodymdsemibold w-full text-center">고객아이디</p>
-          <p className=" bodymdsemibold w-full text-center text-gray-400">HTU****</p>
+      <div className=" mt-[190px] flex h-auto w-[200px] flex-col items-start justify-evenly gap-[35px] rounded-[10px] bg-white px-[20px] py-[60px] shadow">
+        <div className="flex  flex-col items-start justify-center">
+          <p className="bodymdmedium">고객아이디</p>
+          <p className="bodysmsemibold text-gray-400">HTU****</p>
         </div>
-        <div className="flex w-full flex-col items-center justify-center">
-          <p className=" bodymdsemibold w-full text-center">지역</p>
-          <p className=" bodymdsemibold w-full text-center text-gray-400">서울 강남구</p>
+        <div className="flex flex-col items-start justify-center">
+          <p className="bodymdmedium">지역</p>
+          <p className="bodysmsemibold text-gray-400">서울 강남구</p>
         </div>
-        <div className="flex  w-full flex-col items-start justify-center">
-          <p className=" bodymdsemibold w-full text-center">이용권</p>
-          <p className=" bodymdsemibold w-full text-center text-gray-400">서울 강남구</p>
+        <div className="flex flex-col items-start justify-center">
+          <p className="bodymdmedium">이용권</p>
+          <p className="bodysmsemibold text-gray-400">서울 강남구</p>
+        </div>
+        <div className="flex flex-col items-start justify-center">
+          <p className="bodymdmedium">상담날짜</p>
+          <p className="bodysmsemibold text-gray-400">2024.3.24 12:00</p>
         </div>
       </div>
     </div>
