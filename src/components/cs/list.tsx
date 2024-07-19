@@ -119,7 +119,8 @@ const ListinCS = () => {
           type="button"
           key={i}
           onClick={() => handlePageClick(i)}
-          className="bodysmmedium cursor-pointer bg-transparent text-stone-500">
+          className={`bodysmmedium cursor-pointer bg-transparent hover:text-primary-600 
+          ${currentPage === i ? 'text-primary-600' : 'text-stone-500'}`}>
           {i}{' '}
         </button>,
       )
@@ -130,7 +131,7 @@ const ListinCS = () => {
   return (
     <div className="flex w-[880px] flex-col justify-center">
       <div className="divide-y-[0.5px] divide-gray-400">
-        <div className="bodysmsemibold flex py-[26px]">
+        <div className="bodymdmedium flex py-[26px]">
           <div className="flex w-[673px] items-center justify-center">제목</div>
           <div className="flex w-[114px] items-center justify-center">날짜</div>
           <div className="flex w-[93px] items-center justify-center">조회</div>
@@ -139,13 +140,19 @@ const ListinCS = () => {
         {getCurrentLists().map((list) => (
           <div
             key={list.id}
-            className={`bodysmsemibold flex py-[26px] ${
+            className={`bodysmmedium flex py-[26px] ${
               list.type === '중요공지' ? 'bg-gray-100' : 'bg-white'
             }`}>
-            <div className="flex w-[83px] items-center justify-center">{list.type}</div>
-            <div className="w-[590px] ps-[43px]">{list.content}</div>
-            <div className="flex w-[114px] items-center justify-center">{list.date}</div>
-            <div className="flex w-[93px] items-center justify-center">{list.views}</div>
+            <div className="flex w-[83px] cursor-pointer items-center justify-center text-gray-400">
+              {list.type}
+            </div>
+            <div className="w-[590px] cursor-pointer ps-[43px] text-gray-500">{list.content}</div>
+            <div className="flex w-[114px] cursor-pointer items-center justify-center text-gray-400">
+              {list.date}
+            </div>
+            <div className="flex w-[93px] cursor-pointer items-center justify-center text-gray-400">
+              {list.views}
+            </div>
           </div>
         ))}
 
@@ -155,14 +162,14 @@ const ListinCS = () => {
         <img
           className=" cursor-pointer"
           onClick={handlePrevious}
-          src="src/assets/images/icon/icon_arrow_left_pink.svg"
+          src="src/assets/images/icon/icon_arrow_left_gray.svg"
           alt="왼쪽 화살표"
         />
         {renderPageNumbers()}
         <img
           className=" cursor-pointer"
           onClick={handleNext}
-          src="src/assets/images/icon/icon_arrow_right_pink.svg"
+          src="src/assets/images/icon/icon_arrow_right_gray.svg"
           alt="오른쪽 화살표"
         />
       </div>
