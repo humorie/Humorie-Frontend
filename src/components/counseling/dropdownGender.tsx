@@ -18,7 +18,11 @@ const DropdownGender = () => {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="relative">
-        <MenuButton className="bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0 text-gray-700 hover:bg-gray-100">
+        <MenuButton
+          className={classNames(
+            `bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0 hover:bg-gray-100`,
+            selectedGender !== '성별' ? 'text-primary-600' : 'text-gray-700',
+          )}>
           {selectedGender}
           <img src="src/assets/images/counseling/dropdown.svg" alt="dropdown" />
         </MenuButton>
@@ -40,7 +44,7 @@ const DropdownGender = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedGender('남성')}>
                   남성
@@ -53,7 +57,7 @@ const DropdownGender = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular block w-[62px] rounded-none bg-gray-100',
+                    'bodymdregular block w-[80px] rounded-none bg-gray-100',
                   )}
                   onClick={() => handleSelectedGender('여성')}>
                   여성

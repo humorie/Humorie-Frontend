@@ -18,7 +18,11 @@ const DropdownViews = () => {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="relative">
-        <MenuButton className="bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0  text-gray-700  hover:bg-gray-100">
+        <MenuButton
+          className={classNames(
+            `bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0  text-gray-700  hover:bg-gray-100`,
+            selectedViews !== '리뷰' ? 'text-primary-600' : 'text-gray-700',
+          )}>
           {selectedViews}
           <img src="src/assets/images/counseling/dropdown.svg" alt="dropdown" />
         </MenuButton>
@@ -40,7 +44,7 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedViews('조회순')}>
                   조회순
@@ -53,7 +57,7 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedViews('추천순')}>
                   추천순
@@ -66,7 +70,7 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular w-[85px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedViews('인기순')}>
                   인기순
@@ -79,7 +83,7 @@ const DropdownViews = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular rounded-none bg-gray-100',
+                    'bodymdregular rounded-none bg-gray-100',
                   )}
                   onClick={() => handleSelectedViews('최신순')}>
                   최신순

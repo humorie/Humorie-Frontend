@@ -18,7 +18,11 @@ const DropdownRegion = () => {
   return (
     <Menu as="div" className="relative inline-block">
       <div className="relative">
-        <MenuButton className="bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0 text-gray-700  hover:bg-gray-100">
+        <MenuButton
+          className={classNames(
+            `bodymdregular flex h-[40px] w-[100px] items-center justify-center gap-x-[8px] rounded-[4px] bg-gray-100 p-0  hover:bg-gray-100`,
+            selectedRegion !== '지역별' ? 'text-primary-600' : 'text-gray-700',
+          )}>
           {selectedRegion}
           <img src="src/assets/images/counseling/dropdown.svg" alt="dropdown" />
         </MenuButton>
@@ -40,7 +44,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('서울')}>
                   서울
@@ -53,7 +57,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('경기')}>
                   경기
@@ -66,7 +70,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular  block w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular  block w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('인천')}>
                   인천
@@ -79,7 +83,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular  block w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular  block w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('강원')}>
                   강원
@@ -92,7 +96,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular  block w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular  block w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('충청')}>
                   충청
@@ -105,7 +109,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodysmregular  block w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular  block w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('대전')}>
                   대전
@@ -118,7 +122,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    '  bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    '  bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('경상')}>
                   경상
@@ -131,7 +135,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    '  bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    '  bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('전라')}>
                   전라
@@ -144,7 +148,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('대구')}>
                   대구
@@ -157,7 +161,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('광주')}>
                   광주
@@ -170,7 +174,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('울산')}>
                   울산
@@ -183,7 +187,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('부산')}>
                   부산
@@ -196,7 +200,7 @@ const DropdownRegion = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodysmregular w-[62px] rounded-none bg-gray-100',
+                    ' bodymdregular w-[80px] rounded-none bg-gray-100',
                   )}
                   onClick={() => handleSelectedRegion('제주')}>
                   제주
