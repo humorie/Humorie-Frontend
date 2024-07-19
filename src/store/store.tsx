@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import Calendar from '../components/reservation/Calendar'
 
+/* ----------------- 태그 및 모달창 Store ------------------- */
 interface ModalState {
   modalOpen: boolean
   openModal: () => void
@@ -14,7 +15,7 @@ export const useModalStore = create<ModalState>((set) => ({
 }))
 
 export interface Tag {
-  title: string
+  title?: string
   content: string
 }
 
@@ -41,7 +42,22 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
+interface SearchState {
+  searchTerm: string
+  setSearchTerm: (term: string) => void
+  searchResults: string[]
+  setSearchResults: (results: string[]) => void
+}
 
+export const useSearchStore = create<SearchState>((set) => ({
+  searchTerm: '',
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  searchResults: [],
+  setSearchResults: (results) => set({ searchResults: results }),
+}))
+/* ------------------------------------------------------ */
+
+/* -------------------- 드롭다운 Store --------------------- */
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
   setSelectedDropdown: (dropdownKey: string, value: string) => void
@@ -55,6 +71,7 @@ const useDropdownStore = create<DropdownState>((set) => ({
     })),
 }))
 export default useDropdownStore
+/* ------------------------------------------------------ */
 
 /* ------------------- 상담예약 Store --------------------- */
 // 달력 상태관리
@@ -93,4 +110,3 @@ export const useMeetingStore = create<MeetingState>((set) => ({
   setOnlineOption: (option) => set({ onlineOption: option }),
 }))
 /* ------------------------------------------------------------ */
-
