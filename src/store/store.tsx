@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import Calendar from '../components/reservation/Calendar'
 
 /* ----------------- 태그 및 모달창 Store ------------------- */
 interface ModalState {
