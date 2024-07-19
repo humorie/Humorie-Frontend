@@ -78,7 +78,7 @@ export const useTimeStore = create<TimeState>((set) => ({
 }))
 // 장소 상태관리
 interface MeetingState {
-  meetingType: string
+  meetingType: string // '온라인' or '오프라인'
   onlineOption: string
   setMeetingType: (type: string) => void
   setOnlineOption: (option: string) => void
