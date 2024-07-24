@@ -1,4 +1,5 @@
 import Button from '../Button'
+import Input from '../Input'
 
 const DeleteAccountForm: React.FC = () => {
   return (
@@ -15,11 +16,7 @@ const DeleteAccountForm: React.FC = () => {
               <div className="text-status-4 bodymdsemibold relative">*</div>
             </div>
             <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-[1px] border-solid border-gray-200 bg-white text-sm">
-              <input
-                type="password"
-                className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 outline-none focus:outline-none"
-                placeholder="비밀번호"
-              />
+              <Input type="Password" placeholder="비밀번호" btnLabel="" />
             </div>
             <div className="bodyxsregular relative text-gray-500">
               <p>계정은 즉시 탈퇴 처리되나,</p>

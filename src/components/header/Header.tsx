@@ -6,7 +6,7 @@ const Header: React.FC = () => {
   const [showProfile, setShowProfile] = useState(false)
   const navigate = useNavigate()
 
-  const menuItems = [
+  const menuItems2 = [
     { id: 1, label: '로그인', onClick: () => navigate('/login') },
     { id: 2, label: '회원가입', onClick: () => navigate('/join') },
   ]
@@ -27,7 +27,9 @@ const Header: React.FC = () => {
           className="absolute left-[20px] top-0 cursor-pointer"
           src="/src/assets/images/header&footer/headerlogo.svg"
           alt="HeaderLogo"
+
           onClick={() => navigate('/')}
+
         />
         {/* 헤더 목록 */}
         <div className="bodysmbold absolute left-[220px] top-0 flex items-start justify-start text-center text-gray-800 ">
@@ -55,7 +57,9 @@ const Header: React.FC = () => {
           <div className="flex h-[60px] w-[100px] items-center justify-center">
             <div
               className="w-[84px] cursor-pointer hover:text-primary-800"
+
               onClick={() => navigate('/info')}>
+
               서비스소개
             </div>
           </div>

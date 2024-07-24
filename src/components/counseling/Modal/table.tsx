@@ -5,7 +5,8 @@ const Table = () => {
   const [activeMainTab, setActiveMainTab] = useState<string>('개인') // 개인 탭이 기본으로 선택되도록 설정
   const [activeSubTab, setActiveSubTab] = useState<string>('개인 문제') // 개인 문제 탭이 기본으로 선택되도록 설정
   const overflowRef = useRef<HTMLDivElement>(null)
-  const { addTag, selectedSymptoms, addSelectedSymptom, removeSelectedSymptom } = useTagsStore()
+  const { addTag, removeTag, selectedSymptoms, addSelectedSymptom, removeSelectedSymptom } =
+    useTagsStore()
   const mainTabs = ['개인', '가족']
   const privatetabs = ['개인 문제']
   const privatesymptoms = [
@@ -88,10 +89,11 @@ const Table = () => {
   const handleSymptomClick = (symptom: string) => {
     if (selectedSymptoms.includes(symptom)) {
       removeSelectedSymptom(symptom)
+      removeTag(symptom)
     } else {
       addSelectedSymptom(symptom)
+      addTag({ title: activeSubTab, content: symptom })
     }
-    addTag({ title: activeSubTab, content: symptom })
   }
 
   useEffect(() => {
@@ -123,7 +125,7 @@ const Table = () => {
               {mainTabs.map((tab, index) => (
                 <div
                   key={index}
-                  className={`bodylmedium  flex h-[58px] w-[110px] cursor-pointer items-center justify-center border-b-[1px] border-gray-200 bg-gray-100  text-center text-gray-400 ${activeMainTab === tab ? ' bg-primary-500 text-gray-50' : ''}`}
+                  className={`bodylmedium  flex h-[58px] w-[110px] cursor-pointer items-center justify-center border-b-[1px] border-gray-200 bg-gray-100  text-center text-gray-400 hover:bg-primary-100 ${activeMainTab === tab ? ' bg-primary-500 text-gray-50 hover:bg-primary-500' : ''}`}
                   onClick={() => handleMainTabClick(tab)}>
                   {tab}
                 </div>
@@ -138,7 +140,7 @@ const Table = () => {
                       {privatetabs.map((tab, index) => (
                         <td
                           key={index}
-                          className={`bodylmedium h-[58px] w-[110px] cursor-pointer border-b-[1px] border-gray-200 bg-gray-100 text-center  text-gray-400 ${activeSubTab === tab ? 'bg-primary-500 text-gray-50' : ''}`}
+                          className={`bodylmedium h-[58px] w-[110px] cursor-pointer border-b-[1px] border-gray-200 bg-gray-100 text-center  text-gray-400 hover:bg-primary-100 ${activeSubTab === tab ? 'bg-primary-500 text-gray-50 hover:bg-primary-500' : ''}`}
                           onClick={() => handleSubTabClick(tab)}>
                           {tab}
                         </td>
@@ -155,7 +157,7 @@ const Table = () => {
                         {familytabs.map((tab, index) => (
                           <div
                             key={index}
-                            className={`bodylmedium flex h-[58px] w-[110px] cursor-pointer items-center justify-center border-b-[1px] border-gray-200 bg-gray-100  text-gray-400 ${activeSubTab === tab ? 'bg-primary-500 text-gray-50' : ''}`}
+                            className={`bodylmedium flex h-[58px] w-[110px] cursor-pointer items-center justify-center border-b-[1px] border-gray-200 bg-gray-100  text-gray-400 hover:bg-primary-100 ${activeSubTab === tab ? 'bg-primary-500 text-gray-50 hover:bg-primary-500' : ''}`}
                             onClick={() => handleSubTabClick(tab)}>
                             {tab}
                           </div>
@@ -172,7 +174,7 @@ const Table = () => {
                   privatesymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className={`bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center justify-between border-b-[1px] border-gray-300 bg-white px-[20px] ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : ''}`}
+                      className={`bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center justify-between border-b-[1px] border-gray-300 bg-white px-[20px] hover:text-primary-600 ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : ''}`}
                       onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
                       {selectedSymptoms.includes(symptom) && (
@@ -184,7 +186,7 @@ const Table = () => {
                   familysymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center border-b-[1px] border-gray-300 bg-white px-[20px] "
+                      className={`bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center justify-between border-b-[1px] border-gray-300 bg-white px-[20px] hover:text-primary-600 ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : ''}`}
                       onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
                       {selectedSymptoms.includes(symptom) && (
@@ -196,7 +198,7 @@ const Table = () => {
                   couplesymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center border-b-[1px] border-gray-300 bg-white px-[20px] "
+                      className={`bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center justify-between border-b-[1px] border-gray-300 bg-white px-[20px] hover:text-primary-600 ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : ''}`}
                       onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
                       {selectedSymptoms.includes(symptom) && (
@@ -208,7 +210,7 @@ const Table = () => {
                   childsymptoms.map((symptom, index) => (
                     <div
                       key={index}
-                      className="bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center border-b-[1px] border-gray-300 bg-white px-[20px] "
+                      className={`bodylmedium rounded-0 flex h-[58px] cursor-pointer items-center justify-between border-b-[1px] border-gray-300 bg-white px-[20px] hover:text-primary-600 ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : ''}`}
                       onClick={() => handleSymptomClick(symptom)}>
                       {symptom}
                       {selectedSymptoms.includes(symptom) && (

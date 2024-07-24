@@ -1,5 +1,7 @@
 interface MenuProps {
+
   items: { id: number; label: string; onClick: () => void }[]
+
 }
 
 const Menu: React.FC<MenuProps> = ({ items }) => {

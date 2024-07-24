@@ -1,5 +1,6 @@
 import Button from '../Button'
 import { useNavigate } from 'react-router-dom'
+import Input from '../Input'
 
 const MemberInfo: React.FC = () => {
   const navigate = useNavigate()
@@ -7,6 +8,8 @@ const MemberInfo: React.FC = () => {
   const handleDeleteAccountButtonClick = () => {
     navigate('/deleteaccount')
   }
+
+  //
   return (
     <div className="relative h-[2522px] w-[1100px] bg-gray-50 text-center text-gray-900">
       {/* 회원정보 */}
@@ -26,12 +29,8 @@ const MemberInfo: React.FC = () => {
             <div className="bodymdmedium relative">이름</div>
             <div className="bodymdsemibold relative text-status-2">*</div>
           </div>
-          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
-            <input
-              type="text"
-              className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
-              value="김데이"
-            />
+          <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-solid border-gray-200 bg-white text-sm">
+            <Input type="Primary" placeholder="이메일" btnLabel="" value="김데이" />
           </div>
           <div className="bodyxsregular relative text-gray-500">공개적으로 사용될 이름입니다.</div>
         </div>
@@ -40,24 +39,16 @@ const MemberInfo: React.FC = () => {
             <div className="bodymdmedium relative">이메일</div>
             <div className="bodymdsemibold relative text-status-2">*</div>
           </div>
-          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
-            <input
-              type="email"
-              className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
-              value="nday12@naver.com"
-            />
+          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
+            <Input type="Primary" placeholder="이메일" btnLabel="" value="nday12@naver.com" />
           </div>
         </div>
         <div className="box-border flex h-24 w-[880px] flex-row items-center justify-start gap-[8px] border-b border-gray-200 px-12 py-6">
           <div className="flex w-[120px] flex-row items-center justify-start">
             <div className="bodymdmedium relative leading-[24px]">새 비밀번호</div>
           </div>
-          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
-            <input
-              type="password"
-              className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
-              placeholder="비밀번호"
-            />
+          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
+            <Input type="Password" placeholder="비밀번호" btnLabel="" />
           </div>
           <div className="bodyxsregular relative text-gray-500">
             새 비밀번호는 8~16자, 영문자, 숫자, 특수문자를 모두 포함합니다.
@@ -67,12 +58,8 @@ const MemberInfo: React.FC = () => {
           <div className="flex w-[120px] flex-row items-center justify-start">
             <div className="bodymdmedium relative">새 비밀번호 확인</div>
           </div>
-          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
-            <input
-              type="password"
-              className="bodysmmedium h-full w-[280px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
-              placeholder="비밀번호 확인"
-            />
+          <div className="flex h-12 w-[312px] items-center justify-center gap-1 border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
+            <Input type="Password" placeholder="비밀번호 확인" btnLabel="" />
           </div>
         </div>
         <div className="box-border flex h-24 w-[880px] flex-row items-center justify-start gap-[8px] border-gray-200 px-12 py-6">
