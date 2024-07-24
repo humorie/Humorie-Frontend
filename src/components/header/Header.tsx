@@ -1,47 +1,26 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Menu from './Menu'
-import { useNavigate } from 'react-router-dom'
 
 const Header: React.FC = () => {
-  const navigate = useNavigate()
-  const onClickMainhandler = () => {
-    navigate('/')
-  }
-  const onClickInfohandler = () => {
-    navigate('/info')
-  }
-
-  const [showMenu, setShowMenu] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
   const navigate = useNavigate()
 
-  const menuItems = [
-
-    { id: 1, label: '상담사 보기', onClick: () => navigate('/counseling') },
-    { id: 2, label: '상담 후기 보기', onClick: () => navigate('/counseling/counselor/reviews') },
-  ]
   const menuItems2 = [
     { id: 1, label: '로그인', onClick: () => navigate('/login') },
     { id: 2, label: '회원가입', onClick: () => navigate('/join') },
-
   ]
-
-  const handleClickMenu = () => {
-    setShowMenu(!showMenu)
-  }
 
   const handleClickProfile = () => {
     setShowProfile(!showProfile)
   }
 
   const handleCloseMenu = () => {
-    setShowMenu(false)
     setShowProfile(false)
   }
 
   return (
-    <div className="relative left-0 top-0 z-10 flex h-[60px] w-[1440px] flex-col items-center justify-center bg-white">
+    <div className="fixed top-0 z-10 flex h-[60px] w-screen flex-col items-center justify-center bg-white">
       <div className="relative h-[60px] w-[1100px] " onMouseLeave={handleCloseMenu}>
         {/* 로고 */}
         <img
@@ -57,10 +36,9 @@ const Header: React.FC = () => {
           <div className="flex h-[60px] w-[100px] items-center justify-center">
             <div
               className="w-[84px] cursor-pointer hover:text-primary-800"
-              onClick={handleClickMenu}>
+              onClick={() => navigate('/counseling')}>
               상담하기
             </div>
-            {showMenu && <Menu items={menuItems} />}
           </div>
           <div className="flex h-[60px] w-[100px] items-center justify-center ">
             <div
@@ -72,7 +50,7 @@ const Header: React.FC = () => {
           <div className="flex h-[60px] w-[100px] items-center justify-center">
             <div
               className="w-[84px] cursor-pointer hover:text-primary-800"
-              onClick={() => console.log('미구현')}>
+              onClick={() => alert('미구현')}>
               커뮤니티
             </div>
           </div>
@@ -94,7 +72,7 @@ const Header: React.FC = () => {
             alt="profile"
             onClick={handleClickProfile}
           />
-          {showProfile && <Menu items={menuItems2} />}
+          {showProfile && <Menu items={menuItems} />}
         </div>
       </div>
       <div className="w-full border-b border-gray-100" />

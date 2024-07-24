@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 const Profile: React.FC = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="mb-[300px] mt-[60px] flex h-[500px] w-full flex-row items-center justify-between gap-[60px]">
       {/* 상담사 카드 */}
@@ -17,7 +21,11 @@ const Profile: React.FC = () => {
       {/* 상담사 설명 */}
       <div className="flex flex-col items-start justify-center gap-[30px]">
         <div className="flex flex-row items-center justify-center gap-2.5 rounded-md bg-gray-200 px-[18px] py-2">
-          <div className="h-6 w-6 bg-pink-500" />
+          <img
+            src="/src/assets/images/counseling/icon_shield.svg"
+            alt="뱃지"
+            className="h-[24px] w-[24px]"
+          />
           <p className="bodyxssemibold text-center text-gray-500">공인 의료 서비스 제공자</p>
         </div>
         <div className="xssemibold text-center">김정희님의 밝고 활기찬 앞길을 응원합니다.</div>
@@ -41,8 +49,9 @@ const Profile: React.FC = () => {
             </div>
           </div>
         </div>
-
-        <div className="bodymdsemibold flex h-[54px] w-[463px] items-center justify-center rounded-[10px] bg-pink-400 text-white">
+        <div
+          className="bodymdsemibold flex h-[54px] w-[463px] cursor-pointer items-center justify-center rounded-[10px] bg-pink-400 text-white"
+          onClick={() => navigate('/review')}>
           리뷰쓰러 가기
         </div>
       </div>

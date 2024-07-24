@@ -5,7 +5,7 @@ const CardReview: React.FC = () => {
     <div className="relative h-[340px] w-[260px] rounded-[10px] bg-white">
       {/* 이름 */}
       <div className="absolute left-0 top-0 inline-flex w-[260px] items-center justify-start gap-2 px-6 pb-4 pt-6">
-        <div className="xssemibold text-black">이름</div>
+        <div className="xssemibold text-black">상담사</div>
         <div className="flex items-center justify-center gap-1">
           <img
             className="h-[24px] w-[24px]"
@@ -26,8 +26,8 @@ const CardReview: React.FC = () => {
       </div>
       <img
         className="absolute left-[8px] top-[172px] h-[160px] w-[160px]"
-        src="src/assets/images/main/main_contents_image1.svg"
-        alt="리뷰카드 이미지"
+        src="/src/assets/images/main/main_icon_5_star.svg"
+        alt="별점카드"
       />
     </div>
   )

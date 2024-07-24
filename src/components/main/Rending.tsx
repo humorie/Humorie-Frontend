@@ -83,7 +83,7 @@ const Rending: React.FC = () => {
       <div className="bodymdsemibold absolute left-[190px] top-[576px] inline-flex w-[1060px] items-start justify-between px-6 text-gray-700 ">
         {categories.map((category, index) => (
           <div key={index} className="inline-flex flex-col items-center justify-start gap-4">
-            <img className="relative h-[56px] w-[56px]" src={category.src} alt={category.alt} />
+            <img className="h-14 w-14" src={category.src} alt={category.alt} />
             <p>{category.label}</p>
           </div>
         ))}
