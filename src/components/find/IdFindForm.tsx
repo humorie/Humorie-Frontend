@@ -1,6 +1,8 @@
 import Button from '../Button'
 import Input from '../Input'
 import { useNavigate } from 'react-router-dom'
+import React, { useState, useCallback } from 'react'
+import axios from 'axios'
 
 const IdFindForm: React.FC = () => {
   const navigate = useNavigate()
@@ -12,6 +14,58 @@ const IdFindForm: React.FC = () => {
   // 회원가입 버튼
   const handleJoinButtonClick = () => {
     navigate('/join')
+  }
+
+  const [email, setEmail] = useState<string>('')
+  const [message, setMessage] = useState<string>('')
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+  const [foundId, setFoundId] = useState<string>('')
+
+  // 이메일 입력 핸들러
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }, [])
+
+  // 아이디를 변환하는 함수
+  const maskId = (id: string): string => {
+    if (id.length <= 3) {
+      return id
+    }
+    const front = id.slice(0, 2)
+    const back = id.slice(-1)
+    const middle = '*'.repeat(id.length - 3)
+    return `${front}${middle}${back}`
+  }
+
+  // 아이디찾기 버튼 클릭 핸들러
+  const handleFindIdClick = async () => {
+    if (!email) {
+      setMessage('가입자 정보를 찾을 수 없습니다.')
+      setIsSuccess(false)
+      return
+    }
+
+    try {
+      const response = await axios.post('/api/account/find-id', {
+        email: email,
+      })
+
+      const { isSuccess, result } = response.data
+
+      if (isSuccess) {
+        const maskedId = maskId(result)
+        setFoundId(maskedId)
+        setMessage(`회원님의 아이디는 ${maskedId}입니다.`)
+        setIsSuccess(true)
+      } else {
+        setMessage('가입자 정보를 찾을 수 없습니다.')
+        setIsSuccess(false)
+      }
+    } catch (error) {
+      console.error('아이디 찾기 실패:', error)
+      setMessage('가입자 정보를 찾을 수 없습니다.')
+      setIsSuccess(false)
+    }
   }
 
   return (
@@ -28,15 +82,37 @@ const IdFindForm: React.FC = () => {
               <div className="text-status-4 bodymdsemibold relative">*</div>
             </div>
             <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-solid border-gray-200 bg-white text-sm">
-              <Input type="Primary" placeholder="이메일" btnLabel="Click me" />
+              <Input
+                type="Primary"
+                placeholder="이메일"
+                btnLabel=""
+                value={email}
+                onChange={handleEmailChange}
+              />
             </div>
             <div className="bodyxsregular relative text-center text-gray-500">
               가입에 사용한 이메일을 입력해주세요.
             </div>
           </div>
         </div>
+
+        {/* 성공 메시지 */}
+        {isSuccess && (
+          <div className="bg-point-6 relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-point-5 p-6 text-center">
+            <div className="bodyxsregular relative text-gray-800">
+              회원님의 아이디는 {foundId}입니다.
+            </div>
+          </div>
+        )}
+        {/* 에러 메시지 */}
+        {!isSuccess && message && (
+          <div className="relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-primary-800 bg-primary-100 p-6 text-center">
+            <div className="bodyxsregular relative text-primary-800">{message}</div>
+          </div>
+        )}
+
         <div className="absolute left-[394px] top-[746px]">
-          <Button label="아이디 찾기" size="XLarge" color="pink" />
+          <Button label="아이디 찾기" size="XLarge" color="pink" onClick={handleFindIdClick} />
         </div>
 
         <div className="absolute left-[466px] top-[834px] h-[18px] w-[168px] text-sm text-gray-400">

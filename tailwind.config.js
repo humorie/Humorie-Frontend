@@ -44,7 +44,8 @@ export default {
           2: '#C3E4EA',
           3: '#C3E4EA',
           4: '#FDF1E5',
-          5: '#E89595',
+          5: '#9BD592',
+          6: '#EAF6E8',
         },
         status: {
           1: '#3385FF',
