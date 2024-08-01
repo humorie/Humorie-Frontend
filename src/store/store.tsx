@@ -41,24 +41,6 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
-
-interface SearchState {
-  searchTerm: string
-  setSearchTerm: (term: string) => void
-  searchResults: string[]
-  setSearchResults: (results: string[]) => void
-}
-
-export const useSearchStore = create<SearchState>((set) => ({
-  searchTerm: '',
-  setSearchTerm: (term) => set({ searchTerm: term }),
-  searchResults: [],
-  setSearchResults: (results) => set({ searchResults: results }),
-}))
-/* ------------------------------------------------------ */
-
-/* -------------------- 드롭다운 Store --------------------- */
-
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
   setSelectedDropdown: (dropdownKey: string, value: string) => void
@@ -109,5 +91,17 @@ export const useMeetingStore = create<MeetingState>((set) => ({
   onlineOption: 'Zoom 미팅',
   setMeetingType: (type) => set({ meetingType: type }),
   setOnlineOption: (option) => set({ onlineOption: option }),
+}))
+/* ------------------------------------------------------------ */
+
+/* ------------------- 카테고리 Store --------------------- */
+interface CategoryState {
+  selectedCategory: string
+  setSelectedCategory: (category: string) => void
+}
+
+export const useCategoryStore = create<CategoryState>((set) => ({
+  selectedCategory: '청소년', // 초기 상태 설정
+  setSelectedCategory: (category: string) => set({ selectedCategory: category }),
 }))
 /* ------------------------------------------------------------ */

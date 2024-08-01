@@ -1,18 +1,16 @@
-import React, { useState } from 'react'
-
-const categories = ['학업/진로', '대인관계', '정신건강', '성격']
+import React from 'react'
+import { useCategoryStore } from '../../store/store'
+const categories = ['청소년', '중독', '집단', '개인']
 
 const Category: React.FC = () => {
-  // 초기 상태를 '학업/진로'로 설정
-  const [selectedCategory, setSelectedCategory] = useState<string>('학업/진로')
+  const { selectedCategory, setSelectedCategory } = useCategoryStore()
 
-  // 카테고리 클릭 핸들러
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category)
   }
 
   return (
-    <div className="absolute left-[190px] top-[160px] inline-flex items-start justify-start gap-4">
+    <div className="mb-[24px] mt-[32px] flex items-start justify-start gap-4">
       {categories.map((category) => (
         <div
           key={category}
