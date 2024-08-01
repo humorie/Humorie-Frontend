@@ -38,6 +38,10 @@
   ::-webkit-scrollbar-track {
     background: white; /* 트랙의 색상 */
   }
+  /* 스크롤바 감추기 */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
 
 a {
