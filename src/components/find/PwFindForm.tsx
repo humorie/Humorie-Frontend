@@ -1,6 +1,8 @@
 import Button from '../Button'
 import Input from '../Input'
 import { useNavigate } from 'react-router-dom'
+import React, { useState, useCallback } from 'react'
+import axios from 'axios'
 
 const PwFindForm: React.FC = () => {
   const navigate = useNavigate()
@@ -13,6 +15,51 @@ const PwFindForm: React.FC = () => {
   const handleJoinButtonClick = () => {
     navigate('/join')
   }
+
+  const [email, setEmail] = useState<string>('')
+  const [message, setMessage] = useState<string>('')
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
+
+  // 이메일 입력 핸들러
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }, [])
+
+  // 비밀번호 찾기 버튼 클릭 핸들러
+  const handleFindPasswordClick = async () => {
+    if (!email) {
+      setMessage('존재하지 않는 사용자입니다.')
+      setIsSuccess(false)
+      return
+    }
+
+    try {
+      const response = await axios.post('/api/account/find-password', {
+        email: email,
+      })
+
+      const { isSuccess, message } = response.data
+
+      if (isSuccess) {
+        setMessage(
+          '회원님의 이메일로 임시 비밀번호를 발송했습니다. 임시 비밀번호를 사용해서 로그인 해주세요!',
+        )
+        setIsSuccess(true)
+      } else {
+        setMessage(
+          message === 'User not found'
+            ? '존재하지 않는 사용자입니다.'
+            : '이메일 전송에 실패했습니다.',
+        )
+        setIsSuccess(false)
+      }
+    } catch (error) {
+      console.error('비밀번호 찾기 실패:', error)
+      setMessage('이메일 전송에 실패했습니다.')
+      setIsSuccess(false)
+    }
+  }
+
   return (
     <div className="flex h-[960px] w-screen flex-col items-center bg-gray-50">
       <img className="shrink-0 self-stretch" src="src/assets/images/login/logo_long.svg" alt="" />
@@ -27,15 +74,42 @@ const PwFindForm: React.FC = () => {
               <div className="text-status-4 bodymdsemibold relative">*</div>
             </div>
             <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-solid border-gray-200 bg-white text-sm">
-              <Input type="Primary" placeholder="이메일" btnLabel="Click me" />
+              <Input
+                type="Primary"
+                placeholder="이메일"
+                btnLabel=""
+                value={email}
+                onChange={handleEmailChange}
+              />
             </div>
             <div className="bodyxsregular relative text-center text-gray-500">
               가입에 사용한 이메일을 입력해주세요.
             </div>
           </div>
         </div>
+
+        {/* 성공 메시지 */}
+        {isSuccess && (
+          <div className="bg-point-6 relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-point-5 p-6 text-center">
+            <div className="bodyxsregular relative text-gray-800">
+              회원님의 이메일로 임시 비밀번호를 발송했습니다. 임시 비밀번호를 사용해서 로그인
+              해주세요!
+            </div>
+          </div>
+        )}
+        {/* 에러 메시지 */}
+        {!isSuccess && message && (
+          <div className="relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-primary-800 bg-primary-100 p-6 text-center">
+            <div className="bodyxsregular relative text-primary-800">{message}</div>
+          </div>
+        )}
         <div className="absolute left-[394px] top-[746px]">
-          <Button label="임시 비밀번호 발송" size="XLarge" color="pink" />
+          <Button
+            label="임시 비밀번호 발송"
+            size="XLarge"
+            color="pink"
+            onClick={handleFindPasswordClick}
+          />
         </div>
 
         <div className="absolute left-[466px] top-[834px] h-[18px] w-[168px] text-sm text-gray-400">
