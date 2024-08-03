@@ -46,14 +46,13 @@ interface DropdownState {
   setSelectedDropdown: (dropdownKey: string, value: string) => void
 }
 
-const useDropdownStore = create<DropdownState>((set) => ({
+export const useDropdownStore = create<DropdownState>((set) => ({
   selectedDropdowns: {},
   setSelectedDropdown: (dropdownKey, value) =>
     set((state) => ({
       selectedDropdowns: { ...state.selectedDropdowns, [dropdownKey]: value },
     })),
 }))
-export default useDropdownStore
 /* ------------------------------------------------------ */
 
 /* ------------------- 상담예약 Store --------------------- */
@@ -104,4 +103,21 @@ export const useCategoryStore = create<CategoryState>((set) => ({
   selectedCategory: '청소년', // 초기 상태 설정
   setSelectedCategory: (category: string) => set({ selectedCategory: category }),
 }))
-/* ------------------------------------------------------------ */
+/* -------------------------------------------------
+/* ------------------- 토큰인증 Store --------------------- */
+interface AuthState {
+  isLoggedIn: boolean
+  logIn: () => void
+  logOut: () => void
+  checkAuth: () => void
+}
+
+export const useAuthStore = create<AuthState>((set) => ({
+  isLoggedIn: false,
+  logIn: () => set({ isLoggedIn: true }),
+  logOut: () => set({ isLoggedIn: false }),
+  checkAuth: () => {
+    const refreshToken = localStorage.getItem('refreshToken')
+    set({ isLoggedIn: !!refreshToken })
+  },
+}))

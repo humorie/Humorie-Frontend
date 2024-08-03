@@ -14,14 +14,14 @@ interface Post {
 
 const Posts: React.FC = () => {
   const posts: Post[] = [
-    {
-      id: 1,
-      name: '김철수',
-      state: '진행중',
-      content: '상담 내용 1',
-      skill: '전화',
-      date: '2024-05-01',
-    },
+    // {
+    //   id: 1,
+    //   name: '김철수',
+    //   state: '진행중',
+    //   content: '상담 내용 1',
+    //   skill: '전화',
+    //   date: '2024-05-01',
+    // },
   ]
   const navigate = useNavigate()
   // 페이지네이션 상태
@@ -41,7 +41,7 @@ const Posts: React.FC = () => {
 
   return (
     <div className="flex w-[1060px] flex-col bg-white text-black">
-      <div className="mb-[50px] mt-[150px] flex h-[30px] flex-col items-start justify-start">
+      <div className="mb-[50px] mt-[80px] flex h-[30px] flex-col items-start justify-start">
         <p className="xsbold text-center">상담 내역</p>
       </div>
 
