@@ -1,7 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import '../../index.css'
 import { Fragment } from 'react'
-import useDropdownStore from '../../store/store'
+import useDropdownStore, { useFiltersStore } from '../../store/store'
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
   return classes.filter(Boolean).join(' ')
@@ -9,10 +9,12 @@ function classNames(...classes: (string | boolean | undefined)[]): string {
 
 const DropdownGender = () => {
   const { selectedDropdowns, setSelectedDropdown } = useDropdownStore()
+  const { setGender } = useFiltersStore()
   const selectedGender = selectedDropdowns['gender'] || '성별'
 
   const handleSelectedGender = (gender: string) => {
     setSelectedDropdown('gender', gender)
+    setGender(gender)
   }
 
   return (
