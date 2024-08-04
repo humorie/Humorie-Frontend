@@ -1,11 +1,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import '../../index.css'
 import { Fragment } from 'react'
-<<<<<<< HEAD
 import useDropdownStore, { useFiltersStore } from '../../store/store'
-=======
-import { useDropdownStore } from '../../store/store'
->>>>>>> main
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
   return classes.filter(Boolean).join(' ')

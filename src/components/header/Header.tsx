@@ -5,17 +5,6 @@ import Menu from './Menu'
 
 const Header: React.FC = () => {
   const [showProfile, setShowProfile] = useState(false)
-<<<<<<< HEAD
-
-  const menuItems = [
-    { id: 1, label: '상담사 보기', onClick: () => navigate('/counseling') },
-    { id: 2, label: '상담 후기 보기', onClick: () => navigate('/counseling/counselor/reviews') },
-  ]
-  const menuItems2 = [
-    { id: 1, label: '로그인', onClick: () => navigate('/login') },
-    { id: 2, label: '회원가입', onClick: () => navigate('/join') },
-  ]
-=======
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const refreshToken = localStorage.getItem('refreshToken')
@@ -47,8 +36,6 @@ const Header: React.FC = () => {
             refresh_token: refreshToken,
           },
         })
->>>>>>> main
-
         if (response.data.isSuccess) {
           // 서버에서 로그아웃 성공 응답을 받았을 경우
           localStorage.removeItem('refreshToken')

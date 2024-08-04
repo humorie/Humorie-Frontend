@@ -41,7 +41,6 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
-<<<<<<< HEAD
 interface SearchState {
   searchTerm: string
   setSearchTerm: (term: string) => void
@@ -58,9 +57,6 @@ export const useSearchStore = create<SearchState>((set) => ({
 /* ------------------------------------------------------ */
 
 /* -------------------- 드롭다운 Store --------------------- */
-
-=======
->>>>>>> main
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
   setSelectedDropdown: (dropdownKey: string, value: string) => void
@@ -73,7 +69,7 @@ export const useDropdownStore = create<DropdownState>((set) => ({
       selectedDropdowns: { ...state.selectedDropdowns, [dropdownKey]: value },
     })),
 }))
-<<<<<<< HEAD
+
 export default useDropdownStore
 
 interface Filters {
@@ -97,8 +93,6 @@ export const useFiltersStore = create<Filters>((set) => ({
   setRegion: (region) => set({ region }),
   setOrder: (order) => set({ order }),
 }))
-=======
->>>>>>> main
 /* ------------------------------------------------------ */
 
 /* ------------------- 상담예약 Store --------------------- */
