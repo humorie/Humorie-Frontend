@@ -46,15 +46,15 @@ const Rending: React.FC = () => {
   ]
 
   return (
-    <div className="relative  flex h-[752px] w-[1440px] items-center justify-center bg-white">
+    <div className="flex w-[1440px] flex-col items-center justify-center px-[170px]">
       {/* 헤드라인 */}
-      <div className="absolute left-[320px] top-[188px] h-[112px] w-[800px]">
-        <div className="absolute left-0 top-[16px] inline-flex h-20 w-[800px] items-start justify-start gap-[100px]">
+      <div className="relative mt-[190px] flex w-full flex-col  items-center justify-center">
+        <div className=" absolute flex w-full items-center justify-center gap-[100px]">
           {stickers.map((image, index) => (
-            <img key={index} className="h-20 w-20 opacity-50" src={image.src} alt={image.alt} />
+            <img key={index} className="w-20 opacity-50" src={image.src} alt={image.alt} />
           ))}
         </div>
-        <p className="mdPlusBold absolute left-[139px] top-0 text-center text-pink-400">
+        <p className="mdPlusBold  text-center text-pink-400">
           당신의 더 나은 내일을 응원합니다
           <br />
           앤데이 심리상담
@@ -63,11 +63,11 @@ const Rending: React.FC = () => {
 
       {/* 검색창 */}
       <div
-        className="absolute left-[190px] top-[452px] inline-flex h-[68px] cursor-pointer flex-col items-start justify-start gap-2.5 bg-gray-50 px-6 py-[19px]"
+        className="mt-[150px] flex h-[68px] cursor-pointer flex-col items-start justify-start bg-gray-50 px-6 py-[19px]"
         onClick={() => openModal()}>
-        <div className="inline-flex items-center justify-start gap-9">
+        <div className="flex items-center justify-start gap-9">
           <img
-            className="relative h-6 w-6  "
+            className="h-6 w-6"
             src="src/assets/images/icon/icon_search_pink.svg"
             alt="icon_search"
           />
@@ -80,10 +80,10 @@ const Rending: React.FC = () => {
       </div>
 
       {/* 카테고리 */}
-      <div className="bodymdsemibold absolute left-[190px] top-[576px] inline-flex w-[1060px] items-start justify-between px-6 text-gray-700 ">
+      <div className="bodymdsemibold mb-[80px] mt-[56px] flex w-[1060px] items-start justify-between px-6 text-gray-700 ">
         {categories.map((category, index) => (
           <div key={index} className="inline-flex flex-col items-center justify-start gap-4">
-            <img className="relative h-[56px] w-[56px]" src={category.src} alt={category.alt} />
+            <img className="h-14 w-14" src={category.src} alt={category.alt} />
             <p>{category.label}</p>
           </div>
         ))}

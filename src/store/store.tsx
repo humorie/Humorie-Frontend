@@ -41,6 +41,7 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
+<<<<<<< HEAD
 interface SearchState {
   searchTerm: string
   setSearchTerm: (term: string) => void
@@ -58,18 +59,21 @@ export const useSearchStore = create<SearchState>((set) => ({
 
 /* -------------------- 드롭다운 Store --------------------- */
 
+=======
+>>>>>>> main
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
   setSelectedDropdown: (dropdownKey: string, value: string) => void
 }
 
-const useDropdownStore = create<DropdownState>((set) => ({
+export const useDropdownStore = create<DropdownState>((set) => ({
   selectedDropdowns: {},
   setSelectedDropdown: (dropdownKey, value) =>
     set((state) => ({
       selectedDropdowns: { ...state.selectedDropdowns, [dropdownKey]: value },
     })),
 }))
+<<<<<<< HEAD
 export default useDropdownStore
 
 interface Filters {
@@ -93,6 +97,8 @@ export const useFiltersStore = create<Filters>((set) => ({
   setRegion: (region) => set({ region }),
   setOrder: (order) => set({ order }),
 }))
+=======
+>>>>>>> main
 /* ------------------------------------------------------ */
 
 /* ------------------- 상담예약 Store --------------------- */
@@ -119,7 +125,7 @@ export const useTimeStore = create<TimeState>((set) => ({
 }))
 // 장소 상태관리
 interface MeetingState {
-  meetingType: string
+  meetingType: string // '온라인' or '오프라인'
   onlineOption: string
   setMeetingType: (type: string) => void
   setOnlineOption: (option: string) => void
@@ -132,3 +138,32 @@ export const useMeetingStore = create<MeetingState>((set) => ({
   setOnlineOption: (option) => set({ onlineOption: option }),
 }))
 /* ------------------------------------------------------------ */
+
+/* ------------------- 카테고리 Store --------------------- */
+interface CategoryState {
+  selectedCategory: string
+  setSelectedCategory: (category: string) => void
+}
+
+export const useCategoryStore = create<CategoryState>((set) => ({
+  selectedCategory: '청소년', // 초기 상태 설정
+  setSelectedCategory: (category: string) => set({ selectedCategory: category }),
+}))
+/* -------------------------------------------------
+/* ------------------- 토큰인증 Store --------------------- */
+interface AuthState {
+  isLoggedIn: boolean
+  logIn: () => void
+  logOut: () => void
+  checkAuth: () => void
+}
+
+export const useAuthStore = create<AuthState>((set) => ({
+  isLoggedIn: false,
+  logIn: () => set({ isLoggedIn: true }),
+  logOut: () => set({ isLoggedIn: false }),
+  checkAuth: () => {
+    const refreshToken = localStorage.getItem('refreshToken')
+    set({ isLoggedIn: !!refreshToken })
+  },
+}))

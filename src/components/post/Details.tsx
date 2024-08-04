@@ -1,6 +1,6 @@
 const Details: React.FC = () => {
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="mb-[640px] flex w-full flex-col items-center justify-center">
       {/* 상담 증상 */}
       <div className="mt-[60px]  flex w-full flex-col items-start justify-start gap-[10px]">
         <div className=" xsbold">상담 증상</div>
@@ -24,7 +24,7 @@ const Details: React.FC = () => {
       </div>
 
       {/* 상담 일정 */}
-      <div className="mb-[110px] mt-[125px] flex w-full flex-col items-start justify-start gap-[24px] rounded-lg border border-gray-100 bg-gray-50 p-[16px] text-gray-900">
+      {/* <div className="mb-[110px] mt-[125px] flex w-full flex-col items-start justify-start gap-[24px] rounded-lg border border-gray-100 bg-gray-50 p-[16px] text-gray-900">
         <div className="flex  w-full flex-row items-center justify-between">
           <div className="xsbold text-center">상담 일정 </div>
           <div className="bodysmmedium text-center">상담목록 1</div>
@@ -61,7 +61,7 @@ const Details: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

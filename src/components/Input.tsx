@@ -7,9 +7,17 @@ interface InputProps {
   btnLabel: string // 버튼 컴포넌트 라벨
   btnEvent?: () => void // 버튼 컴포넌트 클릭 이벤트
   value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void // onChange 이벤트 핸들러
 }
 
-const Input: React.FC<InputProps> = ({ type, placeholder, btnLabel, btnEvent, value }) => {
+const Input: React.FC<InputProps> = ({
+  type,
+  placeholder,
+  btnLabel,
+  btnEvent,
+  value,
+  onChange,
+}) => {
   const [isFocused, setIsFocused] = useState(false)
 
   const handleFocus = () => {
@@ -31,6 +39,7 @@ const Input: React.FC<InputProps> = ({ type, placeholder, btnLabel, btnEvent, va
         placeholder={placeholder}
         value={value}
         type={type === 'Password' ? 'password' : 'text'}
+        onChange={onChange}
       />
       {type === 'Button' && (
         <Button label={btnLabel} size="XSmall" color="pink" onClick={btnEvent} />

@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
   }
 
   return (
-    <div className="flex h-[200px] w-[1440px] items-center justify-center bg-white">
+    <div className="flex h-[200px] w-screen items-center justify-center border-t border-gray-100 bg-white">
       <div className="flex w-[1060px] flex-col items-center justify-center ">
         <div className="flex flex-col items-center justify-center self-stretch  px-[20px] py-[24px]">
           <div className="flex h-[140px] flex-col items-start justify-start gap-8 self-stretch">

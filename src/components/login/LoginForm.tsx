@@ -1,6 +1,8 @@
+import React, { useState } from 'react'
 import '../../index.css'
 import { useNavigate } from 'react-router-dom'
 import Button from '../Button'
+import axios from 'axios'
 
 const LoginForm = () => {
   const navigate = useNavigate()
@@ -29,6 +31,44 @@ const LoginForm = () => {
     navigate('/policy')
   }
 
+  const [accountName, setAccountName] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  // 로그인 버튼 클릭 핸들러
+  const handleLoginButtonClick = async () => {
+    try {
+      const response = await axios.post('/api/account/login', {
+        accountName,
+        password,
+      })
+
+      if (response.data.isSuccess) {
+        // 로그인 성공 시 토큰 저장
+        const { accessToken, refreshToken } = response.data.result
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
+        navigate('/')
+
+        console.log('로그인 성공:', {
+          accessToken,
+          refreshToken,
+        })
+      } else {
+        // 실패 시 에러 메시지 처리
+        setErrorMessage(
+          response.data.message ||
+            '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
+        )
+      }
+    } catch (error) {
+      console.error('Login Error:', error)
+      setErrorMessage(
+        '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
+      )
+    }
+  }
+
   return (
     <div className="relative flex h-[960px] w-screen items-center justify-center bg-gray-50">
       <div className="absolute top-0 h-[960px] w-[1100px] bg-gray-50">
@@ -52,6 +92,8 @@ const LoginForm = () => {
                     />
                     <input
                       type="email"
+                      value={accountName}
+                      onChange={(e) => setAccountName(e.target.value)}
                       className="bodysmmedium h-full w-[254px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                       placeholder="아이디"
                     />
@@ -67,6 +109,8 @@ const LoginForm = () => {
                   />
                   <input
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="bodysmmedium h-full w-[254px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                     placeholder="비밀번호"
                   />
@@ -84,7 +128,12 @@ const LoginForm = () => {
               </div>
             </div>
 
-            <Button label="로그인" size="XLarge" color="pink" />
+            {/* 에러 메시지 표시 */}
+            {errorMessage && (
+              <div className="text-status-3 bodyxsmedium whitespace-pre-line">{errorMessage}</div>
+            )}
+
+            <Button label="로그인" size="XLarge" color="pink" onClick={handleLoginButtonClick} />
           </div>
 
           <div className="flex h-[18px] w-[312px] flex-row items-start justify-start gap-[76px]">

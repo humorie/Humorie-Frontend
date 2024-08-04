@@ -7,17 +7,17 @@ import TimeTable from '../components/reservation/TimeTable'
 
 const Reservation: React.FC = () => {
   return (
-    <div className="justify-cente flex flex-col items-center">
+    <div className="flex flex-col items-center justify-center">
       <Header />
-      <div className="flex w-full flex-col items-start justify-start gap-[180px] bg-gray-50 px-[170px] pb-[150px] pt-[80px]">
+      <div className="flex w-[1440px] flex-col items-start justify-start bg-gray-50 px-[170px] pb-[150px] pt-[80px]">
         <div className="flex flex-row items-start justify-center gap-[90px]">
           <div className="flex flex-col items-center justify-center gap-[110px]">
             <Calendar />
             <TimeTable />
+            <Place />
           </div>
           <CardReservation />
         </div>
-        <Place />
       </div>
       <Footer />
     </div>
