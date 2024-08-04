@@ -41,7 +41,6 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
-
 interface SearchState {
   searchTerm: string
   setSearchTerm: (term: string) => void
@@ -72,6 +71,28 @@ const useDropdownStore = create<DropdownState>((set) => ({
     })),
 }))
 export default useDropdownStore
+
+interface Filters {
+  gender: string
+  counselingMethod: string
+  region: string
+  order: string
+  setGender: (gender: string) => void
+  setCounselingMethod: (method: string) => void
+  setRegion: (region: string) => void
+  setOrder: (order: string) => void
+}
+
+export const useFiltersStore = create<Filters>((set) => ({
+  gender: '',
+  counselingMethod: '',
+  region: '',
+  order: '',
+  setGender: (gender) => set({ gender }),
+  setCounselingMethod: (method) => set({ counselingMethod: method }),
+  setRegion: (region) => set({ region }),
+  setOrder: (order) => set({ order }),
+}))
 /* ------------------------------------------------------ */
 
 /* ------------------- 상담예약 Store --------------------- */
