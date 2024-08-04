@@ -11,6 +11,14 @@ const TimeTable: React.FC = () => {
 
   const [availableTimes, setAvailableTimes] = useState<string[]>([])
 
+  // 날짜를 "YYYY-MM-DD" 형식으로 포맷
+  const formatDate = (date: Date | null) => {
+    if (!date) return
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(
+      date.getDate(),
+    ).padStart(2, '0')}` // "YYYY-MM-DD" 형식으로 포맷
+  }
+
   // 이벤트 핸들러
   const handleTimeClick = useCallback(
     (time: string) => {
@@ -33,14 +41,13 @@ const TimeTable: React.FC = () => {
   // 예약 가능 시간 가져오기
   useEffect(() => {
     if (!selectedDate) {
-      console.log('선택된 날짜가 없습니다.')
       return
     }
 
     async function getAvailableTimes(counselorId: number) {
       try {
         const response = await axios.get(`/api/reservation/available/time/${counselorId}`, {
-          params: { selectDate: selectedDate?.toISOString().split('T')[0] }, // YYYY-MM-DD 형식
+          params: { selectDate: formatDate(selectedDate) }, // YYYY-MM-DD 형식
         })
 
         const times = response.data.availableTimes.map((time: string) => time.slice(0, 5))
