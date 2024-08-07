@@ -41,6 +41,22 @@ export const useTagsStore = create<TagsState>((set) => ({
     set((state) => ({ selectedSymptoms: state.selectedSymptoms.filter((s) => s !== symptom) })),
 }))
 
+interface SearchState {
+  searchTerm: string
+  setSearchTerm: (term: string) => void
+  searchResults: string[]
+  setSearchResults: (results: string[]) => void
+}
+
+export const useSearchStore = create<SearchState>((set) => ({
+  searchTerm: '',
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  searchResults: [],
+  setSearchResults: (results) => set({ searchResults: results }),
+}))
+/* ------------------------------------------------------ */
+
+/* -------------------- 드롭다운 Store --------------------- */
 interface DropdownState {
   selectedDropdowns: { [key: string]: string }
   setSelectedDropdown: (dropdownKey: string, value: string) => void
@@ -52,6 +68,30 @@ export const useDropdownStore = create<DropdownState>((set) => ({
     set((state) => ({
       selectedDropdowns: { ...state.selectedDropdowns, [dropdownKey]: value },
     })),
+}))
+
+export default useDropdownStore
+
+interface Filters {
+  gender: string
+  counselingMethod: string
+  region: string
+  order: string
+  setGender: (gender: string) => void
+  setCounselingMethod: (method: string) => void
+  setRegion: (region: string) => void
+  setOrder: (order: string) => void
+}
+
+export const useFiltersStore = create<Filters>((set) => ({
+  gender: '',
+  counselingMethod: '',
+  region: '',
+  order: '',
+  setGender: (gender) => set({ gender }),
+  setCounselingMethod: (method) => set({ counselingMethod: method }),
+  setRegion: (region) => set({ region }),
+  setOrder: (order) => set({ order }),
 }))
 /* ------------------------------------------------------ */
 

@@ -5,10 +5,6 @@ const Counselorlist = () => {
   return (
     <div className="mb-[136px] flex flex-col items-center justify-center">
       <CounselorCard />
-      <CounselorCard />
-      <CounselorCard />
-      <CounselorCard />
-      <CounselorCard />
     </div>
   )
 }
