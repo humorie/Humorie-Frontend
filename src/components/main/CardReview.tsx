@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Button from '../Button'
 
-interface Counselor {
+interface CounselorProps {
   counselorId: number
   name: string
   rating: number
@@ -14,7 +14,7 @@ interface CardReviewProps {
 }
 
 const CardReview: React.FC<CardReviewProps> = ({ counselorId }) => {
-  const [counselor, setCounselor] = useState<Counselor>()
+  const [counselor, setCounselor] = useState<CounselorProps>()
 
   useEffect(() => {
     axios

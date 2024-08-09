@@ -4,11 +4,14 @@ import Button from '../Button'
 import Input from '../Input'
 import { useDateStore, useTimeStore, useMeetingStore } from '../../store/store'
 
-const CardReservation: React.FC = () => {
+interface CardReservationProps {
+  counselorId?: string
+}
+
+const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
   const { meetingType, onlineOption } = useMeetingStore() // 저장된 장소 불러오기
-  const counselorId = 3 // 상담사 ID (임시 하드코딩)
   const price = 50000 // 상담 금액 (임시 하드코딩)
   const counselContent = '아동/복지' // 상담 내용 (임시 하드코딩)
 
@@ -29,6 +32,7 @@ const CardReservation: React.FC = () => {
     return `${time}`
   }
 
+  // 임의의 주소로 임시고정 후에 실제 데이터로 변경해야 함
   const address: string = '서울특별시 강남구 학동로 426'
 
   // 서버에 예약 정보를 POST로 전송하는 함수
@@ -46,15 +50,10 @@ const CardReservation: React.FC = () => {
       location: meetingType === '온라인' ? onlineOption : address,
       price,
     }
-    console.log(reservationData)
-
     try {
       const response = await axios.post('/api/reservation/create', reservationData)
       if (response.status === 200) {
         alert('예약이 성공적으로 완료되었습니다!')
-        console.log(reservationData)
-
-        // 필요에 따라 성공 후의 추가 로직을 추가합니다.
       }
     } catch (error) {
       console.error('예약 요청 중 에러가 발생했습니다:', error)
@@ -112,7 +111,7 @@ const CardReservation: React.FC = () => {
           type="Button"
           placeholder="0원"
           btnLabel="전액사용"
-          btnEvent={() => console.log('전액사용 클릭됨')}
+          btnEvent={() => alert('전액사용 클릭됨')}
         />
       </div>
       <div className="border border-gray-100"></div>

@@ -2,6 +2,9 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
 import { useDateStore } from '../../store/store'
 
+interface CalendarProps {
+  counselorId?: string
+}
 // 상수와 유틸리티 함수 분리
 const DAYS_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토']
 const MONTH_NAMES = [
@@ -75,7 +78,7 @@ const CalendarDay: React.FC<{
   )
 })
 
-const Calendar: React.FC = () => {
+const Calendar: React.FC<CalendarProps> = ({ counselorId }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [availableDates, setAvailableDates] = useState<Date[]>([])
   const selectedDate = useDateStore((state) => state.selectedDate)
@@ -85,9 +88,9 @@ const Calendar: React.FC = () => {
 
   // 예약 가능 날짜 가져오기
   useEffect(() => {
-    async function getDate(param: number) {
+    async function getDate() {
       try {
-        const response = await axios.get(`/api/reservation/available/date/${param}`)
+        const response = await axios.get(`/api/reservation/available/date/${counselorId}`)
         const availableDatesFromApi = response.data.availableDates.map(
           (dateStr: string) => new Date(dateStr),
         )
@@ -96,7 +99,7 @@ const Calendar: React.FC = () => {
         console.log('API 요청 에러', error)
       }
     }
-    getDate(1)
+    getDate()
   }, [])
 
   // 날짜가 예약 가능한지 확인하는 함수
