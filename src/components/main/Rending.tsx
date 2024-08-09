@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useModalStore, useTagsStore } from '../../store/store'
-import SearchinModal from '../counseling/Modal/searchmodal'
+import SearchinModal from '../counseling/Modal/searchinmodal'
 import Table from '../counseling/Modal/table'
 import Button from '../Button'
 
@@ -99,7 +99,11 @@ const Rending: React.FC = () => {
             }
           }}>
           <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
-            <SearchinModal />
+            <SearchinModal
+              onSearchInputChange={function (e: React.ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.')
+              }}
+            />
             <Table />
             <div className="h-150px ms-[45px] mt-[25px] flex w-full  flex-wrap justify-start space-x-[12px] overflow-y-auto">
               {tags.map((tag, index) => (

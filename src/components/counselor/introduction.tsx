@@ -1,20 +1,60 @@
+import { useEffect, useState } from 'react'
 import '../../index.css'
-import Review from './review'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
+import ReviewList from './review'
+
+interface Counselor {
+  counselorId: number
+  counselingFields: string[]
+  introduction: string
+  affiliations: string[]
+}
 
 const Introduction = () => {
+  const [counselor, setCounselor] = useState<Counselor | null>(null)
+  const { counselorId } = useParams<{ counselorId: string }>()
+
+  useEffect(() => {
+    const fetchCounselorData = async () => {
+      const accessToken = localStorage.getItem('accessToken')
+      try {
+        const response = await axios.get(`/api/counselor/${counselorId}`, {
+          headers: {
+            accesstoken: accessToken || '',
+          },
+        })
+        console.log('API Response:', response.data)
+
+        if (response.data.isSuccess) {
+          setCounselor(response.data.result)
+        } else {
+          console.error('API Error:', response.data.message)
+        }
+      } catch (error) {
+        console.error('Error fetching counselor data:', error)
+      }
+    }
+    fetchCounselorData()
+  }, [counselorId])
+
+  if (!counselor) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="flex flex-col justify-between">
-      <div className="flex flex-col text-black space-y-[37px]">
-        <div className="flex flex-row items-center justify-center w-[202px] h-[40px] space-x-[10px] bg-gray-200 rounded-[6px]">
+      <div className="flex flex-col space-y-[37px] text-black">
+        <div className="flex h-[40px] w-[202px] flex-row items-center justify-center space-x-[10px] rounded-[6px] bg-gray-200">
           <img src="/src/assets/images/counseling/icon_shield.svg" alt="icon" />
           <p className="bodysmbold text-gray-500">공인 의료 서비스 제공자</p>
         </div>
-        <p className="mdbold">내담자의 든든한 심리파트너가 되어드리겠습니다.</p>
+        <p className="mdbold">{counselor.introduction}</p>
       </div>
-      <div className="flex flex-col bodymdmedium space-y-[14px]">
+      <div className="bodymdmedium flex flex-col space-y-[25px]">
         <div className="flex flex-row space-x-[55px]">
           <p className="text-primary-800">대표업무</p>
-          <p>결혼,가정,이혼부부 상담 00서비스</p>
+          <p>{counselor.counselingFields.join(',')}</p>
         </div>
         <div className="flex flex-row space-x-[37px]">
           <p className="text-primary-800">상담 스타일</p>
@@ -29,12 +69,13 @@ const Introduction = () => {
         <div className="flex flex-row space-x-[51px]">
           <p className="text-primary-800">현재 직무</p>
           <div className="flex flex-col">
-            <p>00상담 브릿지</p>
-            <p>00병원 4년근무</p>
+            {counselor.affiliations.map((affiliation, index) => (
+              <p key={index}>{affiliation}</p>
+            ))}
           </div>
         </div>
       </div>
-      <Review />
+      <ReviewList />
     </div>
   )
 }

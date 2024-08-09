@@ -36,7 +36,6 @@ const Header: React.FC = () => {
             refresh_token: refreshToken,
           },
         })
-
         if (response.data.isSuccess) {
           // 서버에서 로그아웃 성공 응답을 받았을 경우
           localStorage.removeItem('refreshToken')

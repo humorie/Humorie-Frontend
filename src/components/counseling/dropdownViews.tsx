@@ -1,7 +1,8 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import '../../index.css'
 import { Fragment } from 'react'
-import { useDropdownStore } from '../../store/store'
+
+import { useDropdownStore, useFiltersStore } from '../../store/store'
 
 function classNames(...classes: (string | boolean | undefined)[]): string {
   return classes.filter(Boolean).join(' ')
@@ -9,10 +10,12 @@ function classNames(...classes: (string | boolean | undefined)[]): string {
 
 const DropdownViews = () => {
   const { selectedDropdowns, setSelectedDropdown } = useDropdownStore()
-  const selectedViews = selectedDropdowns['views'] || '리뷰'
+  const { setOrder } = useFiltersStore()
+  const selectedViews = selectedDropdowns['order'] || '리뷰'
 
-  const handleSelectedViews = (views: string) => {
-    setSelectedDropdown('views', views)
+  const handleSelectedViews = (order: string) => {
+    setSelectedDropdown('order', order)
+    setOrder(order)
   }
 
   return (
