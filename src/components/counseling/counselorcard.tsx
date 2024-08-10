@@ -27,14 +27,15 @@ const CounselorCard = () => {
 
   useEffect(() => {
     const fetchCounselorData = async () => {
-      const accessToken = localStorage.getItem('accessToken')
       try {
         let endpoint = '/api/search'
         const params: Record<string, any> = {}
 
         if (tags.length > 0) {
           endpoint = '/api/search/keywords'
-          params.keywords = tags.map((tag) => tag.content)
+          {
+            params.keywords = tags.map((tag) => tag.content).join(',')
+          }
           // if (gender) params.gender = gender
           // if (counselingMethod) params.counselingMethod = counselingMethod
           // if (region) params.region = region
@@ -51,15 +52,13 @@ const CounselorCard = () => {
 
         const response = await axios.get(endpoint, {
           params: params,
-          headers: {
-            accesstoken: accessToken || '',
-          },
+          headers: {},
         })
 
         console.log('Request URL:', endpoint)
         console.log('Request Params:', params)
-
         console.log('API Response:', response.data)
+
         const data = response.data.result.map((item: any) => ({
           id: item.counselorId,
           name: item.name,
@@ -89,7 +88,7 @@ const CounselorCard = () => {
   }
 
   if (error) {
-    return <div>Error loading data</div>
+    return <div>API 요청 에러</div>
   }
 
   if (loading) {
@@ -110,11 +109,11 @@ const CounselorCard = () => {
                   {counselor.region}
                 </div>
 
-                {counselor.counselingMethods.map((method, index) => (
+                {counselor.counselingFields.map((field, index) => (
                   <div
                     key={index}
                     className="rounded-[4px] bg-gray-100 px-[12px] py-[6px] text-gray-700">
-                    {method}
+                    {field}
                   </div>
                 ))}
               </div>
@@ -137,7 +136,7 @@ const CounselorCard = () => {
                       <p className="bodylmedium text-gray-500">({counselor.reviewCount})</p>
                       <div className="w-[12px]" />
                       <p className="bodymdmedium text-gray-800">
-                        {counselor.counselingFields.join(', ')}
+                        {counselor.counselingMethods.join(', ')}
                       </p>
                     </div>
                     <p className="bodymdmedium text-gray-500">“{counselor.introduction}”</p>
