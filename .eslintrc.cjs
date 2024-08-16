@@ -19,6 +19,7 @@ module.exports = {
     'plugin:prettier/recommended', // Prettier와 관련된 ESLint 규칙을 사용한다는 의미
   ],
   rules: {
+    'import/named': 0,
     '@typescript-eslint/no-unused-vars': 'off', // 사용하지 않는 TypeScript 변수에 대한 경고를 비활성화
     'no-param-reassign': 0, // 매개변수의 값을 수정하는 것을 허용
     'global-require': 0, // require 함수를 전역에서 사용하는 것을 허용
