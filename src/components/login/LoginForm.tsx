@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../index.css'
 import { useNavigate } from 'react-router-dom'
 import Button from '../Button'
@@ -6,6 +6,116 @@ import axios from 'axios'
 
 const LoginForm = () => {
   const navigate = useNavigate()
+  const [accountName, setAccountName] = useState('')
+  const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [intervalId, setIntervalId] = useState<number | null>(null)
+
+  // access token 자동 갱신 함수
+  const refreshAccessToken = async () => {
+    try {
+      console.log('토큰 갱신 시도 중...')
+      // 로컬 스토리지에서 refresh token을 가져옴.
+      const refreshToken = localStorage.getItem('refreshToken')
+      if (!refreshToken) {
+        throw new Error('Refresh token이 없습니다.')
+      }
+
+      // refresh token을 사용하여 새로운 access token을 요청함.
+      const response = await axios.post(
+        '/api/account/issue/token',
+        {}, // 요청 본문이 빈 객체인지 확인
+        {
+          headers: {
+            refresh_token: refreshToken,
+          },
+        },
+      )
+      console.log('토큰 갱신 응답:', response.data)
+
+      if (response.data.isSuccess) {
+        const result = response.data.result
+        // 새로운 access token과 refresh token을 로컬 스토리지에 저장.
+        if (result) {
+          const { accessToken, refreshToken: newRefreshToken } = result
+          localStorage.setItem('accessToken', accessToken)
+          localStorage.setItem('refreshToken', newRefreshToken)
+          console.log('토큰 갱신 성공:', { accessToken, newRefreshToken })
+        } else {
+          console.error('토큰 갱신 실패:', response.data.message)
+          navigate('/login')
+        }
+      } else {
+        console.error('토큰 갱신 실패:', response.data.message)
+        navigate('/login')
+      }
+    } catch (error) {
+      console.error('토큰 갱신 오류:', error)
+      navigate('/login')
+    }
+  }
+
+  const startTokenRefreshInterval = () => {
+    // 기존의 인터벌을 클리어하고 새로운 인터벌을 설정
+    if (intervalId) {
+      clearInterval(intervalId)
+    }
+    const id = setInterval(refreshAccessToken, 29 * 60 * 1000)
+    setIntervalId(id)
+  }
+
+  // 로그인 버튼 클릭 핸들러
+  const handleLoginButtonClick = async () => {
+    try {
+      const response = await axios.post('/api/account/login', {
+        accountName,
+        password,
+      })
+
+      // 로그인 성공 시 토큰 저장
+      if (response.data.isSuccess) {
+        const result = response.data.result
+
+        if (result && typeof result === 'object') {
+          const { accessToken, refreshToken } = result
+          localStorage.setItem('accessToken', accessToken)
+          localStorage.setItem('refreshToken', refreshToken)
+          console.log('로그인 성공:', { accessToken, refreshToken })
+
+          navigate('/')
+
+          startTokenRefreshInterval() // 로그인 후 토큰 갱신 설정
+        } else {
+          setErrorMessage(
+            response.data.message ||
+              '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
+          )
+        }
+      }
+    } catch (error) {
+      console.error('로그인 오류:', error)
+      setErrorMessage(
+        '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
+      )
+    }
+  }
+
+  useEffect(() => {
+    // 컴포넌트가 언마운트될 때 인터벌 클리어
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId)
+      }
+    }
+  }, [intervalId])
+
+  // 로그인 상태가 유지되면 토큰 갱신을 시작하도록 설정
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      startTokenRefreshInterval() // 로그인 후 또는 페이지 리프레시 후 토큰 갱신 설정
+    }
+  }, [])
+
   // 회원가입 버튼
   const handleJoinButtonClick = () => {
     navigate('/join')
@@ -29,44 +139,6 @@ const LoginForm = () => {
   // 이용약관 버튼
   const handlePolicyClick = () => {
     navigate('/policy')
-  }
-
-  const [accountName, setAccountName] = useState('')
-  const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-
-  // 로그인 버튼 클릭 핸들러
-  const handleLoginButtonClick = async () => {
-    try {
-      const response = await axios.post('/api/account/login', {
-        accountName,
-        password,
-      })
-
-      if (response.data.isSuccess) {
-        // 로그인 성공 시 토큰 저장
-        const { accessToken, refreshToken } = response.data.result
-        localStorage.setItem('accessToken', accessToken)
-        localStorage.setItem('refreshToken', refreshToken)
-        navigate('/')
-
-        console.log('로그인 성공:', {
-          accessToken,
-          refreshToken,
-        })
-      } else {
-        // 실패 시 에러 메시지 처리
-        setErrorMessage(
-          response.data.message ||
-            '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
-        )
-      }
-    } catch (error) {
-      console.error('Login Error:', error)
-      setErrorMessage(
-        '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
-      )
-    }
   }
 
   return (
