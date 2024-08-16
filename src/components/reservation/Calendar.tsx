@@ -66,7 +66,7 @@ const CalendarDay: React.FC<{
   const dayClass = isSelected
     ? 'bg-primary-400 text-white cursor-pointer'
     : isAvailable
-      ? 'bg-primary-200 text-gray-900 cursor-pointer hover:bg-primary-300' // 호버 효과 추가
+      ? 'bg-primary-100 text-gray-900 cursor-pointer hover:bg-primary-300' // 호버 효과 추가
       : 'bg-gray-100 text-gray-400 cursor-not-allowed'
 
   return (
@@ -91,7 +91,8 @@ const Calendar: React.FC<CalendarProps> = ({ counselorId }) => {
     async function getDate() {
       try {
         const response = await axios.get(`/api/reservation/available/date/${counselorId}`)
-        const availableDatesFromApi = response.data.availableDates.map(
+        // console.log('상담가능날짜: ', response.data.result)
+        const availableDatesFromApi = response.data.result.availableDates.map(
           (dateStr: string) => new Date(dateStr),
         )
         setAvailableDates(availableDatesFromApi)

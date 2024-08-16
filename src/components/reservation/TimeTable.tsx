@@ -52,7 +52,7 @@ const TimeTable: React.FC<TimeTableProps> = ({ counselorId }) => {
           params: { selectDate: formatDate(selectedDate) }, // YYYY-MM-DD 형식
         })
 
-        const times = response.data.availableTimes.map((time: string) => time.slice(0, 5))
+        const times = response.data.result.availableTimes.map((time: string) => time.slice(0, 5))
         setAvailableTimes(times)
       } catch (error) {
         console.error('API 요청 에러:', error)

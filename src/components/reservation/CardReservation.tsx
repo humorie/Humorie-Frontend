@@ -9,9 +9,8 @@ interface CardReservationProps {
   counselorId?: string
 }
 interface CounselorProps {
-  name: string
-  counselingMethods: string[]
-  counselingFields: string[]
+  name: string // 상담사 이름
+  symptoms: string[] // 상담 분야(스킬)
 }
 
 const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
@@ -22,7 +21,7 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
   const price = 50000 // 상담 금액 (임시 하드코딩)
   const address: string = '서울특별시 강남구 학동로 426' // 임의의 주소로 임시고정 후에 실제 데이터로 변경해야 함
   const [counselor, setCounselor] = useState<CounselorProps>()
-  const counselContent = counselor?.counselingFields.join(', ') // 상담 분야
+  const counselContent = counselor?.symptoms.join(', ') // 상담 분야
 
   // 날짜를 "YYYY.MM.DD" 형식으로 포맷
   const formatDateDot = (date: Date) => {
@@ -47,6 +46,7 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
       .get(`/api/counselor/${counselorId}`)
       .then((response) => {
         if (response.data.isSuccess) {
+          console.log(response.data)
           setCounselor(response.data.result)
         } else {
           console.log('API 요청 실패', response.data.message)
@@ -59,6 +59,8 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
 
   // 서버에 예약 정보를 POST로 전송하는 함수
   const handleReservation = async () => {
+    const accessToken = localStorage.getItem('accessToken')
+
     if (!selectedDate || !selectedTime) {
       alert('상담 날짜와 시간을 선택해 주세요.')
       return
@@ -72,8 +74,16 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
       location: meetingType === '온라인' ? onlineOption : address,
       price,
     }
+    console.log(reservationData)
+    console.log(accessToken)
+
     try {
-      const response = await axios.post('/api/reservation/create', reservationData)
+      const response = await axios.post('/api/reservation/create', reservationData, {
+        headers: {
+          accessToken: accessToken,
+        },
+      })
+
       if (response.status === 200) {
         openModal() // 예약 완료 모달 오픈
       }
