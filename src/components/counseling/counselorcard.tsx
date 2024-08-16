@@ -154,7 +154,8 @@ const CounselorCard = () => {
                     label="예약하기"
                     size="Large"
                     color="pink"
-                    onClick={() => navigate('/counseling/reservation')}
+                    onClick={() => navigate(`/counseling/reservation/${counselor.id}`)}
+                    // 예약하기 페이지에 상담사 id를 전달하기 위해서 수정
                   />
                 </div>
               </div>

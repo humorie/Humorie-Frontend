@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({ label, onClick, size, color = 'pink' }) => {
   const colorClasses = {
     pink: 'bg-primary-600 text-white hover:bg-primary-700 hover:text-gray-50 active:bg-primary-800 active:text-white',
-    gray: 'bg-gray-200 text-gray-500 hover:bg-gray-200 hover:text-gray-600 active:bg-gray-300 active:text-gray-600',
+    gray: 'cursor-not-allowed bg-gray-200 text-gray-500 hover:bg-gray-200 hover:text-gray-600 active:bg-gray-300 active:text-gray-600',
     line: 'bg-white text-primary-600 border-[1px] border-primary-600 hover:bg-primary-50 hover:text-primary-700 active:bg-primary-100 active:text-primary-800',
   }
 
