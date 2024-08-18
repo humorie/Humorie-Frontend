@@ -28,12 +28,9 @@ const ReviewList = () => {
 
   useEffect(() => {
     const fetchCounselorData = async () => {
-      const accessToken = localStorage.getItem('accessToken')
       try {
         const response = await axios.get(`/api/counselor/${counselorId}`, {
-          headers: {
-            accesstoken: accessToken || '',
-          },
+          headers: {},
         })
         console.log('API Response:', response.data)
 
