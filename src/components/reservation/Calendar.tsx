@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
 import { useDateStore } from '../../store/store'
+import { ResvationTypes } from '../Types'
 
-interface CalendarProps {
-  counselorId?: string
-}
 // 상수와 유틸리티 함수 분리
 const DAYS_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토']
 const MONTH_NAMES = [
@@ -78,7 +76,7 @@ const CalendarDay: React.FC<{
   )
 })
 
-const Calendar: React.FC<CalendarProps> = ({ counselorId }) => {
+const Calendar: React.FC<ResvationTypes> = ({ counselorId }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [availableDates, setAvailableDates] = useState<Date[]>([])
   const selectedDate = useDateStore((state) => state.selectedDate)
@@ -88,20 +86,20 @@ const Calendar: React.FC<CalendarProps> = ({ counselorId }) => {
 
   // 예약 가능 날짜 가져오기
   useEffect(() => {
-    async function getDate() {
+    const fetchData = async () => {
       try {
         const response = await axios.get(`/api/reservation/available/date/${counselorId}`)
-        // console.log('상담가능날짜: ', response.data.result)
+        console.log('상담 가능 날짜 API 결과: ', response.data.result)
         const availableDatesFromApi = response.data.result.availableDates.map(
           (dateStr: string) => new Date(dateStr),
         )
         setAvailableDates(availableDatesFromApi)
       } catch (error) {
-        console.log('API 요청 에러', error)
+        console.log('상강 가능 날짜 API 에러', error)
       }
     }
-    getDate()
-  }, [])
+    fetchData()
+  }, [counselorId])
 
   // 날짜가 예약 가능한지 확인하는 함수
   const isAvailable = useCallback(

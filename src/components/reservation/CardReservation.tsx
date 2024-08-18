@@ -2,26 +2,22 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Button from '../Button'
 import Input from '../Input'
-import { useDateStore, useTimeStore, useMeetingStore, useModalStore } from '../../store/store'
-import CompleteModal from './CompleteModal'
+import { useDateStore, useTimeStore, useMeetingStore } from '../../store/store'
+import PortOne from '../../services/PortOneApi'
+import { ResvationTypes, CounselorTypes } from '../Types'
 
-interface CardReservationProps {
-  counselorId?: string
-}
-interface CounselorProps {
-  name: string // 상담사 이름
-  symptoms: string[] // 상담 분야(스킬)
-}
-
-const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
+const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
-  const { modalOpen, openModal } = useModalStore()
   const { meetingType, onlineOption } = useMeetingStore() // 저장된 장소 불러오기
-  const price = 50000 // 상담 금액 (임시 하드코딩)
-  const address: string = '서울특별시 강남구 학동로 426' // 임의의 주소로 임시고정 후에 실제 데이터로 변경해야 함
-  const [counselor, setCounselor] = useState<CounselorProps>()
+  const [counselor, setCounselor] = useState<CounselorTypes>()
+  const [reservationUid, setReservationUid] = useState<string | null>(null) // 예약 UID 상태 추가
   const counselContent = counselor?.symptoms.join(', ') // 상담 분야
+  // 더미 데이터
+  const price = 50000
+  const point = 0
+  const finalPrice = 50000
+  const address: string = '서울특별시 강남구 학동로 426'
 
   // 날짜를 "YYYY.MM.DD" 형식으로 포맷
   const formatDateDot = (date: Date) => {
@@ -40,27 +36,24 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
     return `${time}`
   }
 
-  // 상담서 api 요청
+  // 상담사 API 요청
   useEffect(() => {
-    axios
-      .get(`/api/counselor/${counselorId}`)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/counselor/${counselorId}`)
         if (response.data.isSuccess) {
-          console.log(response.data)
+          console.log('상담사 조회 API 결과: ', response.data.result)
           setCounselor(response.data.result)
-        } else {
-          console.log('API 요청 실패', response.data.message)
         }
-      })
-      .catch((error) => {
-        console.log('API 요청 에러', error)
-      })
+      } catch (error) {
+        console.log('상담사 조회 API 에러: ', error)
+      }
+    }
+    fetchData()
   }, [counselorId])
 
-  // 서버에 예약 정보를 POST로 전송하는 함수
-  const handleReservation = async () => {
-    const accessToken = localStorage.getItem('accessToken')
-
+  // 상담예약생성 API 요청
+  const handleReservationClick = async () => {
     if (!selectedDate || !selectedTime) {
       alert('상담 날짜와 시간을 선택해 주세요.')
       return
@@ -73,22 +66,24 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
       counselContent,
       location: meetingType === '온라인' ? onlineOption : address,
       price,
+      point,
+      finalPrice,
     }
-    console.log(reservationData)
-    console.log(accessToken)
 
     try {
+      const accessToken = localStorage.getItem('accessToken')
       const response = await axios.post('/api/reservation/create', reservationData, {
         headers: {
           accessToken: accessToken,
         },
       })
 
-      if (response.status === 200) {
-        openModal() // 예약 완료 모달 오픈
+      if (response.data.isSuccess) {
+        console.log('상담예약 생성 API 결과: ', response.data)
+        setReservationUid(response.data.result.reservationUid)
       }
     } catch (error) {
-      console.error('예약 요청 중 에러가 발생했습니다:', error)
+      console.error('상담예약 생성 API 에러: ', error)
       alert('예약 요청에 실패했습니다. 다시 시도해 주세요.')
     }
   }
@@ -161,7 +156,7 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
             label="다음"
             size="XLarge"
             color="pink"
-            onClick={handleReservation} // 예약 처리 함수 호출
+            onClick={handleReservationClick} // 예약 처리 함수 호출
           />
         ) : (
           <Button
@@ -172,7 +167,7 @@ const CardReservation: React.FC<CardReservationProps> = ({ counselorId }) => {
           />
         )}
       </div>
-      {modalOpen ? <CompleteModal /> : null}
+      {reservationUid && <PortOne reservationUid={reservationUid} />}
     </div>
   )
 }
