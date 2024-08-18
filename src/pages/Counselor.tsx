@@ -16,7 +16,7 @@ const Counselor: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center space-y-[66px] text-black">
       <Header />
-      <div className="mt-[135px] flex w-[1050px] flex-row justify-between">
+      <div className="flex w-[1050px] flex-row justify-between pt-[75px]">
         <Profile />
         <Introduction />
       </div>
