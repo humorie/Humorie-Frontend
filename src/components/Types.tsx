@@ -1,22 +1,3 @@
-// 상담 상세 정보 인터페이스
-export interface ConsultDetail {
-  id: number
-  counselorName: string
-  content: string
-  status: boolean
-  symptom: string
-  title: string
-  counselDate: string
-  counselTime: string
-  location: string
-}
-
-// 상담 내역 인터페이스
-export interface HistoryProps {
-  consultDetail: ConsultDetail
-  accountName: string
-}
-
 // 상담사 정보 인터페이스
 export interface CounselorTypes {
   counselorId: number
@@ -44,6 +25,62 @@ export interface Review {
   createdAt: string
 }
 
+// 상담예약 페이지 인터페이스
 export interface ResvationTypes {
   counselorId: string // 상담사 id
+}
+
+// 전체 상담 내역 디테일 타입 인터페이스
+export interface AllHistoryDetailTypes {
+  id: string
+  status?: boolean
+  counselorName?: string
+  counselContent?: string
+  location?: string
+  counselDate?: string
+}
+
+// 전체 상담내역 타입 인터페이스
+export interface AllHistoryTypes {
+  consultDetails: AllHistoryDetailTypes[]
+  pageNumber?: number
+  pageSize?: number
+  totalElements: number
+  totalPages?: number
+}
+
+// 특정 상담내역 디테일 인터페이스
+export interface PostDetailTypes {
+  id: string // 게시글 id
+  // counslorId: string // 필요함
+  counselorName: string
+  content: string
+  status: boolean
+  symptom: string
+  title: string
+  counselDate: string
+  counselTime: string
+  location: string
+}
+
+// 특정 상담내역 인터페이스
+export interface PostContentsTypes {
+  consultDetail: PostDetailTypes
+  accountName: string
+}
+
+// Post페이지 인터페이스
+export interface PostTypes {
+  id: string // 상담내역 특정 게시글 ID
+}
+
+// 최근 상담내역 인터페이스
+export interface RecentPostTypes {
+  id: string
+  counselorName: string
+  rating: number
+  location: string
+  counselDate: string
+  title: string
+  content: string
 }
