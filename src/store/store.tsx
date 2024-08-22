@@ -140,7 +140,7 @@ interface CategoryState {
 }
 
 export const useCategoryStore = create<CategoryState>((set) => ({
-  selectedCategory: '청소년', // 초기 상태 설정
+  selectedCategory: '학업/진로', // 초기 상태 설정
   setSelectedCategory: (category: string) => set({ selectedCategory: category }),
 }))
 /* -------------------------------------------------
