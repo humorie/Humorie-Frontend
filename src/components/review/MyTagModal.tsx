@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Button from '../Button'
 import { useTagsStore } from '../../store/store'
 import axios from 'axios'
+
 interface MyTagModlProps {
   isOpen: boolean
   onClose: () => void
@@ -14,8 +15,6 @@ const MyTagModl: React.FC<MyTagModlProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = async () => {
     const accessToken = localStorage.getItem('accessToken')
-    console.log(accessToken)
-    console.log(title, content)
     try {
       const response = await axios.post(
         '/api/review/tag',
@@ -29,14 +28,13 @@ const MyTagModl: React.FC<MyTagModlProps> = ({ isOpen, onClose }) => {
           },
         },
       )
-      // 상태 업데이트 및 모달 닫기
       addTag({ title, content })
-      setTitle('')
-      setContent('')
-      onClose()
-      console.log('API Response: ', response.data)
+      setTitle('') // 태그 제목 초기화
+      setContent('') // 태그 내용 초기화
+      onClose() // 모달 닫기
+      console.log('태그 등록 API 결과: ', response.data)
     } catch (error) {
-      console.error('Error creating tag:', error)
+      console.error('태그 등록 API 에러: ', error)
     }
   }
 

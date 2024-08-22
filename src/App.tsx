@@ -29,9 +29,9 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/joinsuccess" element={<JoinSuccess />} />
         <Route path="/history" element={<History />} />
-        <Route path="/review" element={<Review />} />
+        <Route path="/review/:consultId" element={<Review />} />
         <Route path="/review/complete" element={<Complete />} />
-        <Route path="/post" element={<Post />} />
+        <Route path="/history/:id" element={<Post />} />
         <Route path="/counseling" element={<Counseling />} />
         <Route path="/counseling/counselor/:counselorId" element={<Counselor />} />
         <Route path="/counseling/counselor/:counselorId/reviews" element={<MoreReviews />} />
