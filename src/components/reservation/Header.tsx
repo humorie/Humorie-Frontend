@@ -1,31 +1,25 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { ResvationTypes, CounselorTypes } from '../Types'
 
-interface CounselorProps {
-  name: string
-}
-interface HeaderProps {
-  counselorId?: string
-}
+const Header: React.FC<ResvationTypes> = ({ counselorId }) => {
+  const [counselor, setCounselor] = useState<CounselorTypes>()
 
-const Header: React.FC<HeaderProps> = ({ counselorId }) => {
-  const [counselor, setCounselor] = useState<CounselorProps>()
-
-  // 상담서 api 요청
+  // 상담사 API 요청
   useEffect(() => {
-    axios
-      .get(`/api/counselor/${counselorId}`)
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/counselor/${counselorId}`)
         if (response.data.isSuccess) {
+          console.log('상담사 조회 API 결과: ', response.data.result)
           setCounselor(response.data.result)
-        } else {
-          console.log('API 요청 실패', response.data.message)
         }
-      })
-      .catch((error) => {
-        console.log('API 요청 에러', error)
-      })
+      } catch (error) {
+        console.log('상담사 조회 API 에러: ', error)
+      }
+    }
+    fetchData()
   }, [counselorId])
 
   const navigate = useNavigate()

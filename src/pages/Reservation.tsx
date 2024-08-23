@@ -15,6 +15,11 @@ const Reservation: React.FC = () => {
     isLoggedIn: state.isLoggedIn,
     checkAuth: state.checkAuth,
   }))
+
+  if (!counselorId) {
+    return <div>Error: Counselor ID is missing</div>
+  }
+
   // 리프레시 토큰검사
   useEffect(() => {
     checkAuth()
