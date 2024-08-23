@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
-import { useTimeStore, useDateStore } from '../../store/store' // 달력 상태 관리 import
-import TimeSlot from './TimeSlot' // TimeSlot 컴포넌트 import
+import { useTimeStore, useDateStore } from '../../store/store'
+import { ResvationTypes } from '../Types'
+import TimeSlot from './TimeSlot'
 
-interface TimeTableProps {
-  counselorId?: string
-}
-
-const TimeTable: React.FC<TimeTableProps> = ({ counselorId }) => {
+const TimeTable: React.FC<ResvationTypes> = ({ counselorId }) => {
   const selectedTime = useTimeStore((state) => state.selectedTime)
   const setSelectedTime = useTimeStore((state) => state.setSelectedTime)
   const selectedDate = useDateStore((state) => state.selectedDate) // 선택된 날짜 가져오기
@@ -52,7 +49,7 @@ const TimeTable: React.FC<TimeTableProps> = ({ counselorId }) => {
           params: { selectDate: formatDate(selectedDate) }, // YYYY-MM-DD 형식
         })
 
-        const times = response.data.availableTimes.map((time: string) => time.slice(0, 5))
+        const times = response.data.result.availableTimes.map((time: string) => time.slice(0, 5))
         setAvailableTimes(times)
       } catch (error) {
         console.error('API 요청 에러:', error)
