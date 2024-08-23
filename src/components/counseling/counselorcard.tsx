@@ -36,17 +36,12 @@ const CounselorCard = () => {
           {
             params.keywords = tags.map((tag) => tag.content).join(',')
           }
-          // if (gender) params.gender = gender
-          // if (counselingMethod) params.counselingMethod = counselingMethod
-          // if (region) params.region = region
-          // if (order) params.order = order
         } else {
           if (gender || counselingMethod || region || order) {
             endpoint = '/api/search/conditions'
           }
           if (gender) params.gender = gender
           if (counselingMethod) params.counselingMethod = counselingMethod
-          if (region) params.region = region ? `%${region}%` : undefined
           if (order) params.order = order
         }
 
@@ -71,6 +66,12 @@ const CounselorCard = () => {
           introduction: item.introduction,
         }))
 
+        if (order === '리뷰 높은순') {
+          data.sort((a: CounselorList, b: CounselorList) => b.reviewCount - a.reviewCount)
+        } else if (order === '리뷰 낮은순') {
+          data.sort((a: CounselorList, b: CounselorList) => a.reviewCount - b.reviewCount)
+        }
+
         setCounselor(data)
         setError(false)
       } catch (error) {
@@ -81,7 +82,7 @@ const CounselorCard = () => {
       }
     }
     fetchCounselorData()
-  }, [gender, counselingMethod, region, order, tags])
+  }, [gender, counselingMethod, order, tags])
 
   if (counselor.length === 0) {
     return <div>해당되는 상담사가 없습니다.</div>
