@@ -141,6 +141,13 @@ const LoginForm = () => {
     navigate('/policy')
   }
 
+  // 엔터키 눌렀을 때 로그인 시도
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleLoginButtonClick()
+    }
+  }
+
   return (
     <div className="relative flex h-[960px] w-screen items-center justify-center bg-gray-50">
       <div className="absolute top-0 h-[960px] w-[1100px] bg-gray-50">
@@ -166,6 +173,7 @@ const LoginForm = () => {
                       type="email"
                       value={accountName}
                       onChange={(e) => setAccountName(e.target.value)}
+                      onKeyDown={handleKeyDown} // 엔터키 이벤트 추가
                       className="bodysmmedium h-full w-[254px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                       placeholder="아이디"
                     />
@@ -183,6 +191,7 @@ const LoginForm = () => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={handleKeyDown} // 엔터키 이벤트 추가
                     className="bodysmmedium h-full w-[254px] border-none bg-white p-2 pl-[0.125rem] text-gray-900 placeholder-gray-200 caret-primary-700 outline-none focus:bg-primary-100 focus:outline-none"
                     placeholder="비밀번호"
                   />
