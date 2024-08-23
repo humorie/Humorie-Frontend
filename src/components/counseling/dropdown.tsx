@@ -1,14 +1,12 @@
 import '../../index.css'
 import DropdownGender from './dropdownGender'
 import DropdownMethod from './dropdownMethod'
-import DropdownRegion from './dropdownRegion'
 import DropdownViews from './dropdownViews'
 
 const Dropdown = () => {
   return (
-    <div className="flex flex-row items-center justify-end space-x-[9px] mt-[40px] mb-[52px]">
+    <div className="mb-[52px] mt-[40px] flex flex-row items-center justify-end space-x-[9px]">
       <DropdownMethod />
-      <DropdownRegion />
       <DropdownGender />
       <DropdownViews />
     </div>
