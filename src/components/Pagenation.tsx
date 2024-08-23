@@ -21,12 +21,17 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPage
 
   const renderPageNumbers = () => {
     const pageNumbers = []
-    for (let i = 1; i <= totalPages; i++) {
+    const startPage = Math.max(1, currentPage - 1)
+    const endPage = Math.min(totalPages, startPage + 3) // 최대 4개 페이지 표시
+
+    for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={'bodymdmedium cursor-pointer bg-transparent text-gray-500'}>
+          className={`bodymdmedium cursor-pointer bg-transparent text-gray-500 ${
+            currentPage === i ? 'text-primary-600' : ''
+          }`}>
           {i}
         </button>,
       )
