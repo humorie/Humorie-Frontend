@@ -1,6 +1,6 @@
 const SearchinCS = () => {
   return (
-    <div className="flex h-[68px] w-[880px] items-center justify-center space-x-[36px] bg-gray-50 px-[24px] py-[19px]">
+    <div className="mb-[70px] flex h-[68px] w-[880px] items-center justify-center space-x-[36px] bg-gray-50 px-[24px] py-[19px]">
       <img src="src/assets/images/counseling/search.svg" alt="search icon" />
       <input
         type="text"

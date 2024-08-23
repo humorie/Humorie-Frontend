@@ -59,48 +59,54 @@ const CustomerServicePost: React.FC = () => {
           공지사항
         </div>
       </div>
+
       {/* 헤더 */}
       <div className="mt-[100px] flex h-auto w-[1100px] flex-col gap-[40px]">
         <p className="smsemibold flex items-center justify-start self-stretch text-center">
           {notice?.title}
         </p>
-        <div className="flex flex-row gap-[8px] self-stretch">
-          <img
-            className="h-[62px] w-[62px]"
-            src="/src/assets/images/icon/icon_person_gray.svg"
-            alt="프로필 사진"
-          />
-          <div className="flex flex-col items-start justify-evenly">
-            <p className="bodylregular">{notice?.author}</p>
-            <div className="flex flex-row items-center justify-center gap-[14px]">
-              <div className="bodymdregular flex flex-row items-center justify-center gap-[14px] text-gray-500">
-                <img
-                  className="h-[24px] w-[24px]"
-                  src="/src/assets/images/icon/icon_eye_gray.svg"
-                  alt="조회수"
-                />
-                {notice?.viewCount}
-              </div>
-              <div className="bodymdregular flex flex-row items-center justify-center gap-[14px] text-gray-500">
-                <img
-                  className="h-[24px] w-[24px]"
-                  src="/src/assets/images/icon/icon_time_gray.svg"
-                  alt="작성일"
-                />
-                {notice?.createdDate} {notice?.createdTime}
+        <div className="flex flex-row items-center justify-between self-stretch">
+          <div className="flex flex-row gap-[8px]">
+            <img
+              className="h-[62px] w-[62px]"
+              src="/src/assets/images/icon/icon_person_gray.svg"
+              alt="프로필 사진"
+            />
+            <div className="flex flex-col items-start justify-evenly">
+              <p className="bodylregular">{notice?.author}</p>
+              <div className="flex flex-row items-center justify-center gap-[14px]">
+                <div className="bodymdregular flex flex-row items-center justify-center gap-[14px] text-gray-500">
+                  <img
+                    className="h-[24px] w-[24px]"
+                    src="/src/assets/images/icon/icon_eye_gray.svg"
+                    alt="조회수"
+                  />
+                  {notice?.viewCount}
+                </div>
+                <div className="bodymdregular flex flex-row items-center justify-center gap-[14px] text-gray-500">
+                  <img
+                    className="h-[24px] w-[24px]"
+                    src="/src/assets/images/icon/icon_time_gray.svg"
+                    alt="작성일"
+                  />
+                  {notice?.createdDate} {notice?.createdTime}
+                </div>
               </div>
             </div>
           </div>
-          {/* <img
-            className="h-[27px] w-[27px]"
-            src="/src/assets/images/icon/icon_person_gray.svg"
-            alt="프로필 사진"
-          /> */}
+          <img
+            className="h-[27] w-[27px]"
+            src="/src/assets/images/icon/icon_list_gray.svg"
+            alt="목록으로"
+            onClick={() => navigate(-1)}
+          />
         </div>
         <div className="flex border-t border-gray-400" />
       </div>
+
       {/* 본문 */}
       <div className="bodymdmedium h-[500px] w-[1100px] py-[80px]">{notice?.content}</div>
+
       {/* 풋터 */}
       <div className="mb-[100px] w-[1100px]">
         {page?.previousNotice && (
