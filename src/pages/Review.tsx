@@ -15,12 +15,17 @@ interface TagType {
   tagContent: string
 }
 
+interface UserType {
+  name: string
+}
+
 const Review: React.FC = () => {
   const { consultId } = useParams()
   const [title, setTitle] = useState('') // 리뷰 제목
   const [contents, setContents] = useState('') // 리뷰 콘텐츠
   const [rating, setRating] = useState(0) // 별점
   const [tags, setTags] = useState<TagType[]>([]) // 태그 목록
+  const [user, setUser] = useState<UserType>()
   const { modalOpen, openModal, closeModal } = useModalStore()
   const navigate = useNavigate()
 
@@ -34,18 +39,15 @@ const Review: React.FC = () => {
       alert('리뷰 내용을 확인해 주세요')
       return
     }
-
     try {
       const accessToken = localStorage.getItem('accessToken')
       const response = await axios.post(
         `/api/review/${consultId}?consultId=${consultId}`,
-
         {
           title: title,
           content: contents,
           rating: rating,
         },
-
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -102,7 +104,31 @@ const Review: React.FC = () => {
       console.error('태그 삭제 API 에러: ', error)
     }
   }
+  // 회원정보조회 API 요청
+  useEffect(() => {
+    const fetchData = async () => {
+      const accessToken = localStorage.getItem('accessToken')
+      try {
+        const response = await axios.get('/api/mypage/get', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        if (response.data.isSuccess) {
+          setUser(response.data.result)
+          console.log('회원정보조회 API 결과: ', response.data.result)
+        }
+      } catch (error) {
+        console.log('회원정보조회 API 에러: ', error)
+      }
+    }
+    fetchData()
+  }, [])
 
+  // 태그 추가 핸들러
+  const handleTagAdded = (newTag: TagType) => {
+    setTags((prevTags) => [...prevTags, newTag]) // 새로운 태그 추가
+  }
   // 제목 변경 이벤트 핸들러
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -116,17 +142,17 @@ const Review: React.FC = () => {
     setTitle(title)
     setContents(content)
   }
-
   // 별점 클릭 이벤트 핸들러
   const handleStarClick = (index: number) => {
     setRating(index + 1) // 클릭한 별의 인덱스까지 별점 설정
   }
+
   return (
     <div className="flex flex-col items-center justify-center bg-white">
       <Header />
       <div className="contents-black flex w-[1060px] flex-col items-center justify-center bg-white text-black">
         <div className="mb-[85px] mt-[180px] flex h-[204px] w-full flex-col items-center justify-evenly rounded-lg bg-pink-50">
-          <div className="smbold contents-center">{}이번상담 어떠셨나요?</div>
+          <div className="smbold contents-center">{user?.name}님 이번상담 어떠셨나요?</div>
           <div className="flex h-[30px] w-[330px] flex-row gap-[45px]">
             {[...Array(5)].map((_, index) => (
               <img
@@ -143,6 +169,7 @@ const Review: React.FC = () => {
             ))}
           </div>
         </div>
+
         {/* 제목 */}
         <div className="relative w-full">
           <input
@@ -173,11 +200,10 @@ const Review: React.FC = () => {
 
         {/* 마이태그 */}
         <div className="mt-[40px] flex w-full flex-row items-center justify-between self-stretch text-black">
-          {/* 태그 */}
           <div className="flex flex-row items-center justify-center gap-[12px]">
-            {tags.slice(0, 5).map((tag) => (
+            {tags.slice(0, 5).map((tag, index) => (
               <Tag
-                key={tag.tagId}
+                key={index}
                 label={tag.tagName}
                 onClick={() => handleTagClick(tag.tagName, tag.tagContent)}
                 onDelete={() => handleTagDelete(tag.tagId)}
@@ -193,8 +219,10 @@ const Review: React.FC = () => {
             onClick={openModal}
           />
         </div>
+
         {/* 태그 입력 모달 */}
-        <MakeTagModal isOpen={modalOpen} onClose={closeModal} />
+        <MakeTagModal isOpen={modalOpen} onClose={closeModal} onTagAdded={handleTagAdded} />
+
         {/* 등록 버튼 */}
         <div
           className="hover:contents-gray-50 active:contents-white mb-[356px] mt-[122px] flex h-[94px] w-full cursor-pointer items-center justify-center rounded-[10px] bg-pink-400 px-[35px] py-[15px] text-white hover:bg-primary-700 active:bg-primary-800"

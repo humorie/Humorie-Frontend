@@ -52,7 +52,7 @@ export interface AllHistoryTypes {
 // 특정 상담내역 디테일 인터페이스
 export interface PostDetailTypes {
   id: string // 게시글 id
-  // counslorId: string // 필요함
+  counslorId: string // 필요함
   counselorName: string
   content: string
   status: boolean
@@ -61,26 +61,4 @@ export interface PostDetailTypes {
   counselDate: string
   counselTime: string
   location: string
-}
-
-// 특정 상담내역 인터페이스
-export interface PostContentsTypes {
-  consultDetail: PostDetailTypes
-  accountName: string
-}
-
-// Post페이지 인터페이스
-export interface PostTypes {
-  id: string // 상담내역 특정 게시글 ID
-}
-
-// 최근 상담내역 인터페이스
-export interface RecentPostTypes {
-  id: string
-  counselorName: string
-  rating: number
-  location: string
-  counselDate: string
-  title: string
-  content: string
 }

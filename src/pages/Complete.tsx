@@ -2,8 +2,10 @@
 import Header from '../components/header/Header'
 import Button from '../components/Button'
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 
 const Complete: React.FC = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex flex-col items-center justify-center bg-white">
       <Header />
@@ -16,13 +18,7 @@ const Complete: React.FC = () => {
             내담자분께서 정성스럽게 작성해주신 리뷰는
             <br /> 앤데이 상담사님에게 소중히 간직될 거에요
           </div>
-          <Button
-            label="돌아가기"
-            size="XLarge"
-            onClick={() => {
-              console.log('클릭됨')
-            }}
-          />
+          <Button label="돌아가기" size="XLarge" onClick={() => navigate('/')} />
         </div>
       </div>
       <Footer />
