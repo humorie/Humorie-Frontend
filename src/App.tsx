@@ -20,6 +20,8 @@ import FindPw from './pages/FindPw'
 import Policy from './pages/Policy'
 import MyPage from './pages/MyPage'
 import DeleteAccount from './pages/DeleteAccount'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import DataCollection from './pages/DataCollection'
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
         <Route path="/policy" element={<Policy />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/deleteaccount" element={<DeleteAccount />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/datacollection" element={<DataCollection />} />
       </Routes>
     </Router>
   )

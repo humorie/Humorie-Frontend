@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import Button from './Button'
 
 interface InputProps {
-  type: 'Button' | 'Primary' | 'Password' // 인풋 타입, 피그마 참고
+  type: 'Button' | 'Primary' | 'Password' | 'Text' // 인풋 타입, 피그마 참고
   placeholder: string // placeholder 이름
   btnLabel: string // 버튼 컴포넌트 라벨
   btnEvent?: () => void // 버튼 컴포넌트 클릭 이벤트
   value?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void // onChange 이벤트 핸들러
+  disabled?: boolean
 }
 
 const Input: React.FC<InputProps> = ({
@@ -17,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   btnEvent,
   value,
   onChange,
+  disabled = false, // 기본값을 false로 설정
 }) => {
   const [isFocused, setIsFocused] = useState(false)
 
@@ -38,8 +40,9 @@ const Input: React.FC<InputProps> = ({
         className=" w-[214px] bg-transparent text-black placeholder:text-gray-300 focus:bg-transparent focus:text-gray-900 focus:outline-none"
         placeholder={placeholder}
         value={value}
-        type={type === 'Password' ? 'password' : 'text'}
+        type={type === 'Password' ? 'password' : type === 'Text' ? 'text' : 'text'}
         onChange={onChange}
+        disabled={disabled}
       />
       {type === 'Button' && (
         <Button label={btnLabel} size="XSmall" color="pink" onClick={btnEvent} />

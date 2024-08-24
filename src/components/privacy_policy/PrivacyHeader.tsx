@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-const PolicyHeader: React.FC = () => {
+const PrivacyHeader: React.FC = () => {
   const navigate = useNavigate()
 
   const handleBackClick = () => {
@@ -16,9 +16,9 @@ const PolicyHeader: React.FC = () => {
           alt="뒤로가기"
           onClick={handleBackClick} // 뒤로가기 이벤트
         />
-        <div className="bodylsemibold w-[770px] text-white">이용약관</div>
+        <div className="bodylsemibold w-[770px] text-white">개인정보 처리방침</div>
       </div>
     </div>
   )
 }
-export default PolicyHeader
+export default PrivacyHeader
