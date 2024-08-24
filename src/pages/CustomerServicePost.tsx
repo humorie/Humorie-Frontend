@@ -49,11 +49,11 @@ const CustomerServicePost: React.FC = () => {
   return (
     <div className="flex h-auto w-[1440px] flex-col items-center justify-center bg-white text-black">
       <Header />
-      <div className="relative h-[450px] w-[1440px] text-center text-white">
+      <div className="relative h-[450px] w-[1440px] text-center text-black">
         <img
           src="/src/assets/images/customerService/cs_rending_image1.svg"
           alt="렌딩이미지"
-          className="h-full w-full brightness-50"
+          className="h-full w-full"
         />
         <div className="xlbold absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
           공지사항
