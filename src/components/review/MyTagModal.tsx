@@ -1,17 +1,22 @@
 import { useState } from 'react'
 import Button from '../Button'
-import { useTagsStore } from '../../store/store'
 import axios from 'axios'
+
+interface TagType {
+  tagId: number
+  tagName: string
+  tagContent: string
+}
 
 interface MyTagModlProps {
   isOpen: boolean
   onClose: () => void
+  onTagAdded: (tag: TagType) => void
 }
 
-const MyTagModl: React.FC<MyTagModlProps> = ({ isOpen, onClose }) => {
+const MyTagModl: React.FC<MyTagModlProps> = ({ isOpen, onClose, onTagAdded }) => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const addTag = useTagsStore((state) => state.addTag)
 
   const handleSubmit = async () => {
     const accessToken = localStorage.getItem('accessToken')
@@ -28,13 +33,15 @@ const MyTagModl: React.FC<MyTagModlProps> = ({ isOpen, onClose }) => {
           },
         },
       )
-      addTag({ title, content })
+      const newTag = { tagId: response.data.result.tagId, tagName: title, tagContent: content }
+      onTagAdded(newTag) // 태그 추가 후 콜백 함수 호출
       setTitle('') // 태그 제목 초기화
       setContent('') // 태그 내용 초기화
       onClose() // 모달 닫기
       console.log('태그 등록 API 결과: ', response.data)
     } catch (error) {
-      console.error('태그 등록 API 에러: ', error)
+      alert('마이태그는 최대 5개입니다!')
+      console.log('태그 등록 API 에러: ', error)
     }
   }
 

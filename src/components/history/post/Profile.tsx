@@ -1,14 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { CounselorTypes, PostContentsTypes } from '../../Types'
+import { CounselorTypes } from '../../Types'
 import axios from 'axios'
 
-interface PostProfilePageTypes {
-  id: string
-  contents: PostContentsTypes
+interface ProfileProps {
+  consultId: number
+  counselorId: number
+  content: string
 }
 
-const Profile: React.FC<PostProfilePageTypes> = ({ id, contents }) => {
+const Profile: React.FC<ProfileProps> = ({ consultId, counselorId, content }) => {
   const [counselor, setCounselor] = useState<CounselorTypes>()
   const navigate = useNavigate()
 
@@ -16,15 +17,15 @@ const Profile: React.FC<PostProfilePageTypes> = ({ id, contents }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api/counselor/${id}`)
-        console.log('상담사 프로필 조회 API: ', response.data.result)
+        const response = await axios.get(`/api/counselor/${counselorId}`)
+        console.log('상담사 프로필 조회 API 결과: ', response.data.result)
         setCounselor(response.data.result)
       } catch (error) {
-        console.log('API 요청 에러: ', error)
+        console.log('상담사 프로필 조회 API 에러: ', error)
       }
     }
     fetchData()
-  }, [])
+  }, [counselorId])
 
   return (
     <div className="mb-[300px] mt-[60px] flex h-[500px] w-full flex-row items-center justify-between gap-[60px]">
@@ -65,7 +66,7 @@ const Profile: React.FC<PostProfilePageTypes> = ({ id, contents }) => {
           </div>
           <div className="bodymdsemibold flex flex-row items-start justify-start gap-[50px]">
             <div className="w-[60px] text-pink-600">상담 내용</div>
-            <div className="w-[340px]">{contents.consultDetail.content}</div>
+            <div className="w-[340px]">{content}</div>
           </div>
           <div className="bodymdsemibold flex flex-row items-start justify-start gap-[50px]">
             <div className="w-[60px] text-pink-600">현재 직무</div>
@@ -83,7 +84,7 @@ const Profile: React.FC<PostProfilePageTypes> = ({ id, contents }) => {
         </div>
         <div
           className="bodymdsemibold flex h-[54px] w-[463px] cursor-pointer items-center justify-center rounded-[10px] bg-pink-400 text-white"
-          onClick={() => navigate(`/review/${id}`)}>
+          onClick={() => navigate(`/review/${consultId}`)}>
           리뷰쓰러 가기
         </div>
       </div>

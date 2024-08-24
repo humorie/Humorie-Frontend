@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useCategoryStore } from '../../store/store'
 
@@ -11,7 +11,7 @@ interface Counselor {
   reviewCount: number
   introduction: string
   counselingMethods: string[]
-  counselingFields: string[]
+  symptoms: string[]
 }
 
 const CardRecommend: React.FC = () => {
@@ -19,25 +19,26 @@ const CardRecommend: React.FC = () => {
   const { selectedCategory } = useCategoryStore()
 
   useEffect(() => {
-    axios
-      .get('/api/search')
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/search')
         if (response.data.isSuccess) {
-          const filteredCounselors = response.data.result.filter((counselor: Counselor) =>
-            counselor.counselingMethods.includes(selectedCategory),
+          const filteredCounselors = response.data.result.filter(
+            (counselor: Counselor) => counselor.symptoms.includes(selectedCategory), // 클릭한 카테고리 명으로 필터링
           )
-          setCounselors(filteredCounselors)
-        } else {
-          console.log('API 요청 실패', response.data.message)
+          setCounselors(filteredCounselors) // 카테고리에 선택된 상담사만 상태 업데이트
+          console.log('전체 상담사 조회 API 결과: ', counselors)
+          console.log(response.data)
         }
-      })
-      .catch((error) => {
-        console.log('API 요청 에러', error)
-      })
+      } catch (error) {
+        console.log('전체 상담사 조회 API 에러: ', error)
+      }
+    }
+    fetchData()
   }, [selectedCategory])
 
   return (
-    <div className="hide-scrollbar flex w-[1250px] overflow-x-auto">
+    <div className="flex w-[1250px] overflow-x-auto">
       {counselors.map((counselor) => (
         <div
           key={counselor.counselorId}
@@ -66,7 +67,7 @@ const CardRecommend: React.FC = () => {
               </div>
               <div className="flex h-6 shrink grow basis-0 items-center justify-start gap-1">
                 <p className="bodymdsemibold text-center text-gray-700">
-                  {counselor.counselingMethods.join(', ')}
+                  {counselor.symptoms.join(', ')}
                 </p>
               </div>
             </div>

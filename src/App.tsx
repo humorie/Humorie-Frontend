@@ -12,6 +12,7 @@ import Post from './pages/Post'
 import Complete from './pages/Complete'
 import MoreReviews from './pages/Reviews'
 import CustomerServcie from './pages/CustomerService'
+import CustomerServciePost from './pages/CustomerServicePost'
 import Reservation from './pages/Reservation'
 import Info from './pages/Info'
 import FindId from './pages/FindId'
@@ -38,6 +39,7 @@ function App() {
         <Route path="/counseling/counselor/:counselorId" element={<Counselor />} />
         <Route path="/counseling/counselor/:counselorId/reviews" element={<MoreReviews />} />
         <Route path="/customerservice" element={<CustomerServcie />} />
+        <Route path="/customerservice/:id" element={<CustomerServciePost />} />
         <Route path="/counseling/reservation/:counselorId" element={<Reservation />} />
         <Route path="/info" element={<Info />} />
         <Route path="/findid" element={<FindId />} />

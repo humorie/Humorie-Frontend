@@ -1,8 +1,6 @@
-import SearchinCS from '../components/cs/search'
 import Footer from '../components/Footer'
 import Header from '../components/header/Header'
-import '../index.css'
-import ListinCS from '../components/cs/list'
+import ListinCS from '../components/customerService/list'
 import { useEffect } from 'react'
 
 const CustomerServcie: React.FC = () => {
@@ -13,12 +11,20 @@ const CustomerServcie: React.FC = () => {
   }, [])
 
   return (
-    <div className="flex w-[1440px] flex-col items-center justify-center bg-white  text-black">
-      <Header />
-      <div className="mt-[148px] flex w-[1100px] flex-col">
-        <div className="ms-[200px] flex items-center">
-          <SearchinCS />
+    <div className="flex w-[1440px] flex-col items-center justify-center bg-white text-black">
+      <div className="relative h-[450px] w-[1440px] text-center text-black">
+        <img
+          src="/src/assets/images/customerService/cs_rending_image1.svg"
+          alt="렌딩이미지"
+          className=" h-full w-full"
+        />
+        <div className="xlbold absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
+          공지사항
         </div>
+      </div>
+      <Header />
+      <div className="flex w-[1100px] flex-col">
+        <div className="ms-[200px] flex items-center"></div>
         <div className="mt-[82px] flex space-x-[48px] px-[20px]">
           <div className="flex flex-col">
             <div className="bodylbold mb-[23px] mt-[6px] text-gray-800">고객센터</div>

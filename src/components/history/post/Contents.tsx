@@ -1,13 +1,40 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Details from './Details'
 import Profile from './Profile'
 import axios from 'axios'
-import { PostTypes, PostContentsTypes } from '../../Types'
 
-const Contents: React.FC<PostTypes> = ({ id }) => {
+interface PostProps {
+  id: string
+}
+
+interface ConsultDetail {
+  id: number
+  counselorId: number
+  counselorName: string
+  status: boolean
+  symptom: string
+  symptoms: string[]
+  isOnline: boolean
+  counselDate: string
+  counselTime: string
+  location: string
+  title: string
+  content: string
+}
+
+interface ConsultDetailsResponse {
+  consultDetail: ConsultDetail
+  pageNumber: number
+  pageSize: number
+  totalElements: number
+  totalPages: number
+  accountName: string
+}
+
+const Contents: React.FC<PostProps> = ({ id }) => {
   const [selectTab, setSelectTab] = useState('Details') // 상담내용, 상담사 보기 메뉴 상태관리
-  const [contents, setContent] = useState<PostContentsTypes>()
+  const [contents, setContent] = useState<ConsultDetailsResponse>()
   const navigate = useNavigate()
 
   // 특정 상담사의 상담내역 API
@@ -22,7 +49,7 @@ const Contents: React.FC<PostTypes> = ({ id }) => {
       }
     }
     fetchData()
-  }, [])
+  }, [id])
 
   return (
     <div className="taxt-black flex w-[1100px] flex-row items-start justify-between bg-white text-black">
@@ -41,15 +68,20 @@ const Contents: React.FC<PostTypes> = ({ id }) => {
         {/* 태그 */}
         <div className="bodymdbold mt-[57px] flex w-full flex-row items-center justify-start gap-[12px] text-gray-700">
           <div className="flex flex-col items-center justify-center rounded bg-gray-100 px-[12px] py-[10px]">
-            {contents?.consultDetail.symptom}
+            {contents?.consultDetail.symptoms.join('/')}
           </div>
           <div className="flex flex-col items-center justify-center rounded bg-gray-100 px-[12px] py-[10px]">
-            {contents?.consultDetail.location}
+            {contents?.consultDetail.isOnline === true ? '온라인' : '오프라인'}
           </div>
+          {contents?.consultDetail.isOnline === false ? (
+            <div className="flex flex-col items-center justify-center rounded bg-gray-100 px-[12px] py-[10px]">
+              {contents?.consultDetail.location}
+            </div>
+          ) : null}
         </div>
         {/* 제목 */}
         <div className="my-[40px] flex h-[87px] w-full flex-row items-center justify-between">
-          <p className="mdbold text-center">직장 내 대인 관계 갈등 상담문의</p>
+          <p className="mdbold text-center">{contents?.consultDetail.title}</p>
           <p className="bodylsemibold text-center">종료</p>
         </div>
         {/* 상담내용, 상담사 후기 */}
@@ -65,8 +97,14 @@ const Contents: React.FC<PostTypes> = ({ id }) => {
             상담사 보기
           </div>
         </div>
-        {selectTab === 'Details' && contents ? <Details contents={contents} /> : null}
-        {selectTab === 'Profile' && contents ? <Profile contents={contents} id={id} /> : null}
+        {selectTab === 'Details' && contents ? <Details contents={contents.consultDetail} /> : null}
+        {selectTab === 'Profile' && contents ? (
+          <Profile
+            consultId={contents.consultDetail.id}
+            counselorId={contents.consultDetail.counselorId}
+            content={contents.consultDetail.content}
+          />
+        ) : null}
       </div>
 
       {/* 오른쪽 카드 */}

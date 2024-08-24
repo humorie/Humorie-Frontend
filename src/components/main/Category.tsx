@@ -1,6 +1,6 @@
 import React from 'react'
 import { useCategoryStore } from '../../store/store'
-const categories = ['청소년', '중독', '집단', '개인']
+const categories = ['학업/진로', '대인관계', '정신건강', '성격']
 
 const Category: React.FC = () => {
   const { selectedCategory, setSelectedCategory } = useCategoryStore()
