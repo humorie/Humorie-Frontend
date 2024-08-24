@@ -38,7 +38,7 @@ const DropdownMethod = () => {
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95">
-        <MenuItems className="absolute z-10 mt-2 w-[120px] origin-top-right items-center rounded-md bg-gray-100 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <MenuItems className="absolute z-10 mt-2 w-[120px] origin-top-right items-center rounded-md bg-gray-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="flex flex-col items-center py-1">
             <MenuItem>
               {({ active }: { active: boolean }) => (
@@ -46,10 +46,10 @@ const DropdownMethod = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    ' bodymdregular w-[100px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    ' bodymdregular w-[100px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-200',
                   )}
-                  onClick={() => handleSelectedMedthod('전화상담')}>
-                  전화상담
+                  onClick={() => handleSelectedMedthod('오프라인')}>
+                  오프라인
                 </button>
               )}
             </MenuItem>
@@ -59,49 +59,10 @@ const DropdownMethod = () => {
                   type="submit"
                   className={classNames(
                     active ? 'text-primary-600' : 'text-gray-700',
-                    'bodymdregular block w-[100px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100',
+                    'bodymdregular block w-[100px] rounded-none border-x-0 border-b-0 border-t-0 border-gray-300 bg-gray-200',
                   )}
-                  onClick={() => handleSelectedMedthod('문자상담')}>
-                  문자상담
-                </button>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ active }: { active: boolean }) => (
-                <button
-                  type="submit"
-                  className={classNames(
-                    active ? 'text-primary-600' : 'text-gray-700',
-                    'bodymdregular block w-[100px] rounded-none  border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100 px-0',
-                  )}
-                  onClick={() => handleSelectedMedthod('텍스트테라피')}>
-                  텍스트테라피
-                </button>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ active }: { active: boolean }) => (
-                <button
-                  type="submit"
-                  className={classNames(
-                    active ? 'text-primary-600' : 'text-gray-700',
-                    'bodymdregular block w-[100px] rounded-none border-x-0 border-b-[0.5px] border-t-0 border-gray-300 bg-gray-100 ',
-                  )}
-                  onClick={() => handleSelectedMedthod('화상상담')}>
-                  화상상담
-                </button>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ active }: { active: boolean }) => (
-                <button
-                  type="submit"
-                  className={classNames(
-                    active ? 'text-primary-600' : 'text-gray-700',
-                    'bodymdregular block w-[100px] rounded-none bg-gray-100',
-                  )}
-                  onClick={() => handleSelectedMedthod('대면상담')}>
-                  대면상담
+                  onClick={() => handleSelectedMedthod('온라인')}>
+                  온라인
                 </button>
               )}
             </MenuItem>
