@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import Footer from '../components/Footer'
-import FirstArticle from '../components/policy/FirstArticle'
-import PolicyHeader from '../components/policy/PolicyHeader'
+import PrivacyContents from '../components/privacy_policy/PrivacyContents'
+import PrivacyHeader from '../components/privacy_policy/PrivacyHeader'
 
-const Policy: React.FC = () => {
+const PrivacyPolicy: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       window.scrollTo(0, 0)
@@ -12,13 +12,13 @@ const Policy: React.FC = () => {
 
   return (
     <div className="justify-top flex flex-col items-center text-black ">
-      <PolicyHeader />
+      <PrivacyHeader />
       <div className="mb-[150px] mt-[48px] w-[1100px] px-[110px]">
-        <FirstArticle />
+        <PrivacyContents />
       </div>
       <Footer />
     </div>
   )
 }
 
-export default Policy
+export default PrivacyPolicy
