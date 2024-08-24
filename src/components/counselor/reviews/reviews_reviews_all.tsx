@@ -51,12 +51,14 @@ const ReviewsAll = () => {
   const displayedReviews = counselor.reviews || []
 
   // 별점 집계
-  const totalRating = displayedReviews.reduce((acc, review) => acc + review.rating, 0)
-  const averageRating = displayedReviews.length > 0 ? totalRating / displayedReviews.length : 0
-  const MAX_RATING = 5
-  const fullStars = Math.floor(averageRating)
-  const halfStar = averageRating % 1 >= 0.5 ? 1 : 0
-  const emptyStars = MAX_RATING - fullStars - halfStar
+  // const totalRating = displayedReviews.reduce((acc, review) => acc + review.rating, 0)
+  // const averageRating = displayedReviews.length > 0 ? totalRating / displayedReviews.length : 0
+  // const MAX_RATING = 5
+  // const fullStars = Math.floor(averageRating)
+  // const halfStar = averageRating % 1 >= 0.5 ? 1 : 0
+  // const emptyStars = MAX_RATING - fullStars - halfStar
+  const rating = Math.floor(counselor.rating)
+  const totalStars = 5
 
   //평점 집계
   const ratingCounts = [1, 2, 3, 4, 5].map(
@@ -72,17 +74,15 @@ const ReviewsAll = () => {
           <div className="bodymdmedium mb-[40px] text-black">내담자 총 평점</div>
 
           <div className="mb-[25px] flex flex-row space-x-[6px]">
-            {[...Array(fullStars)].map((_, index) => (
+            {[...Array(rating)].map((_, index) => (
               <img
                 key={`full-${index}`}
                 src="/src/assets/images/icon/icon_star_pink.svg"
                 alt="Full Start"
               />
             ))}
-            {halfStar === 1 && (
-              <img src="/src/assets/images/icon/icon_star_gray.svg" alt="Half Star" />
-            )}
-            {[...Array(emptyStars)].map((_, index) => (
+
+            {[...Array(totalStars - rating)].map((_, index) => (
               <img
                 key={`empty-${index}`}
                 src="/src/assets/images/icon/icon_star_gray.svg"
