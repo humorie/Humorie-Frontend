@@ -6,7 +6,11 @@ const ServiceHistory: React.FC = () => {
         앤데이는, <br />
         이런 길을 걸어왔어요
       </div>
-      <div className="mt-[76px] h-[200px] w-full  bg-rose-400"></div>
+      <img
+        className="mt-[130px]"
+        src="/src/assets/images/info/info_rending_image2.svg"
+        alt="랜딩페이지 이미지"
+      />
     </div>
   )
 }
