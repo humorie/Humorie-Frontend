@@ -11,7 +11,7 @@ interface CounselorList {
   gender: string
   region: string
   counselingMethods: string[]
-  counselingFields: string[]
+  symptoms: string[]
   rating: number
   reviewCount: number
   introduction: string
@@ -19,7 +19,7 @@ interface CounselorList {
 
 const CounselorCard = () => {
   const { tags } = useTagsStore()
-  const { gender, counselingMethod, region, order } = useFiltersStore()
+  const { gender, counselingMethod, order } = useFiltersStore()
   const navigate = useNavigate()
   const [counselor, setCounselor] = useState<CounselorList[]>([])
   const [loading, setLoading] = useState(true)
@@ -37,7 +37,7 @@ const CounselorCard = () => {
             params.keywords = tags.map((tag) => tag.content).join(',')
           }
         } else {
-          if (gender || counselingMethod || region || order) {
+          if (gender || counselingMethod || order) {
             endpoint = '/api/search/conditions'
           }
           if (gender) params.gender = gender
@@ -58,9 +58,9 @@ const CounselorCard = () => {
           id: item.counselorId,
           name: item.name,
           gender: item.gender,
-          region: item.region,
           counselingMethods: item.counselingMethods || [],
-          counselingFields: item.counselingFields || [],
+          region: item.region || '',
+          symptoms: item.symptoms || [],
           rating: item.rating,
           reviewCount: item.reviewCount,
           introduction: item.introduction,
@@ -110,11 +110,11 @@ const CounselorCard = () => {
                   {counselor.region}
                 </div>
 
-                {counselor.counselingFields.map((field, index) => (
+                {counselor.counselingMethods.map((method, index) => (
                   <div
                     key={index}
                     className="rounded-[4px] bg-gray-100 px-[12px] py-[6px] text-gray-700">
-                    {field}
+                    {method}
                   </div>
                 ))}
               </div>
@@ -133,12 +133,10 @@ const CounselorCard = () => {
                     <div className="flex items-center">
                       <img src="src/assets/images/counseling/star_rate.svg" alt="별점" />
                       <div className="w-[7px]" />
-                      <p className="bodylmedium text-gray-800">{counselor.rating.toFixed(2)} </p>
+                      <p className="bodylmedium text-gray-800">{counselor.rating.toFixed(1)} </p>
                       <p className="bodylmedium text-gray-500">({counselor.reviewCount})</p>
                       <div className="w-[12px]" />
-                      <p className="bodymdmedium text-gray-800">
-                        {counselor.counselingMethods.join(', ')}
-                      </p>
+                      <p className="bodymdmedium text-gray-800">{counselor.symptoms.join(',')}</p>
                     </div>
                     <p className="bodymdmedium text-gray-500">“{counselor.introduction}”</p>
                   </div>
