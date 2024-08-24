@@ -6,7 +6,7 @@ import ReviewList from './review'
 
 interface Counselor {
   counselorId: number
-  counselingFields: string[]
+  symptoms: string[]
   introduction: string
   affiliations: string[]
 }
@@ -17,12 +17,9 @@ const Introduction = () => {
 
   useEffect(() => {
     const fetchCounselorData = async () => {
-      const accessToken = localStorage.getItem('accessToken')
       try {
         const response = await axios.get(`/api/counselor/${counselorId}`, {
-          headers: {
-            accesstoken: accessToken || '',
-          },
+          headers: {},
         })
         console.log('API Response:', response.data)
 
@@ -54,7 +51,7 @@ const Introduction = () => {
       <div className="bodymdmedium flex flex-col space-y-[25px]">
         <div className="flex flex-row space-x-[55px]">
           <p className="text-primary-800">대표업무</p>
-          <p>{counselor.counselingFields.join(',')}</p>
+          <p>{counselor.symptoms.join(', ')}</p>
         </div>
         <div className="flex flex-row space-x-[37px]">
           <p className="text-primary-800">상담 스타일</p>

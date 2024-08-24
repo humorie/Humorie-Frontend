@@ -52,7 +52,7 @@ const Profile = () => {
         <div className="h-[28px]"> </div>
         <div className="flex flex-col items-center">
           <div className="bodyxsbold rounded-[5px] bg-gray-100 px-[22px] py-[3px] text-gray-400">
-            평점 {counselor.rating.toFixed(2)}
+            평점 {counselor.rating.toFixed(1)}
           </div>
           <div className="h-[26px]"> </div>
           <div className="flex flex-col items-center space-y-[3px]">

@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
-import Button from '../components/Button'
-import ReviewTabs from '../components/counselor/reviews/reviewtab'
 import Footer from '../components/Footer'
 import Header from '../components/header/Header'
 import '../index.css'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import ReviewsAll from '../components/counselor/reviews/reviews_reviews_all'
 
 interface Counselor {
   counselorId: number
@@ -14,7 +13,6 @@ interface Counselor {
 }
 
 const MoreReviews: React.FC = () => {
-  const navigate = useNavigate()
   const [counselor, setCounselor] = useState<Counselor | null>(null)
   const { counselorId } = useParams<{ counselorId: string }>()
 
@@ -50,15 +48,8 @@ const MoreReviews: React.FC = () => {
         <p className="smbold">
           {counselor.name} 상담사님에 대한 {counselor.reviewCount}개의 후기
         </p>
-        <div className="h-[40px]"> </div>
-        <Button
-          label="상담 예약하기"
-          size="Large"
-          color="pink"
-          onClick={() => navigate('/counseling/reservation')}
-        />
-        <div className="h-[108px]"> </div>
-        <ReviewTabs />
+        <div className="h-[22px]"> </div>
+        <ReviewsAll />
       </div>
       <Footer />
     </div>

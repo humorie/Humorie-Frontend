@@ -21,11 +21,7 @@ const Reviewscard: React.FC<ReviewCardProps> = ({ review }) => {
           className="h-[22px] w-[22px]"
         />
         <div className="w-[12px]" />
-        <p className="bodymdmedium">{review.rating.toFixed(2)}</p>
-        <div className="w-[31px]" />
-        <div className="bodymdmedium flex h-[29px] w-[57px] items-center justify-center rounded-[4px] bg-primary-700 p-0 text-white">
-          Best
-        </div>
+        <p className="bodymdmedium">{review.rating.toFixed(1)}</p>
       </div>
       <p className="bodymdregular text-gray-700">{review.content}</p>
       <div className="flex flex-row justify-between text-gray-500">
