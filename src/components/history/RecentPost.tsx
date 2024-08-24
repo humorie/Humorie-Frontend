@@ -2,10 +2,20 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button from '../Button'
 import axios from 'axios'
-import { RecentPostTypes } from '../Types'
+
+interface ConsultDetail {
+  id: number
+  counselorId: number
+  counselorName: string
+  rating: number
+  isOnline: true
+  counselDate: string
+  title: string
+  content: string
+}
 
 const RecentPost: React.FC = () => {
-  const [contents, setContents] = useState<RecentPostTypes>()
+  const [contents, setContents] = useState<ConsultDetail>()
   const navigate = useNavigate()
   const pinkStars = Math.floor(contents?.rating || 0) // 분홍색 별 개수
   const grayStars = 5 - pinkStars // 회색 별 개수
@@ -45,9 +55,10 @@ const RecentPost: React.FC = () => {
             <p className="bodylregular">상담사</p>
             <p className="bodylmedium">{contents?.counselorName}</p>
             <img
-              className="ml-[4px]"
+              className="ml-[4px] h-[24px] w-[24px] cursor-pointer"
               src="src/assets/images/icon/icon_arrow_right.svg"
               alt="오른쪽 화살표"
+              onClick={() => navigate(`/counseling/counselor/${contents?.counselorId}`)}
             />
           </div>
           <div className="flex flex-row gap-[10px]">
@@ -68,7 +79,7 @@ const RecentPost: React.FC = () => {
               />
             ))}
           </div>
-          <div className="bodysmmedium text-neutral-500">{contents?.rating}</div>
+          <div className="bodysmmedium text-neutral-500">{contents?.rating.toFixed(1)}</div>
         </div>
 
         <div className="flex h-full w-full basis-2/5 flex-col items-start justify-start gap-[12px]">

@@ -1,28 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import EmptyPost from './EmptyPost'
-// import Pagination from '../Pagenation'
 import axios from 'axios'
-import { AllHistoryTypes } from '../Types'
 import RecentPost from './RecentPost'
+import Pagination from '../Pagenation'
+
+interface ConsultDetail {
+  id: number
+  counselorId: number
+  counselorName: string
+  status: boolean
+  symptoms: string[]
+  isOnline: boolean
+  counselDate: string
+  counselTime: string
+}
+
+interface ConsultDetailsResponse {
+  consultDetails: ConsultDetail[]
+  pageNumber: number
+  pageSize: number
+  totalElements: number
+  totalPages: number
+}
 
 const Contents: React.FC = () => {
-  const [historyList, setHistoryList] = useState<AllHistoryTypes>() // 전체 상담 목록 상태관리
-  // const [currentPage, setCurrentPage] = useState<number>(1)
+  const [historyList, setHistoryList] = useState<ConsultDetailsResponse>() // 전체 상담 목록 상태관리
+  const [currentPage, setCurrentPage] = useState(1) // 현재 페이지
+  const [totalPages, setTotalPages] = useState(0) // 전체 페이지
   const navigate = useNavigate()
-
-  // const postsPerPage = 9
-  // const totalPages = Math.ceil(posts.length / postsPerPage)
-
-  // const getCurrentPosts = (): Post[] => {
-  //   const startIndex = (currentPage - 1) * postsPerPage
-  //   const endIndex = startIndex + postsPerPage
-  //   return posts.slice(startIndex, endIndex)
-  // }
-
-  // const handlePageClick = (pageNumber: number) => {
-  //   setCurrentPage(pageNumber)
-  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,18 +39,19 @@ const Contents: React.FC = () => {
             Authorization: `Bearer ${accessToken}`,
           },
           params: {
-            page: 1, // 페이지 번호
+            page: currentPage - 1, // 페이지 번호
             size: 9, // 게시물 개수
           },
         })
         setHistoryList(response.data)
+        setTotalPages(response.data.totalPages) // 총 페이지 수 업데이트
         console.log('전체 상담 내역 조회 API 결과: ', response.data)
       } catch (error) {
         console.log('전체 상담 내역 조회 API 에러: ', error)
       }
     }
     fetchData()
-  }, [])
+  }, [currentPage])
 
   if (!historyList) {
     return <div>전체 상담 내역 API 조회 에러</div>
@@ -80,8 +87,8 @@ const Contents: React.FC = () => {
               onClick={() => navigate(`/history/${post.id}`)}>
               <p className="w-[100px]">{post.counselorName}</p>
               <p className="w-[100px]">{post.status === true ? '상담완료' : '상담진행'}</p>
-              <p className="w-[100px]">{post.counselContent}</p>
-              <p className="w-[100px]">{post.location}</p>
+              <p className="w-[100px]">{post.symptoms.join(', ')}</p>
+              <p className="w-[100px]">{post.isOnline === true ? '온라인' : '오프라인'}</p>
               <p className="w-[100px]">{post.counselDate}</p>
             </div>
           ))}
@@ -89,6 +96,11 @@ const Contents: React.FC = () => {
       ) : (
         <EmptyPost />
       )}
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
     </div>
   )
 }
