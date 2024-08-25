@@ -22,10 +22,12 @@ import MyPage from './pages/MyPage'
 import DeleteAccount from './pages/DeleteAccount'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import DataCollection from './pages/DataCollection'
+import ScrollToTop from './components/\bScrollToTop'
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
