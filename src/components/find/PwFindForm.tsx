@@ -27,6 +27,12 @@ const PwFindForm: React.FC = () => {
 
   // 비밀번호 찾기 버튼 클릭 핸들러
   const handleFindPasswordClick = async () => {
+    interface FindPasswordResponse {
+      isSuccess: boolean
+      code?: number
+      message: string
+    }
+
     if (!email) {
       setMessage('존재하지 않는 사용자입니다.')
       setIsSuccess(false)
@@ -34,11 +40,11 @@ const PwFindForm: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('/api/account/find-password', {
+      const response = await axios.post<FindPasswordResponse>('/api/account/find-password', {
         email: email,
       })
 
-      const { isSuccess, message } = response.data
+      const { isSuccess, message, code } = response.data
 
       if (isSuccess) {
         setMessage(
@@ -46,11 +52,7 @@ const PwFindForm: React.FC = () => {
         )
         setIsSuccess(true)
       } else {
-        setMessage(
-          message === 'User not found'
-            ? '존재하지 않는 사용자입니다.'
-            : '이메일 전송에 실패했습니다.',
-        )
+        setMessage(code === 3001 ? '존재하지 않는 사용자입니다.' : '존재하지 않는 사용자입니다.')
         setIsSuccess(false)
       }
     } catch (error) {
@@ -71,7 +73,7 @@ const PwFindForm: React.FC = () => {
           <div className="box-border flex h-24 w-[880px] flex-row items-center justify-start gap-[8px] border-solid border-gray-200 px-12 py-6">
             <div className="flex w-[120px] flex-row items-center justify-start">
               <div className="bodymdmedium relative text-gray-900">이메일</div>
-              <div className="text-status-4 bodymdsemibold relative">*</div>
+              <div className="bodymdsemibold relative text-status-4">*</div>
             </div>
             <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-solid border-gray-200 bg-white text-sm">
               <Input
@@ -90,7 +92,7 @@ const PwFindForm: React.FC = () => {
 
         {/* 성공 메시지 */}
         {isSuccess && (
-          <div className="bg-point-6 relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-point-5 p-6 text-center">
+          <div className="relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-point-5 bg-point-6 p-6 text-center">
             <div className="bodyxsregular relative text-gray-800">
               회원님의 이메일로 임시 비밀번호를 발송했습니다. 임시 비밀번호를 사용해서 로그인
               해주세요!
