@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import Pagination from '../Pagenation' // Pagination 컴포넌트를 임포트
-import SearchinCS from './search'
+import Pagination from '../Pagenation'
+import Input from '../Input'
 
 interface NoticeTypes {
   id: number
@@ -24,18 +24,21 @@ const ListinCS = () => {
   const [allNotice, setAllNotice] = useState<NoticeTypes[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
+  const [keyword, setKeyword] = useState('')
   const navigate = useNavigate()
+
+  // 전체 공지사항 전체 조회 API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get<AllNoticeTypes>('/api/notice/get', {
           params: {
             page: currentPage - 1,
-            size: 6, // 한 페이지당 9개의 게시물
+            size: 9, // 한 페이지당 9개의 게시물
           },
         })
         setAllNotice(response.data.notices)
-        setTotalPages(response.data.totalPages) // 총 페이지 수 업데이트
+        setTotalPages(response.data.totalPages)
         console.log('전체 공지사항 API 결과: ', response.data.notices)
       } catch (error) {
         console.log('전체 공지사항 API 에러: ', error)
@@ -44,6 +47,30 @@ const ListinCS = () => {
 
     fetchData()
   }, [currentPage])
+
+  // 공지사항 검색 API
+  const handleSearchClick = async () => {
+    try {
+      const response = await axios.get<AllNoticeTypes>('/api/notice/search', {
+        params: {
+          page: 0,
+          size: 9,
+          keyword: keyword,
+        },
+      })
+      setAllNotice(response.data.notices)
+      setTotalPages(response.data.totalPages) // 총 페이지 수 업데이트
+      setCurrentPage(1) // 검색 결과를 1페이지로 고정
+      console.log('공지사항 검색 API 결과: ', response.data)
+    } catch (error) {
+      console.log('공지사항 검색 API 에러: ', error)
+    }
+  }
+
+  // 검색어 이벤트 핸들러
+  const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value)
+  }
 
   return (
     <div className="flex w-[880px] flex-col justify-center">
@@ -65,14 +92,20 @@ const ListinCS = () => {
           </div>
         ))}
       </div>
-
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-
-      <SearchinCS />
+      <div className="my-[60px] flex flex-col items-center justify-center gap-[60px]">
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+        <Input
+          type="Button"
+          placeholder="검색어를 입력해주세요"
+          onChange={handleKeywordChange}
+          btnLabel="검색"
+          btnEvent={handleSearchClick}
+        />
+      </div>
     </div>
   )
 }
