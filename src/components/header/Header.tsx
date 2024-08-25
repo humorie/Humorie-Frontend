@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Menu from './Menu'
 
 const Header: React.FC = () => {
@@ -11,10 +11,14 @@ const Header: React.FC = () => {
   const accessToken = localStorage.getItem('accessToken')
 
   const navigate = useNavigate()
+  const location = useLocation() // 현재 경로 가져오기
 
   // 리프레시 토큰 유/무에 따라 헤더의 로그인 메뉴 동적으로 변환
   const menuItems = isLoggedIn
-    ? [{ id: 1, label: '로그아웃', onClick: () => handleClickLogout() }]
+    ? [
+        { id: 1, label: '마이페이지', onClick: () => navigate('/mypage') }, // 마이페이지 추가
+        { id: 2, label: '로그아웃', onClick: () => handleClickLogout() },
+      ]
     : [
         { id: 1, label: '로그인', onClick: () => navigate('/login') },
         { id: 2, label: '회원가입', onClick: () => navigate('/join') },
@@ -39,6 +43,7 @@ const Header: React.FC = () => {
         if (response.data.isSuccess) {
           // 서버에서 로그아웃 성공 응답을 받았을 경우
           localStorage.removeItem('refreshToken')
+          localStorage.removeItem('accessToken') // 액세스 토큰도 삭제
           setIsLoggedIn(false)
           navigate('/')
         } else {
@@ -89,7 +94,7 @@ const Header: React.FC = () => {
           <div className="flex h-[60px] w-[100px] items-center justify-center">
             <div
               className="w-[84px] cursor-pointer hover:text-primary-800"
-              onClick={() => alert('미구현')}>
+              onClick={() => navigate('/community')}>
               커뮤니티
             </div>
           </div>
@@ -104,8 +109,14 @@ const Header: React.FC = () => {
         {/* 프로필 */}
         <div className="absolute left-[1068px] top-0 flex h-[60px] w-[60px] cursor-pointer items-center justify-center">
           <img
-            className="flex h-[32px] w-[32px] cursor-pointer items-center justify-center opacity-60"
-            src="/src/assets/images/header&footer/profile.svg"
+            className={`flex cursor-pointer items-center justify-center opacity-60 ${
+              location.pathname === '/mypage' ? 'h-[16px] w-[16px]' : 'h-[32px] w-[32px]'
+            }`}
+            src={
+              location.pathname === '/mypage'
+                ? '/src/assets/images/header&footer/profile_pink.svg'
+                : '/src/assets/images/header&footer/profile.svg'
+            }
             alt="profile"
             onClick={handleClickProfile}
           />

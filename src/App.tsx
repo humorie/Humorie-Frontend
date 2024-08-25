@@ -22,6 +22,7 @@ import MyPage from './pages/MyPage'
 import DeleteAccount from './pages/DeleteAccount'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import DataCollection from './pages/DataCollection'
+import Community from './pages/Community'
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/deleteaccount" element={<DeleteAccount />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/datacollection" element={<DataCollection />} />
+        <Route path="/community" element={<Community />} />
       </Routes>
     </Router>
   )
