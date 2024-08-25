@@ -6,17 +6,21 @@ import { useDateStore, useTimeStore, useMeetingStore } from '../../store/store'
 import PortOne from '../../services/PortOneApi'
 import { ResvationTypes, CounselorTypes } from '../Types'
 
+interface PointProps {
+  totalPoints: number
+}
+
 const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
+  const price = 50000
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
   const { meetingType, onlineOption } = useMeetingStore() // 저장된 장소 불러오기
   const [counselor, setCounselor] = useState<CounselorTypes>()
   const [reservationUid, setReservationUid] = useState<string | null>(null) // 예약 UID 상태 추가
+  const [point, setPoint] = useState<PointProps>({ totalPoints: 0 }) // 기본값 0으로 설정
+  const [finalPrice, setFinalPrice] = useState<number>(price) // 결제 금액
+  const [usedPoints, setUsedPoints] = useState<number>(0) // 사용 포인트
   const counselContent = counselor?.symptoms.join(', ') // 상담 분야
-  // 더미 데이터
-  const price = 50000
-  const point = 0
-  const finalPrice = 50000
   const address: string = '서울특별시 강남구 학동로 426'
 
   // 날짜를 "YYYY.MM.DD" 형식으로 포맷
@@ -36,6 +40,25 @@ const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
     return `${time}`
   }
 
+  // 보유 포인트 조회 API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken')
+        const response = await axios.get('/api/points/total', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        console.log('보유 포인트 조회 API 결과: ', response.data.result)
+        setPoint(response.data.result)
+      } catch (error) {
+        console.log('보유 포인트 조회 API 에러: ', error)
+      }
+    }
+    fetchData()
+  }, [])
+
   // 상담사 API 요청
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +75,24 @@ const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
     fetchData()
   }, [counselorId])
 
+  // 포인트 전액 사용
+  const handleUseAllPoints = () => {
+    const availablePoints = point.totalPoints
+    const used = Math.min(availablePoints, price) // 상담 금액보다 많은 포인트 사용 불가
+    setUsedPoints(used)
+  }
+
+  // 사용 포인트 변경 시 결제 금액 계산
+  useEffect(() => {
+    setFinalPrice(price - usedPoints)
+  }, [usedPoints])
+
+  // 사용 포인트 입력 시 핸들러
+  const handlePointsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(event.target.value.replace(/[^0-9]/g, '')) // 숫자만 허용
+    setUsedPoints(Math.min(value, point.totalPoints, price)) // 입력된 값이 보유 포인트와 상담 금액을 넘지 않도록 설정
+  }
+
   // 상담예약생성 API 요청
   const handleReservationClick = async () => {
     if (!selectedDate || !selectedTime) {
@@ -65,16 +106,16 @@ const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
       counselTime: formatTime(selectedTime), // "HH:MM:SS.00" 형식
       counselContent,
       location: meetingType === '온라인' ? onlineOption : address,
-      price,
-      point,
-      finalPrice,
+      price: price,
+      point: usedPoints,
+      finalPrice: finalPrice,
     }
-
+    console.log(reservationData)
     try {
       const accessToken = localStorage.getItem('accessToken')
       const response = await axios.post('/api/reservation/create', reservationData, {
         headers: {
-          accessToken: accessToken,
+          Authorization: `Bearer ${accessToken}`,
         },
       })
 
@@ -130,21 +171,23 @@ const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
       </div>
       <div className="flex flex-row items-center justify-between text-center">
         <div className="bodysmsemibold text-gray-600">보유 포인트</div>
-        <div className="bodymdsemibold text-gray-900">0원</div>
+        <div className="bodymdsemibold text-gray-900">{point?.totalPoints.toLocaleString()}원</div>
       </div>
       <div className="flex flex-row items-center justify-between text-center">
         <div className="bodysmsemibold text-gray-600">사용 포인트</div>
         <Input
           type="Button"
           placeholder="0원"
+          value={usedPoints.toLocaleString()}
           btnLabel="전액사용"
-          btnEvent={() => alert('전액사용 클릭됨')}
+          btnEvent={handleUseAllPoints}
+          onChange={handlePointsChange} // 포인트 입력 핸들러 연결
         />
       </div>
       <div className="border border-gray-100"></div>
       <div className="flex flex-row items-center justify-between text-center">
         <div className="bodysmsemibold text-gray-600">결제 금액</div>
-        <div className="bodymdsemibold text-gray-900">{price.toLocaleString()}원</div>
+        <div className="bodymdsemibold text-gray-900">{finalPrice.toLocaleString()}원</div>
       </div>
       <div className="flex flex-row items-center justify-between text-center">
         <div className="bodysmsemibold text-gray-600">카드결제</div>

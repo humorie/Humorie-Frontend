@@ -22,6 +22,8 @@ import MyPage from './pages/MyPage'
 import DeleteAccount from './pages/DeleteAccount'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import DataCollection from './pages/DataCollection'
+import ScrollToTop from './components/ScrollToTop'
+import Community from './pages/Community'
 
 function App() {
   return (
