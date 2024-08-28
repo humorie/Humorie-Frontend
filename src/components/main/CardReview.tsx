@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Button from '../Button'
-
-interface CounselorProps {
-  counselorId: number
-  name: string
-  rating: number
-  reviewCount: number
-}
+import { CounselorTypes, Review } from '../Types'
 
 interface CardReviewProps {
   counselorId: number
 }
 
 const CardReview: React.FC<CardReviewProps> = ({ counselorId }) => {
-  const [counselor, setCounselor] = useState<CounselorProps>()
+  const [counselor, setCounselor] = useState<CounselorTypes>()
+  const [topReview, setTopReview] = useState<Review | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    axios
-      .get(`/api/counselor/${counselorId}`)
-      .then((response) => {
-        if (response.data.isSuccess) {
-          setCounselor(response.data.result)
-        } else {
-          console.log('API 요청 실패', response.data.message)
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/counselor/${counselorId}`)
+        console.log('상담사 프로필 조회 API 결과: ', response.data.result)
+        setCounselor(response.data.result)
+
+        // 마지막 인덱스의 리뷰를 가장 최신 리뷰로 간주하여 선택
+        const reviews: Review[] = response.data.result.reviews
+        if (reviews && reviews.length > 0) {
+          setTopReview(reviews[reviews.length - 1])
         }
-      })
-      .catch((error) => {
-        console.log('API 요청 에러', error)
-      })
+      } catch (error) {
+        console.log('상담사 프로필 조회 API 에러: ', error)
+      }
+    }
+    fetchData()
   }, [counselorId])
 
-  // 별점에 따라서 이미지 경로 설정
   const ratingImageSrc = counselor
     ? `/src/assets/images/main/main_icon_${Math.floor(counselor.rating)}_star.svg`
     : '/src/assets/images/main/main_icon_1_star.svg'
@@ -52,12 +52,20 @@ const CardReview: React.FC<CardReviewProps> = ({ counselorId }) => {
       </div>
       {/* 제목, 후기 */}
       <div className="absolute top-[76px] inline-flex h-[206px] w-[260px] flex-col items-start justify-start gap-2 px-6">
-        <div className="bodylmedium self-stretch text-gray-700">제목</div>
-        <div className="bodymdregular text-gray-700">후기</div>
+        <div className="bodylmedium self-stretch text-gray-700">
+          {topReview ? topReview.title : '제목이 없습니다'}
+        </div>
+        <div className="bodymdregular text-gray-700">
+          {topReview ? topReview.content : '후기가 없습니다'}
+        </div>
       </div>
       {/* 바로가기 버튼 */}
       <div className="absolute top-[282px] inline-flex h-[58px] w-[260px] items-center justify-end gap-4 px-6">
-        <Button size="XSmall" label="바로가기" onClick={() => alert('미구현')} />
+        <Button
+          size="XSmall"
+          label="바로가기"
+          onClick={() => navigate(`/counseling/counselor/${counselorId}/reviews`)}
+        />
       </div>
       {/* 별점에 따라서 솜솜이 이미지 동적으로 지정 */}
       <img

@@ -62,45 +62,47 @@ const Contents: React.FC = () => {
       <div className="mt-[85px] flex h-[93px] w-full flex-col items-center justify-center">
         <p className="mdbold">상담 내역을 확인해 볼까요?</p>
       </div>
-      {historyList.totalElements > 0 ? (
-        <div>
-          {/* 최근 상담 목록 */}
-          <RecentPost />
+      <div>
+        {/* 최근 상담 목록 */}
+        {historyList.totalElements > 0 ? <RecentPost /> : null}
 
-          <div className="mb-[50px] mt-[80px] flex h-[30px] flex-col items-start justify-start">
-            <p className="xsbold text-center">상담 내역</p>
-          </div>
-
-          {/* 전체 상담 목록 */}
-          <div className="bodymdmedium flex h-[78px] w-full flex-row items-center justify-evenly gap-[100px] bg-neutral-100 text-center text-stone-500">
-            <p className="w-[100px]">담당자명</p>
-            <p className="w-[100px]">상담상태</p>
-            <p className="w-[100px]">상담영역</p>
-            <p className="w-[100px]">상담방법</p>
-            <p className="w-[100px]">상담일</p>
-          </div>
-
-          {historyList.consultDetails.map((post) => (
-            <div
-              key={post.id}
-              className="bodysmmedium flex w-full cursor-pointer flex-row items-center justify-evenly gap-[100px] py-[60px] text-center text-stone-500"
-              onClick={() => navigate(`/history/${post.id}`)}>
-              <p className="w-[100px]">{post.counselorName}</p>
-              <p className="w-[100px]">{post.status === true ? '상담완료' : '상담진행'}</p>
-              <p className="w-[100px]">{post.symptoms.join(', ')}</p>
-              <p className="w-[100px]">{post.isOnline === true ? '온라인' : '오프라인'}</p>
-              <p className="w-[100px]">{post.counselDate}</p>
-            </div>
-          ))}
+        <div className="mb-[50px] mt-[80px] flex h-[30px] flex-col items-start justify-start">
+          <p className="xsbold text-center">상담 내역</p>
         </div>
-      ) : (
-        <EmptyPost />
-      )}
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
+
+        {/* 전체 상담 목록 */}
+        <div className="bodymdmedium flex h-[78px] w-full flex-row items-center justify-evenly gap-[100px] bg-neutral-100 text-center text-stone-500">
+          <p className="w-[100px]">담당자명</p>
+          <p className="w-[100px]">상담상태</p>
+          <p className="w-[150px]">상담영역</p>
+          <p className="w-[100px]">상담방법</p>
+          <p className="w-[100px]">상담일</p>
+        </div>
+
+        {historyList.totalElements > 0 ? (
+          <>
+            {historyList.consultDetails.map((post) => (
+              <div
+                key={post.id}
+                className="bodysmmedium flex w-full cursor-pointer flex-row items-center justify-evenly gap-[100px] py-[60px] text-center text-stone-500"
+                onClick={() => navigate(`/history/${post.id}`)}>
+                <p className="w-[100px]">{post.counselorName}</p>
+                <p className="w-[100px]">{post.status === true ? '상담완료' : '상담진행'}</p>
+                <p className="w-[150px] truncate">{post.symptoms.join(' / ')}</p>
+                <p className="w-[100px]">{post.isOnline === true ? '온라인' : '오프라인'}</p>
+                <p className="w-[100px]">{post.counselDate}</p>
+              </div>
+            ))}
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          </>
+        ) : (
+          <EmptyPost />
+        )}
+      </div>
     </div>
   )
 }

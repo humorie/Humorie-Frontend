@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useCategoryStore } from '../../store/store'
+import { useNavigate } from 'react-router-dom'
 
 interface Counselor {
   counselorId: number
@@ -16,6 +17,7 @@ interface Counselor {
 
 const CardRecommend: React.FC = () => {
   const [counselors, setCounselors] = useState<Counselor[]>([])
+  const navigate = useNavigate()
   const { selectedCategory } = useCategoryStore()
 
   useEffect(() => {
@@ -42,7 +44,8 @@ const CardRecommend: React.FC = () => {
       {counselors.map((counselor) => (
         <div
           key={counselor.counselorId}
-          className="mr-5 flex h-[432px] w-[300px] flex-none flex-col rounded-lg last:mr-0">
+          className="mr-5 flex h-[432px] w-[300px] flex-none flex-col rounded-lg last:mr-0"
+          onClick={() => navigate(`/counseling/counselor/${counselor.counselorId}`)}>
           <img
             className="h-[300px] w-full"
             src="/src/assets/images/avatar/avatar_square1.svg"

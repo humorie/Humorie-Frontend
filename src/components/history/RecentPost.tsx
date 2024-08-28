@@ -82,10 +82,7 @@ const RecentPost: React.FC = () => {
           <div className="bodysmmedium text-neutral-500">{contents?.rating.toFixed(1)}</div>
         </div>
 
-        <div className="flex h-full w-full basis-2/5 flex-col items-start justify-start gap-[12px]">
-          <div className="flex h-[20px] w-[92px] items-center justify-center border border-gray-300 bg-white">
-            <p className="bodyxsregular text-gray-500">무료 온라인상담</p>
-          </div>
+        <div className="flex h-full w-full basis-2/5 flex-col items-start justify-start gap-[12px] px-4">
           <div className="flex flex-row items-center justify-center gap-[9px] text-center">
             <p className="bodylmedium">{contents?.counselDate}</p>
             <p className="bodymdsemibold">상담내용</p>

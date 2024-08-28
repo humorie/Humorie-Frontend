@@ -40,7 +40,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPage
   }
 
   return (
-    <div className="my-[80px] flex cursor-pointer flex-row items-center justify-center gap-[40px]">
+    <div className="flex cursor-pointer flex-row items-center justify-center gap-[40px]">
       <img
         className="h-[20px] w-[20px] cursor-pointer"
         onClick={handlePrevious}

@@ -154,7 +154,7 @@ const LoginForm = () => {
         <div className="absolute left-1/2 top-[128px] h-[35px] w-[312px] -translate-x-1/2">
           <img
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            src="src/assets/images/login/logo_login.svg"
+            src="/src/assets/images/login/logo_login.svg"
             alt=""
           />
         </div>
@@ -166,7 +166,7 @@ const LoginForm = () => {
                   <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
                     <img
                       className="relative h-5 w-5 shrink-0 overflow-hidden"
-                      src="src/assets/images/login/person_empty.svg"
+                      src="/src/assets/images/login/person_empty.svg"
                       alt=""
                     />
                     <input
@@ -184,7 +184,7 @@ const LoginForm = () => {
                 <div className="flex h-12 w-[312px] items-center justify-center gap-1 border border-gray-200 bg-white focus-within:border-primary-700 focus-within:bg-primary-100">
                   <img
                     className="relative h-5 w-5 shrink-0 overflow-hidden"
-                    src="src/assets/images/login/lock_empty.svg"
+                    src="/src/assets/images/login/lock_empty.svg"
                     alt=""
                   />
                   <input
@@ -211,7 +211,7 @@ const LoginForm = () => {
 
             {/* 에러 메시지 표시 */}
             {errorMessage && (
-              <div className="text-status-3 bodyxsmedium whitespace-pre-line">{errorMessage}</div>
+              <div className="bodyxsmedium whitespace-pre-line text-status-3">{errorMessage}</div>
             )}
 
             <Button label="로그인" size="XLarge" color="pink" onClick={handleLoginButtonClick} />
@@ -232,7 +232,7 @@ const LoginForm = () => {
                 onClick={handleFindIdButtonClick}>
                 아이디 찾기
               </button>
-              <img src="src/assets/images/login/divide_login.svg" alt="" />
+              <img src="/src/assets/images/login/divide_login.svg" alt="" />
               <button
                 type="button"
                 className="bodysmsemibold flex h-[18px] w-[68px] shrink-0 items-center justify-center whitespace-nowrap border-none bg-transparent text-center text-gray-400 hover:text-primary-700 focus:outline-none"
@@ -250,7 +250,7 @@ const LoginForm = () => {
             onClick={handleCustomerServiceClick}>
             고객센터
           </button>
-          <img src="src/assets/images/login/divide_login.svg" alt="" />
+          <img src="/src/assets/images/login/divide_login.svg" alt="" />
           <button
             type="button"
             className="bodysmsemibold flex h-[20px] w-[49px] shrink-0 flex-row items-center justify-center whitespace-nowrap border-none bg-transparent text-center text-gray-400 hover:text-primary-700 focus:outline-none"

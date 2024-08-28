@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from '../components/header/Header'
 import Footer from '../components/Footer'
+import { Banner } from '../components/customerService/Banner'
 
 interface NoticeDetails {
   id: number
@@ -49,18 +50,8 @@ const CustomerServicePost: React.FC = () => {
   return (
     <div className="flex h-auto w-[1440px] flex-col items-center justify-center bg-white text-black">
       <Header />
-      <div className="relative h-[450px] w-[1440px] text-center text-black">
-        <img
-          src="/src/assets/images/customerService/cs_rending_image1.svg"
-          alt="렌딩이미지"
-          className="h-full w-full"
-        />
-        <div className="xlbold absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">
-          공지사항
-        </div>
-      </div>
-
-      {/* 헤더 */}
+      <Banner />
+      {/* 제목 */}
       <div className="mt-[100px] flex h-auto w-[1100px] flex-col gap-[40px]">
         <p className="smsemibold flex items-center justify-start self-stretch text-center">
           {notice?.title}
@@ -98,7 +89,7 @@ const CustomerServicePost: React.FC = () => {
             className="h-[27] w-[27px]"
             src="/src/assets/images/icon/icon_list_gray.svg"
             alt="목록으로"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/customerservice')}
           />
         </div>
         <div className="flex border-t border-gray-400" />
@@ -107,7 +98,7 @@ const CustomerServicePost: React.FC = () => {
       {/* 본문 */}
       <div className="bodymdmedium h-[500px] w-[1100px] py-[80px]">{notice?.content}</div>
 
-      {/* 풋터 */}
+      {/* 이전글, 다음글 */}
       <div className="mb-[100px] w-[1100px]">
         {page?.previousNotice && (
           <div className="flex h-[62px] items-center justify-start border-t border-gray-400">

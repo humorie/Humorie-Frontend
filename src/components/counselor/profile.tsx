@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import '../../index.css'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Button from '../Button'
 
 interface Counselor {
   counselorId: number
@@ -13,6 +14,7 @@ interface Counselor {
 const Profile = () => {
   const [counselor, setCounselor] = useState<Counselor | null>(null)
   const { counselorId } = useParams<{ counselorId: string }>()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchCounselorData = async () => {
@@ -63,11 +65,12 @@ const Profile = () => {
           </div>
         </div>
         <div className="h-[70px]"> </div>
-        <button
-          type="submit"
-          className="bodymdsemibold bg-primary-600 px-[45px] py-[15px] text-white">
-          상담 예약하기
-        </button>
+        <Button
+          label="상담 예약하기"
+          size="Large"
+          color="pink"
+          onClick={() => navigate(`/counseling/reservation/${counselorId}`)}
+        />
       </div>
     </div>
   )
