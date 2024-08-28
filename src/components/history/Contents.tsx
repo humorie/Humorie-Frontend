@@ -74,7 +74,7 @@ const Contents: React.FC = () => {
         <div className="bodymdmedium flex h-[78px] w-full flex-row items-center justify-evenly gap-[100px] bg-neutral-100 text-center text-stone-500">
           <p className="w-[100px]">담당자명</p>
           <p className="w-[100px]">상담상태</p>
-          <p className="w-[100px]">상담영역</p>
+          <p className="w-[150px]">상담영역</p>
           <p className="w-[100px]">상담방법</p>
           <p className="w-[100px]">상담일</p>
         </div>
@@ -88,7 +88,7 @@ const Contents: React.FC = () => {
                 onClick={() => navigate(`/history/${post.id}`)}>
                 <p className="w-[100px]">{post.counselorName}</p>
                 <p className="w-[100px]">{post.status === true ? '상담완료' : '상담진행'}</p>
-                <p className="w-[100px]">{post.symptoms.join(', ')}</p>
+                <p className="w-[150px] truncate">{post.symptoms.join(' / ')}</p>
                 <p className="w-[100px]">{post.isOnline === true ? '온라인' : '오프라인'}</p>
                 <p className="w-[100px]">{post.counselDate}</p>
               </div>

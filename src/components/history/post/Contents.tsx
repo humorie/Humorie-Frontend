@@ -66,9 +66,9 @@ const Contents: React.FC<PostProps> = ({ id }) => {
         </div>
         <div className="w-full border-b border-gray-400" />
         {/* 태그 */}
-        <div className="bodymdbold mt-[57px] flex w-full flex-row items-center justify-start gap-[12px] text-gray-700">
+        <div className="bodymdbold mt-[57px] flex w-full flex-row flex-wrap items-center justify-start gap-[12px] text-gray-700">
           <div className="flex flex-col items-center justify-center rounded bg-gray-100 px-[12px] py-[10px]">
-            {contents?.consultDetail.symptoms.join('/')}
+            {contents?.consultDetail.symptoms.join(' · ')}
           </div>
           <div className="flex flex-col items-center justify-center rounded bg-gray-100 px-[12px] py-[10px]">
             {contents?.consultDetail.isOnline === true ? '온라인' : '오프라인'}
