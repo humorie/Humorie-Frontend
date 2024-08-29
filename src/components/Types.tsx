@@ -1,6 +1,6 @@
 // 전체 상담사 인터페이스
 export interface CounselorsType {
-  counselorId: number
+  counselorId: string
   name: string
   gender: string
   region: string
@@ -13,7 +13,7 @@ export interface CounselorsType {
 
 // 상담사 정보 인터페이스
 export interface CounselorType {
-  counselorId: number
+  counselorId: string
   name: string
   phoneNumber: string
   email: string
@@ -31,7 +31,7 @@ export interface CounselorType {
 
 // 리뷰 인터페이스
 export interface ReviewType {
-  reviewId: number
+  reviewId: string
   title: string
   content: string
   rating: number

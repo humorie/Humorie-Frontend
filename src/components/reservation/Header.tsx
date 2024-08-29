@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { ResvationTypes, CounselorTypes } from '../Types'
+import { ResvationTypes, CounselorType } from '../Types'
 
 const Header: React.FC<ResvationTypes> = ({ counselorId }) => {
-  const [counselor, setCounselor] = useState<CounselorTypes>()
+  const [counselor, setCounselor] = useState<CounselorType>()
 
   // 상담사 API 요청
   useEffect(() => {
