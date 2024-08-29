@@ -1,5 +1,18 @@
+// 전체 상담사 인터페이스
+export interface CounselorsType {
+  counselorId: number
+  name: string
+  gender: string
+  region: string
+  rating: number
+  reviewCount: number
+  introduction: string
+  counselingMethods: string[]
+  symptoms: string[]
+}
+
 // 상담사 정보 인터페이스
-export interface CounselorTypes {
+export interface CounselorType {
   counselorId: number
   name: string
   phoneNumber: string
@@ -13,16 +26,25 @@ export interface CounselorTypes {
   educations: string[]
   careers: string[]
   symptoms: string[]
-  reviews: Review[]
+  reviews: ReviewType[]
 }
 
 // 리뷰 인터페이스
-export interface Review {
+export interface ReviewType {
   reviewId: number
   title: string
   content: string
   rating: number
   createdAt: string
+}
+
+// 유저 정보 인터페이스
+export interface UserType {
+  id: number
+  email: string
+  accountName: string
+  name: string
+  emailSubscription: boolean
 }
 
 // 상담예약 페이지 인터페이스

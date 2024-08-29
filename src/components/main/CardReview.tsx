@@ -1,40 +1,21 @@
-import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import Button from '../Button'
-import { CounselorTypes, Review } from '../Types'
+import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 
 interface CardReviewProps {
   counselorId: number
 }
 
 const CardReview: React.FC<CardReviewProps> = ({ counselorId }) => {
-  const [counselor, setCounselor] = useState<CounselorTypes>()
-  const [topReview, setTopReview] = useState<Review | null>(null)
+  const { counselor, review } = useFetchCounselor(counselorId)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/counselor/${counselorId}`)
-        console.log('상담사 프로필 조회 API 결과: ', response.data.result)
-        setCounselor(response.data.result)
-
-        // 마지막 인덱스의 리뷰를 가장 최신 리뷰로 간주하여 선택
-        const reviews: Review[] = response.data.result.reviews
-        if (reviews && reviews.length > 0) {
-          setTopReview(reviews[reviews.length - 1])
-        }
-      } catch (error) {
-        console.log('상담사 프로필 조회 API 에러: ', error)
-      }
-    }
-    fetchData()
-  }, [counselorId])
 
   const ratingImageSrc = counselor
     ? `/src/assets/images/main/main_icon_${Math.floor(counselor.rating)}_star.svg`
     : '/src/assets/images/main/main_icon_1_star.svg'
+
+  // 가장 최신 리뷰를 카드의 텍스트로 선정
+  const firstReview = review && review.length > 0 ? review[0] : null
 
   return (
     <div className="relative h-[340px] w-[260px] rounded-[10px] bg-white">
@@ -53,10 +34,10 @@ const CardReview: React.FC<CardReviewProps> = ({ counselorId }) => {
       {/* 제목, 후기 */}
       <div className="absolute top-[76px] inline-flex h-[206px] w-[260px] flex-col items-start justify-start gap-2 px-6">
         <div className="bodylmedium self-stretch text-gray-700">
-          {topReview ? topReview.title : '제목이 없습니다'}
+          {firstReview ? firstReview.title : '제목이 없습니다'}
         </div>
         <div className="bodymdregular text-gray-700">
-          {topReview ? topReview.content : '후기가 없습니다'}
+          {firstReview ? firstReview.content : '후기가 없습니다'}
         </div>
       </div>
       {/* 바로가기 버튼 */}

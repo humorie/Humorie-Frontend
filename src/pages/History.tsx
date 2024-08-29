@@ -6,10 +6,7 @@ import GoToLogin from '../components/history/GoToLogin'
 import { useAuthStore } from '../store/store'
 
 const History: React.FC = () => {
-  const { isLoggedIn, checkAuth } = useAuthStore((state) => ({
-    isLoggedIn: state.isLoggedIn,
-    checkAuth: state.checkAuth,
-  }))
+  const { isLoggedIn, checkAuth } = useAuthStore()
 
   // 리프레시 토큰검사
   useEffect(() => {

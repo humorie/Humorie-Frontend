@@ -1,15 +1,24 @@
-import { useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useModalStore, useTagsStore } from '../../store/store'
+import { useFetchUser } from '../../hooks/useFetchUser'
 import SearchinModal from '../counseling/Modal/searchinmodal'
 import Table from '../counseling/Modal/table'
 import Button from '../Button'
 
-const Rending: React.FC = () => {
-  const { modalOpen, openModal, closeModal } = useModalStore()
+const Container1: React.FC = () => {
   const modalBackground = useRef(null)
-  const { tags, removeTag, removeSelectedSymptom } = useTagsStore()
   const navigate = useNavigate()
+  const { modalOpen, openModal, closeModal } = useModalStore()
+  const { tags, removeTag, removeSelectedSymptom } = useTagsStore()
+  const user = useFetchUser()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const refreshToken = localStorage.getItem('refreshToken')
+
+  // 리프레시 토큰 검사
+  useEffect(() => {
+    setIsLoggedIn(!!refreshToken) // 비어있지 않는 문자열이면 true, 즉 리프레시 토큰이 발급된 상태 라면 true
+  })
 
   useEffect(() => {
     if (modalOpen) {
@@ -27,38 +36,64 @@ const Rending: React.FC = () => {
     removeSelectedSymptom(tagContent)
   }
 
-  const stickers = [
-    { src: 'src/assets/images/sticker/sticker6_3.svg', alt: '스티커6-3' },
-    { src: 'src/assets/images/sticker/sticker11_2.svg', alt: '스티커11-2' },
-    { src: 'src/assets/images/sticker/sticker4_1.svg', alt: '스티커4-1' },
-    { src: 'src/assets/images/sticker/sticker5_5.svg', alt: '스티커5-5' },
-    { src: 'src/assets/images/sticker/sticker7_4.svg', alt: '스티커7-4' },
-  ]
-
   const categories = [
-    { src: 'src/assets/images/main/main_rending_image1.svg', alt: '개인상담', label: '개인상담' },
-    { src: 'src/assets/images/main/main_rending_image2.svg', alt: '집단상담', label: '집단상담' },
-    { src: 'src/assets/images/main/main_rending_image3.svg', alt: '심리검사', label: '심리검사' },
-    { src: 'src/assets/images/main/main_rending_image4.svg', alt: 'AI매칭', label: 'AI매칭' },
-    { src: 'src/assets/images/main/main_rending_image5.svg', alt: '커뮤니티', label: '커뮤니티' },
-    { src: 'src/assets/images/main/main_rending_image6.svg', alt: '상담기록', label: '상담기록' },
-    { src: 'src/assets/images/main/main_rending_image7.svg', alt: '기업제휴', label: '기업제휴' },
+    {
+      src: 'src/assets/images/main/main_rending_image1.svg',
+      alt: '개인상담',
+      label: '개인상담',
+      navigate: '/counseling',
+    },
+    {
+      src: 'src/assets/images/main/main_rending_image2.svg',
+      alt: '집단상담',
+      label: '집단상담',
+      navigate: '/notdeveloped',
+    },
+    {
+      src: 'src/assets/images/main/main_rending_image3.svg',
+      alt: '심리검사',
+      label: '심리검사',
+      navigate: '/notdeveloped',
+    },
+    {
+      src: 'src/assets/images/main/main_rending_image4.svg',
+      alt: 'AI매칭',
+      label: 'AI매칭',
+      navigate: '/notdeveloped',
+    },
+    {
+      src: 'src/assets/images/main/main_rending_image5.svg',
+      alt: '커뮤니티',
+      label: '커뮤니티',
+      navigate: '/community',
+    },
+    {
+      src: 'src/assets/images/main/main_rending_image6.svg',
+      alt: '상담기록',
+      label: '상담기록',
+      navigate: '/history',
+    },
+    {
+      src: 'src/assets/images/main/main_rending_image7.svg',
+      alt: '기업제휴',
+      label: '기업제휴',
+      navigate: '/notdeveloped',
+    },
   ]
 
   return (
     <div className="flex w-[1440px] flex-col items-center justify-center px-[170px]">
       {/* 헤드라인 */}
       <div className="relative mt-[190px] flex w-full flex-col  items-center justify-center">
-        <div className=" absolute flex w-full items-center justify-center gap-[100px]">
-          {stickers.map((image, index) => (
-            <img key={index} className="w-20 opacity-50" src={image.src} alt={image.alt} />
-          ))}
-        </div>
-        <p className="mdPlusBold  text-center text-pink-400">
-          당신의 더 나은 내일을 응원합니다
-          <br />
-          앤데이 심리상담
-        </p>
+        {isLoggedIn ? (
+          <p className="mdPlusBold  text-center text-pink-400">{user?.name}님 환영합니다!</p>
+        ) : (
+          <p className="mdPlusBold  text-center text-pink-400">
+            당신의 더 나은 내일을 응원합니다
+            <br />
+            앤데이 심리상담
+          </p>
+        )}
       </div>
 
       {/* 검색창 */}
@@ -82,7 +117,10 @@ const Rending: React.FC = () => {
       {/* 카테고리 */}
       <div className="bodymdsemibold mb-[80px] mt-[56px] flex w-[1060px] items-start justify-between px-6 text-gray-700 ">
         {categories.map((category, index) => (
-          <div key={index} className="inline-flex flex-col items-center justify-start gap-4">
+          <div
+            key={index}
+            className="inline-flex cursor-pointer flex-col items-center justify-start gap-4"
+            onClick={() => navigate(category.navigate)}>
             <img className="h-14 w-14" src={category.src} alt={category.alt} />
             <p>{category.label}</p>
           </div>
@@ -140,4 +178,4 @@ const Rending: React.FC = () => {
   )
 }
 
-export default Rending
+export default Container1
