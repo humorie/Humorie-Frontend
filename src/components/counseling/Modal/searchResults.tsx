@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useTagsStore } from '../../../store/store'
-import axios from 'axios'
 import { childsymptoms, couplesymptoms, familysymptoms, privatesymptoms } from './table'
 
 const SearchResults: React.FC<{ query: string }> = ({ query }) => {
