@@ -1,72 +1,96 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useTagsStore } from '../../../store/store'
 
-const Table = () => {
-  const [activeMainTab, setActiveMainTab] = useState<string>('개인') // 개인 탭이 기본으로 선택되도록 설정
-  const [activeSubTab, setActiveSubTab] = useState<string>('개인 문제') // 개인 문제 탭이 기본으로 선택되도록 설정
+interface TableProps {
+  onKeywordsChange?: (keywords: string[]) => void
+}
+
+export const privatesymptoms = [
+  '정신건강',
+  '우울',
+  '자살',
+  '성격',
+  '대인관계',
+  '사회부적응',
+  '외상후 스트레스',
+  '인터넷 중독',
+  '기타 중독',
+]
+
+export const couplesymptoms = [
+  '부부관계갈등',
+  '의사소통',
+  '성격차이',
+  '가치관갈등',
+  '종교갈등',
+  '별거',
+  '재혼',
+  '사별',
+  '배우자 외도',
+  '배우자 의심',
+  '배우자 폭력',
+  '중독',
+  '가출/행방불명',
+  '법률문제',
+  '경제문제',
+  '부부성생활',
+  '출산/낙태/불임/입양',
+]
+export const familysymptoms = [
+  '원가족갈등',
+  '친지갈등',
+  '부양/간병갈등',
+  '세대차이',
+  '역할분담/기대',
+  '종교차이',
+  '가족죽음',
+  '기타',
+]
+export const childsymptoms = [
+  '부모-자녀 갈등',
+  '자녀 간 갈등',
+  '자녀 양육',
+  '자녀 성격',
+  '주의력결핍/과잉행동장애',
+  '학업/진로',
+  '일탈 및 비행',
+  '대인관계',
+  '이성교제',
+  '학교폭력',
+  '정신건강',
+  '자녀성',
+  '자녀학대',
+  '자녀패륜',
+  '기타',
+]
+
+const Table: React.FC<TableProps> = ({ onKeywordsChange = () => {} }) => {
+  // const [activeMainTab, setActiveMainTab] = useState<string>('개인') // 개인 탭이 기본으로 선택되도록 설정
+  // const [activeSubTab, setActiveSubTab] = useState<string>('개인 문제') // 개인 문제 탭이 기본으로 선택되도록 설정
+
   const overflowRef = useRef<HTMLDivElement>(null)
-  const { addTag, removeTag, selectedSymptoms, addSelectedSymptom, removeSelectedSymptom } =
-    useTagsStore()
+  const {
+    addTag,
+    removeTag,
+    selectedSymptoms,
+    addSelectedSymptom,
+    removeSelectedSymptom,
+    activeMainTab,
+    activeSubTab,
+    setActiveMainTab,
+    setActiveSubTab,
+  } = useTagsStore()
+
+  useEffect(() => {
+    console.log('Active Main Tab on Mount:', activeMainTab)
+    console.log('Active Sub Tab on Mount:', activeSubTab)
+  }, [activeMainTab, activeSubTab])
+  console.log('Active Main Tab:', activeMainTab)
+  console.log('Active Sub Tab:', activeSubTab)
+  console.log('Selected Symptoms:', selectedSymptoms)
   const mainTabs = ['개인', '가족']
   const privatetabs = ['개인 문제']
-  const privatesymptoms = [
-    '정신건강',
-    '우울',
-    '자살',
-    '성격',
-    '대인관계',
-    '사회부적응',
-    '외상후 스트레스',
-    '인터넷 중독',
-    '기타 중독',
-  ]
   const familytabs = ['가족 문제', '부부 문제', '자녀 문제']
-  const couplesymptoms = [
-    '부부관계갈등',
-    '의사소통',
-    '성격차이',
-    '가치관갈등',
-    '종교갈등',
-    '별거',
-    '재혼',
-    '사별',
-    '배우자 외도',
-    '배우자 의심',
-    '배우자 폭력',
-    '중독',
-    '가출/행방불명',
-    '법률문제',
-    '경제문제',
-    '부부성생활',
-    '출산/낙태/불임/입양',
-  ]
-  const familysymptoms = [
-    '원가족갈등',
-    '친지갈등',
-    '부양/간병갈등',
-    '세대차이',
-    '역할분담/기대',
-    '종교차이',
-    '가족죽음',
-    '기타',
-  ]
-  const childsymptoms = [
-    '부모-자녀 갈등',
-    '자녀 간 갈등',
-    '자녀 양육',
-    '자녀 성격',
-    '주의력결핍/과잉행동장애',
-    '학업/진로',
-    '일탈 및 비행',
-    '대인관계',
-    '이성교제',
-    '학교폭력',
-    '정신건강',
-    '자녀성',
-    '자녀학대',
-    '자녀패륜',
-    '기타',
-  ]
 
   // 메인 탭을 클릭할 때 실행되는 함수
   const handleMainTabClick = (tab: string) => {
@@ -87,13 +111,18 @@ const Table = () => {
   }
 
   const handleSymptomClick = (symptom: string) => {
+    let updatedSymtoms: string[]
+
     if (selectedSymptoms.includes(symptom)) {
       removeSelectedSymptom(symptom)
       removeTag(symptom)
+      updatedSymtoms = selectedSymptoms.filter((s) => s !== symptom)
     } else {
       addSelectedSymptom(symptom)
       addTag({ title: activeSubTab, content: symptom })
+      updatedSymtoms = [...selectedSymptoms, symptom]
     }
+    onKeywordsChange(updatedSymtoms)
   }
 
   useEffect(() => {
@@ -101,6 +130,7 @@ const Table = () => {
     if (overflowRef.current) {
       overflowRef.current.scrollTop = 0
     }
+    onKeywordsChange(selectedSymptoms)
   }, [activeSubTab]) // activeSubTab 상태가 변경될 때마다 실행
 
   return (
