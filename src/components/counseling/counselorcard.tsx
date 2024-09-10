@@ -18,7 +18,7 @@ interface CounselorList {
 }
 
 const CounselorCard = () => {
-  const { tags } = useTagsStore()
+  const { tags, activeMainTab, activeSubTab } = useTagsStore()
   const { gender, counselingMethod, order } = useFiltersStore()
   const navigate = useNavigate()
   const [counselor, setCounselor] = useState<CounselorList[]>([])
@@ -29,26 +29,34 @@ const CounselorCard = () => {
     const fetchCounselorData = async () => {
       try {
         let endpoint = '/api/search'
+        let requestData: Record<string, any> = {}
+        let method = 'GET'
         const params: Record<string, any> = {}
 
         if (tags.length > 0) {
           endpoint = '/api/search/keywords'
-          {
-            params.keywords = tags.map((tag) => tag.content).join(',')
+          method = 'POST'
+          requestData = {
+            symptoms: tags.map((tag) => ({
+              categoryType: activeMainTab || '개인',
+              issueAreaType: activeSubTab || '개인 문제',
+              symptom: tag.content,
+            })),
           }
         } else {
           if (gender || counselingMethod || order) {
             endpoint = '/api/search/conditions'
+            method = 'GET'
           }
           if (gender) params.gender = gender
           if (counselingMethod) params.counselingMethod = counselingMethod
           if (order) params.order = order
         }
 
-        const response = await axios.get(endpoint, {
-          params: params,
-          headers: {},
-        })
+        const response =
+          method === 'GET'
+            ? await axios.get(endpoint, { params })
+            : await axios.post(endpoint, requestData)
 
         console.log('Request URL:', endpoint)
         console.log('Request Params:', params)
@@ -67,9 +75,9 @@ const CounselorCard = () => {
         }))
 
         if (order === '리뷰 높은순') {
-          data.sort((a: CounselorList, b: CounselorList) => b.reviewCount - a.reviewCount)
+          data.sort((a: CounselorList, b: CounselorList) => b.rating - a.rating)
         } else if (order === '리뷰 낮은순') {
-          data.sort((a: CounselorList, b: CounselorList) => a.reviewCount - b.reviewCount)
+          data.sort((a: CounselorList, b: CounselorList) => a.rating - b.rating)
         }
 
         setCounselor(data)

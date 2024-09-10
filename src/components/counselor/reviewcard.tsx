@@ -26,7 +26,6 @@ const ReviewCard: React.FC<ReviewCardProps> = ({ review }) => {
       <p className="bodymdregular text-gray-700">{review.content}</p>
       <div className="flex flex-row justify-between text-gray-500">
         <p className="bodysmregular">{new Date(review.createdAt).toLocaleDateString()}</p>
-        <p className="bodysmregular">엔데이 프리미엄 구매</p>
       </div>
     </div>
   )
