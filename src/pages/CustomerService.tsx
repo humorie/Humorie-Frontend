@@ -1,9 +1,11 @@
 import Footer from '../components/Footer'
 import Header from '../components/header/Header'
-import ListinCS from '../components/customerService/list'
+import List from '../components/customerService/List'
 import { Banner } from '../components/customerService/Banner'
+import { useNavigate } from 'react-router-dom'
 
 const CustomerServcie: React.FC = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex w-[1440px] flex-col items-center justify-center bg-white text-black">
       <Header />
@@ -15,7 +17,11 @@ const CustomerServcie: React.FC = () => {
           <div className="flex flex-col">
             <div className="bodylbold mb-[23px] mt-[6px] text-gray-800">고객센터</div>
             <div className="mb-[19px] h-[1px] w-[130px]  bg-black"></div>
-            <div className="bodymdmedium text-gray-600">공지사항</div>
+            <div
+              className="bodymdmedium cursor-pointer text-gray-600"
+              onClick={() => navigate('/customerservice')}>
+              공지사항
+            </div>
           </div>
           <div className="flex flex-col">
             <div className="mb-[23px] flex items-end space-x-[25px]">
@@ -25,7 +31,7 @@ const CustomerServcie: React.FC = () => {
               </div>
             </div>
             <div className=" h-[1px] w-[880px] bg-black"></div>
-            <ListinCS />
+            <List />
           </div>
         </div>
       </div>

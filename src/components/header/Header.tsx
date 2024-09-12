@@ -36,7 +36,7 @@ const Header: React.FC = () => {
       try {
         const response = await axios.delete('/api/account/logout', {
           headers: {
-            Authorization: accessToken,
+            Authorization: `Bearer ${accessToken}`,
             refresh_token: refreshToken,
           },
         })
@@ -44,6 +44,7 @@ const Header: React.FC = () => {
           // 서버에서 로그아웃 성공 응답을 받았을 경우
           localStorage.removeItem('refreshToken')
           localStorage.removeItem('accessToken') // 액세스 토큰도 삭제
+          alert('로그아웃')
           setIsLoggedIn(false)
           navigate('/')
         } else {

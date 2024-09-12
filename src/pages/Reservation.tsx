@@ -11,10 +11,7 @@ import LoginForm from '../components/login/LoginForm'
 
 const Reservation: React.FC = () => {
   const { counselorId } = useParams()
-  const { isLoggedIn, checkAuth } = useAuthStore((state) => ({
-    isLoggedIn: state.isLoggedIn,
-    checkAuth: state.checkAuth,
-  }))
+  const { isLoggedIn, checkAuth } = useAuthStore()
 
   if (!counselorId) {
     return <div>Error: Counselor ID is missing</div>

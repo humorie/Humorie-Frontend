@@ -1,31 +1,15 @@
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { CounselorTypes } from '../../Types'
-import axios from 'axios'
+import { useFetchCounselor } from '../../../hooks/useFetchCounselor'
 
-interface ProfileProps {
+interface ProfileType {
   consultId: number
   counselorId: number
   content: string
 }
 
-const Profile: React.FC<ProfileProps> = ({ consultId, counselorId, content }) => {
-  const [counselor, setCounselor] = useState<CounselorTypes>()
+const Profile: React.FC<ProfileType> = ({ consultId, counselorId, content }) => {
+  const { counselor } = useFetchCounselor(counselorId)
   const navigate = useNavigate()
-
-  // 특정 상담사의 상담내역 API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/counselor/${counselorId}`)
-        console.log('상담사 프로필 조회 API 결과: ', response.data.result)
-        setCounselor(response.data.result)
-      } catch (error) {
-        console.log('상담사 프로필 조회 API 에러: ', error)
-      }
-    }
-    fetchData()
-  }, [counselorId])
 
   return (
     <div className="mb-[300px] mt-[60px] flex h-[500px] w-full flex-row items-center justify-between gap-[60px]">

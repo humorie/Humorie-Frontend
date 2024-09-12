@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
 import { useTimeStore, useDateStore } from '../../store/store'
-import { ResvationTypes } from '../Types'
+import { ResvationType } from '../Types'
 import TimeSlot from './TimeSlot'
 
-const TimeTable: React.FC<ResvationTypes> = ({ counselorId }) => {
+const TimeTable: React.FC<ResvationType> = ({ counselorId }) => {
   const selectedTime = useTimeStore((state) => state.selectedTime)
   const setSelectedTime = useTimeStore((state) => state.setSelectedTime)
   const selectedDate = useDateStore((state) => state.selectedDate) // 선택된 날짜 가져오기
@@ -42,7 +42,6 @@ const TimeTable: React.FC<ResvationTypes> = ({ counselorId }) => {
     if (!selectedDate) {
       return
     }
-
     async function getAvailableTimes() {
       try {
         const response = await axios.get(`/api/reservation/available/time/${counselorId}`, {

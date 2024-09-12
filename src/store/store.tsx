@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import axios from 'axios'
 
 /* ----------------- 태그 및 모달창 Store ------------------- */
 interface ModalState {
@@ -152,18 +153,41 @@ export const useCategoryStore = create<CategoryState>((set) => ({
   setSelectedCategory: (category: string) => set({ selectedCategory: category }),
 }))
 /* -------------------------------------------------
+
+
 /* ------------------- 토큰인증 Store --------------------- */
 interface AuthState {
   isLoggedIn: boolean
-  logIn: () => void
-  logOut: () => void
+  accessToken: string | null
+  refreshToken: string | null
+  logOut: () => Promise<void>
   checkAuth: () => void
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>((set, get) => ({
   isLoggedIn: false,
-  logIn: () => set({ isLoggedIn: true }),
-  logOut: () => set({ isLoggedIn: false }),
+  accessToken: localStorage.getItem('accessToken'),
+  refreshToken: localStorage.getItem('refreshToken'),
+
+  logOut: async () => {
+    const { refreshToken, accessToken } = get()
+    try {
+      const response = await axios.delete('/api/account/logout', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          refresh_token: refreshToken,
+        },
+      })
+      if (response.data.isSuccess) {
+        localStorage.removeItem('refreshToken')
+        localStorage.removeItem('accessToken')
+        set({ isLoggedIn: false, accessToken: null, refreshToken: null })
+      }
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
+  },
+
   checkAuth: () => {
     const refreshToken = localStorage.getItem('refreshToken')
     set({ isLoggedIn: !!refreshToken })

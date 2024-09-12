@@ -1,16 +1,16 @@
 import Footer from '../components/Footer'
 import Header from '../components/header/Header'
-import Contents from '../components/main/Contents'
-import Contents2 from '../components/main/Contents2'
-import Rending from '../components/main/Rending'
+import Container1 from '../components/main/Container1'
+import Container2 from '../components/main/Container2'
+import Container3 from '../components/main/Container3'
 
 const Main: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-white">
       <Header />
-      <Rending />
-      <Contents />
-      <Contents2 />
+      <Container1 />
+      <Container2 />
+      <Container3 />
       <Footer />
     </div>
   )

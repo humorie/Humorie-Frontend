@@ -20,7 +20,7 @@ interface AllNoticeTypes {
   totalPages: number
 }
 
-const ListinCS = () => {
+const List = () => {
   const [allNotice, setAllNotice] = useState<NoticeTypes[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
@@ -34,17 +34,15 @@ const ListinCS = () => {
         const response = await axios.get<AllNoticeTypes>('/api/notice/get', {
           params: {
             page: currentPage - 1,
-            size: 9, // 한 페이지당 9개의 게시물
+            size: 8, // 한 페이지당 9개의 게시물
           },
         })
         setAllNotice(response.data.notices)
         setTotalPages(response.data.totalPages)
-        console.log('전체 공지사항 API 결과: ', response.data.notices)
       } catch (error) {
         console.log('전체 공지사항 API 에러: ', error)
       }
     }
-
     fetchData()
   }, [currentPage])
 
@@ -53,15 +51,13 @@ const ListinCS = () => {
     try {
       const response = await axios.get<AllNoticeTypes>('/api/notice/search', {
         params: {
-          page: 0,
-          size: 9,
+          page: currentPage - 1,
+          size: 8,
           keyword: keyword,
         },
       })
       setAllNotice(response.data.notices)
       setTotalPages(response.data.totalPages) // 총 페이지 수 업데이트
-      setCurrentPage(1) // 검색 결과를 1페이지로 고정
-      console.log('공지사항 검색 API 결과: ', response.data)
     } catch (error) {
       console.log('공지사항 검색 API 에러: ', error)
     }
@@ -75,29 +71,35 @@ const ListinCS = () => {
   return (
     <div className="flex w-[880px] flex-col justify-center">
       <div className="divide-y-[0.5px] divide-gray-400">
-        {allNotice.map((notice) => (
-          <div key={notice.id} className="bodysmmedium flex py-[26px]">
-            <div className="flex w-[83px] items-center justify-center text-gray-400">공지</div>
-            <div
-              className="w-[590px] cursor-pointer text-gray-500"
-              onClick={() => navigate(`/customerservice/${notice.id}`)}>
-              {notice.title}
+        {allNotice.length > 0 ? (
+          allNotice.map((notice) => (
+            <div key={notice.id} className="bodysmmedium flex py-[26px]">
+              <div className="flex w-[110px] items-center justify-center text-gray-400">공지</div>
+              <div
+                className="flex w-[590px] cursor-pointer text-gray-500"
+                onClick={() => navigate(`/customerservice/${notice.id}`)}>
+                {notice.title}
+              </div>
+              <div className="flex w-[114px] items-center justify-center text-gray-400">
+                {notice.createdDate}
+              </div>
+              <div className="flex w-[93px] items-center justify-center text-gray-400">
+                {notice.viewCount}
+              </div>
             </div>
-            <div className="flex w-[114px] items-center justify-center text-gray-400">
-              {notice.createdDate}
-            </div>
-            <div className="flex w-[93px] items-center justify-center text-gray-400">
-              {notice.viewCount}
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div className="my-8 flex items-center justify-center">검색결과가 없습니다.</div>
+        )}
       </div>
       <div className="my-[60px] flex flex-col items-center justify-center gap-[60px]">
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+        {allNotice.length > 0 ? (
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        ) : null}
         <Input
           type="Button"
           placeholder="검색어를 입력해주세요"
@@ -110,4 +112,4 @@ const ListinCS = () => {
   )
 }
 
-export default ListinCS
+export default List

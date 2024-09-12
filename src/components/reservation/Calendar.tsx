@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
 import { useDateStore } from '../../store/store'
-import { ResvationTypes } from '../Types'
+import { ResvationType } from '../Types'
 
 // 상수와 유틸리티 함수 분리
 const DAYS_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토']
@@ -76,7 +76,7 @@ const CalendarDay: React.FC<{
   )
 })
 
-const Calendar: React.FC<ResvationTypes> = ({ counselorId }) => {
+const Calendar: React.FC<ResvationType> = ({ counselorId }) => {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [availableDates, setAvailableDates] = useState<Date[]>([])
   const selectedDate = useDateStore((state) => state.selectedDate)

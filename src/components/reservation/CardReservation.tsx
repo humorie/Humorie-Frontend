@@ -4,18 +4,19 @@ import Button from '../Button'
 import Input from '../Input'
 import { useDateStore, useTimeStore, useMeetingStore } from '../../store/store'
 import PortOne from '../../services/PortOneApi'
-import { ResvationTypes, CounselorTypes } from '../Types'
+import { ResvationType } from '../Types'
+import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 
 interface PointProps {
   totalPoints: number
 }
 
-const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
+const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
   const price = 50000
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
   const { meetingType, onlineOption } = useMeetingStore() // 저장된 장소 불러오기
-  const [counselor, setCounselor] = useState<CounselorTypes>()
+  const { counselor } = useFetchCounselor(counselorId)
   const [reservationUid, setReservationUid] = useState<string | null>(null) // 예약 UID 상태 추가
   const [point, setPoint] = useState<PointProps>({ totalPoints: 0 }) // 기본값 0으로 설정
   const [finalPrice, setFinalPrice] = useState<number>(price) // 결제 금액
@@ -58,22 +59,6 @@ const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
     }
     fetchData()
   }, [])
-
-  // 상담사 API 요청
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/counselor/${counselorId}`)
-        if (response.data.isSuccess) {
-          console.log('상담사 조회 API 결과: ', response.data.result)
-          setCounselor(response.data.result)
-        }
-      } catch (error) {
-        console.log('상담사 조회 API 에러: ', error)
-      }
-    }
-    fetchData()
-  }, [counselorId])
 
   // 포인트 전액 사용
   const handleUseAllPoints = () => {

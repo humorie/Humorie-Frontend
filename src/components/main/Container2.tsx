@@ -1,51 +1,43 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { useFetchAllCounselor } from '../../hooks/useFetchAllCounselor'
 import CardRecommend from './CardRecommend'
 import CardReview from './CardReview'
 import Category from './Category'
-import { useLocation } from 'react-router-dom'
+import { CounselorsType } from '../Types'
 
 const Contents: React.FC = () => {
-  const cardRecommendRef = useRef<HTMLDivElement>(null)
-  const location = useLocation()
-  const headerHeight = 80
+  const counselors = useFetchAllCounselor()
+  const [sortedCounselors, setSortedCounselors] = useState<CounselorsType[]>([])
 
   useEffect(() => {
-    if (location.hash === '#card-recommend' && cardRecommendRef.current) {
-      const offsetTop = cardRecommendRef.current.offsetTop - headerHeight
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      })
+    if (counselors.length > 0) {
+      const temp = [...counselors].sort((a, b) => b.rating - a.rating)
+      setSortedCounselors(temp)
     }
-  }, [location])
+  }, [counselors])
 
   return (
     <div className="w-[1440px] bg-gradient-to-b from-white via-stone-50 to-pink-100 px-[170px]">
       {/* 헤드라인 */}
-      <p className="mdbold w-full text-gray-900" ref={cardRecommendRef} id="card-recommend">
-        앤데이 인기 전문가
-      </p>
-
+      <p className="mdbold w-full text-gray-900">앤데이 인기 전문가</p>
       {/* 카테고리 */}
-
       <Category />
-
       {/* 상담사 추천 카드 */}
-      {/* <div ref={cardRecommendRef} id="card-recommend"> */}
       <CardRecommend />
-      {/* </div> */}
-
       {/* 리뷰 카드 */}
       <div className="mb-[160px] ml-[40px] mt-[260px] flex flex-row items-start justify-start gap-[40px]">
-        <div className="flex flex-col gap-[40px]">
-          <CardReview counselorId={1} />
-          <CardReview counselorId={2} />
-        </div>
-        <div className="mt-[100px] flex flex-col gap-[40px]">
-          <CardReview counselorId={3} />
-          <CardReview counselorId={4} />
-        </div>
-
+        {sortedCounselors.length > 1 && (
+          <>
+            <div className="flex flex-col gap-[40px]">
+              <CardReview counselorId={sortedCounselors[0]?.counselorId} />
+              <CardReview counselorId={sortedCounselors[1]?.counselorId} />
+            </div>
+            <div className="mt-[100px] flex flex-col gap-[40px]">
+              <CardReview counselorId={sortedCounselors[2]?.counselorId} />
+              <CardReview counselorId={sortedCounselors[3]?.counselorId} />
+            </div>
+          </>
+        )}
         {/* 상담후기 헤드라인 */}
         <div className="relative ml-[60px] flex h-[110px] w-full flex-col items-start justify-center">
           <img

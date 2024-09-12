@@ -24,6 +24,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import DataCollection from './pages/DataCollection'
 import ScrollToTop from './components/ScrollToTop'
 import Community from './pages/Community'
+import GoToHome from './components/main/GoToHome'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/notdeveloped" element={<GoToHome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/joinsuccess" element={<JoinSuccess />} />
