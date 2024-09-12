@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { CounselorType, ReviewType } from '../components/Types'
 
-export const useFetchCounselor = (counselorId: string) => {
+export const useFetchCounselor = (counselorId: number) => {
   const [counselor, setCounselor] = useState<CounselorType | null>(null)
   const [review, setReview] = useState<ReviewType[] | null>(null)
 

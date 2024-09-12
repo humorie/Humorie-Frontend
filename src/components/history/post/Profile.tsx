@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { useFetchCounselor } from '../../../hooks/useFetchCounselor'
 
 interface ProfileType {
-  consultId: string
-  counselorId: string
+  consultId: number
+  counselorId: number
   content: string
 }
 

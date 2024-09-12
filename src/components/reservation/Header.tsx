@@ -1,27 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { ResvationTypes, CounselorType } from '../Types'
+import { ResvationType } from '../Types'
+import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 
-const Header: React.FC<ResvationTypes> = ({ counselorId }) => {
-  const [counselor, setCounselor] = useState<CounselorType>()
-
-  // 상담사 API 요청
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/counselor/${counselorId}`)
-        if (response.data.isSuccess) {
-          console.log('상담사 조회 API 결과: ', response.data.result)
-          setCounselor(response.data.result)
-        }
-      } catch (error) {
-        console.log('상담사 조회 API 에러: ', error)
-      }
-    }
-    fetchData()
-  }, [counselorId])
-
+const Header: React.FC<ResvationType> = ({ counselorId }) => {
+  const { counselor } = useFetchCounselor(counselorId)
   const navigate = useNavigate()
 
   const handleBackClick = () => {

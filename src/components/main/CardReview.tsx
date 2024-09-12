@@ -3,7 +3,7 @@ import Button from '../Button'
 import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 
 interface CardReviewProps {
-  counselorId: string
+  counselorId: number
 }
 
 const CardReview: React.FC<CardReviewProps> = ({ counselorId }) => {

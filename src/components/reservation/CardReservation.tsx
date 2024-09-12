@@ -4,14 +4,14 @@ import Button from '../Button'
 import Input from '../Input'
 import { useDateStore, useTimeStore, useMeetingStore } from '../../store/store'
 import PortOne from '../../services/PortOneApi'
-import { ResvationTypes } from '../Types'
+import { ResvationType } from '../Types'
 import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 
 interface PointProps {
   totalPoints: number
 }
 
-const CardReservation: React.FC<ResvationTypes> = ({ counselorId }) => {
+const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
   const price = 50000
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
