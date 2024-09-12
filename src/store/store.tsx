@@ -26,9 +26,17 @@ interface TagsState {
   removeTag: (content: string) => void
   addSelectedSymptom: (symptom: string) => void
   removeSelectedSymptom: (symptom: string) => void
+  activeMainTab: string
+  setActiveMainTab: (tab: string) => void
+  activeSubTab: string
+  setActiveSubTab: (tab: string) => void
 }
 
 export const useTagsStore = create<TagsState>((set) => ({
+  activeMainTab: '개인',
+  setActiveMainTab: (tab) => set({ activeMainTab: tab }),
+  activeSubTab: '개인 문제',
+  setActiveSubTab: (tab) => set({ activeSubTab: tab }),
   tags: [],
   selectedSymptoms: [],
   addTag: (tag: Tag) => set((state) => ({ tags: [...state.tags, tag] })),

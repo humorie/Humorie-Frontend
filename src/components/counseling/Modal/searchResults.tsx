@@ -1,25 +1,37 @@
+import { useEffect, useState } from 'react'
 import { useTagsStore } from '../../../store/store'
+import { childsymptoms, couplesymptoms, familysymptoms, privatesymptoms } from './table'
 
-const mockData = [
-  { id: 1, symptom: '부모-자녀 갈등' },
-  { id: 2, symptom: '자녀 간 갈등' },
-  { id: 3, symptom: '자녀 양육' },
-  { id: 4, symptom: '자녀 성격' },
-]
-
-interface SearchResult {
-  id: number
-  symptom: string
-}
-
-interface SearchResultsProps {
-  query: string
-}
-
-const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
-  const filteredResults = mockData.filter((item) => item.symptom.includes(query))
+const SearchResults: React.FC<{ query: string }> = ({ query }) => {
+  const [results, setResults] = useState<string[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
   const { addTag, removeTag, selectedSymptoms, addSelectedSymptom, removeSelectedSymptom } =
     useTagsStore()
+
+  useEffect(() => {
+    if (query) {
+      setLoading(true)
+      try {
+        const allSymptoms = [
+          ...privatesymptoms,
+          ...couplesymptoms,
+          ...familysymptoms,
+          ...childsymptoms,
+        ]
+        const filteredResults = allSymptoms.filter((symptom) =>
+          symptom.toLowerCase().includes(query.toLowerCase()),
+        )
+        setResults(filteredResults)
+        setLoading(false)
+      } catch (e) {
+        setError('Error occurred while filtering symptoms')
+        setLoading(false)
+      }
+    } else {
+      setResults([])
+    }
+  }, [query])
 
   const handleSymptomClick = (symptom: string) => {
     if (selectedSymptoms.includes(symptom)) {
@@ -31,18 +43,26 @@ const SearchResults: React.FC<SearchResultsProps> = ({ query }) => {
     }
   }
 
+  if (error) {
+    return <div>API 요청 에러</div>
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="flex h-[363px] w-full flex-col">
-      {filteredResults.length > 0 ? (
-        filteredResults.map((result) => (
+      {results.length > 0 ? (
+        results.map((symptom, index) => (
           <div
-            key={result.id}
+            key={index}
             className={`bodylmedium  cursor-pointer justify-center border-b border-gray-300 bg-white px-[20px] py-[14px]
-            ${selectedSymptoms.includes(result.symptom) ? 'text-primary-600' : 'text-gray-500'}`}
-            onClick={() => handleSymptomClick(result.symptom)}>
+            ${selectedSymptoms.includes(symptom) ? 'text-primary-600' : 'text-gray-500'}`}
+            onClick={() => handleSymptomClick(symptom)}>
             <div className="flex justify-between hover:text-primary-600">
-              {result.symptom}
-              {selectedSymptoms.includes(result.symptom) && (
+              {symptom}
+              {selectedSymptoms.includes(symptom) && (
                 <img src="src/assets/images/counseling/icon_checkmark.svg" alt="selected" />
               )}
             </div>

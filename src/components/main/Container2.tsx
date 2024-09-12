@@ -19,13 +19,18 @@ const Contents: React.FC = () => {
   return (
     <div className="w-[1440px] bg-gradient-to-b from-white via-stone-50 to-pink-100 px-[170px]">
       {/* 헤드라인 */}
-      <p className="mdbold w-full text-gray-900">앤데이 인기 전문가</p>
+      <p className="mdbold w-full text-gray-900" ref={cardRecommendRef} id="card-recommend">
+        앤데이 인기 전문가
+      </p>
 
       {/* 카테고리 */}
+
       <Category />
 
       {/* 상담사 추천 카드 */}
+      {/* <div ref={cardRecommendRef} id="card-recommend"> */}
       <CardRecommend />
+      {/* </div> */}
 
       {/* 리뷰 카드 */}
       <div className="mb-[160px] ml-[40px] mt-[260px] flex flex-row items-start justify-start gap-[40px]">
