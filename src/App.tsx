@@ -26,6 +26,7 @@ import ScrollToTop from './components/ScrollToTop'
 import Community from './pages/Community'
 import GoToHome from './components/main/GoToHome'
 import WriteHistory from './pages/WriteHistory'
+import WriteCustomerService from './pages/WriteCustomerService'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path="/counseling/counselor/:counselorId/reviews" element={<MoreReviews />} />
         <Route path="/customerservice" element={<CustomerServcie />} />
         <Route path="/customerservice/:id" element={<CustomerServciePost />} />
+        <Route path="/customerservice/write" element={<WriteCustomerService />} />
         <Route path="/counseling/reservation/:counselorId" element={<Reservation />} />
         <Route path="/info" element={<Info />} />
         <Route path="/findid" element={<FindId />} />
