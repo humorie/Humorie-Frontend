@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import EmptyPost from './EmptyPost'
 import axios from 'axios'
 import RecentPost from './RecentPost'
 import Pagination from '../Pagenation'
+import Button from '../Button'
 
 interface ConsultDetail {
   id: number
@@ -93,11 +94,21 @@ const Contents: React.FC = () => {
                 <p className="w-[100px]">{post.counselDate}</p>
               </div>
             ))}
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={(page) => setCurrentPage(page)}
-            />
+            <div className="flex items-center justify-end">
+              <Button
+                label="글쓰기"
+                size="Small"
+                color="gray"
+                onClick={() => navigate('/history/wirte')}
+              />
+            </div>
+            <div className="mb-[170px] mt-[80px] flex items-center justify-center">
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            </div>
           </>
         ) : (
           <EmptyPost />

@@ -25,6 +25,7 @@ import DataCollection from './pages/DataCollection'
 import ScrollToTop from './components/ScrollToTop'
 import Community from './pages/Community'
 import GoToHome from './components/main/GoToHome'
+import WriteHistory from './pages/WriteHistory'
 
 function App() {
   return (
@@ -37,9 +38,10 @@ function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/joinsuccess" element={<JoinSuccess />} />
         <Route path="/history" element={<History />} />
+        <Route path="/history/:id" element={<Post />} />
+        <Route path="/history/wirte" element={<WriteHistory />} />
         <Route path="/review/:consultId" element={<Review />} />
         <Route path="/review/complete" element={<Complete />} />
-        <Route path="/history/:id" element={<Post />} />
         <Route path="/counseling" element={<Counseling />} />
         <Route path="/counseling/counselor/:counselorId" element={<Counselor />} />
         <Route path="/counseling/counselor/:counselorId/reviews" element={<MoreReviews />} />
