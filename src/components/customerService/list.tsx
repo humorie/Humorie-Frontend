@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Pagination from '../Pagenation'
 import Input from '../Input'
+import Button from '../Button'
 
 interface NoticeTypes {
   id: number
@@ -92,6 +93,17 @@ const List = () => {
           <div className="my-8 flex items-center justify-center">검색결과가 없습니다.</div>
         )}
       </div>
+      <div className="border border-gray-300" />
+
+      <div className="my-[80px] flex items-center justify-end">
+        <Button
+          label="글쓰기"
+          size="Small"
+          color="gray"
+          onClick={() => navigate('/customerservice/write')}
+        />
+      </div>
+
       <div className="my-[60px] flex flex-col items-center justify-center gap-[60px]">
         {allNotice.length > 0 ? (
           <Pagination
