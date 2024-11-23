@@ -1,4 +1,4 @@
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
 import Contents from '../components/history/post/Contents.tsx'
 import { useParams } from 'react-router-dom'

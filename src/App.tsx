@@ -7,10 +7,10 @@ import History from './pages/History'
 import Main from './pages/Main'
 import Counselor from './pages/Counselor'
 import Counseling from './pages/Counseling'
-import Review from './pages/Review'
+import WriteReview from './pages/WriteReview'
 import Post from './pages/Post'
 import Complete from './pages/Complete'
-import MoreReviews from './pages/Reviews'
+import CounselorReviews from './pages/CounselorReviews'
 import CustomerServcie from './pages/CustomerService'
 import CustomerServciePost from './pages/CustomerServicePost'
 import Reservation from './pages/Reservation'
@@ -22,9 +22,9 @@ import MyPage from './pages/MyPage'
 import DeleteAccount from './pages/DeleteAccount'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import DataCollection from './pages/DataCollection'
-import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/common/ScrollToTop'
 import Community from './pages/Community'
-import GoToHome from './components/main/GoToHome'
+import NotDeveloped from './pages/NotDeveloped'
 import WriteHistory from './pages/WriteHistory'
 import WriteCustomerService from './pages/WriteCustomerService'
 
@@ -34,18 +34,18 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/notdeveloped" element={<GoToHome />} />
+        <Route path="/notdeveloped" element={<NotDeveloped />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/joinsuccess" element={<JoinSuccess />} />
         <Route path="/history" element={<History />} />
         <Route path="/history/:id" element={<Post />} />
         <Route path="/history/wirte" element={<WriteHistory />} />
-        <Route path="/review/:consultId" element={<Review />} />
+        <Route path="/review/:consultId" element={<WriteReview />} />
         <Route path="/review/complete" element={<Complete />} />
         <Route path="/counseling" element={<Counseling />} />
         <Route path="/counseling/counselor/:counselorId" element={<Counselor />} />
-        <Route path="/counseling/counselor/:counselorId/reviews" element={<MoreReviews />} />
+        <Route path="/counseling/counselor/:counselorId/reviews" element={<CounselorReviews />} />
         <Route path="/customerservice" element={<CustomerServcie />} />
         <Route path="/customerservice/:id" element={<CustomerServciePost />} />
         <Route path="/customerservice/write" element={<WriteCustomerService />} />

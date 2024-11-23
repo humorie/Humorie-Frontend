@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { CounselorType, ReviewType } from '../components/Types'
+import { CounselorType, ReviewType } from '../components/common/Types'
 
 export const useFetchCounselor = (counselorId: number) => {
   const [counselor, setCounselor] = useState<CounselorType | null>(null)

@@ -1,6 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import '../../index.css'
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import { useDropdownStore, useFiltersStore } from '../../store/store'
 
 function classNames(...classes: (string | boolean | undefined)[]): string {

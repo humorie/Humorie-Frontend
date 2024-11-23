@@ -1,7 +1,7 @@
 // 리뷰가 등록되면 이동되는 페이지입니다.
 import Header from '../components/header/Header'
-import Button from '../components/Button'
-import Footer from '../components/Footer'
+import Button from '../components/common/Button'
+import Footer from '../components/common/Footer'
 import { useNavigate } from 'react-router-dom'
 
 const Complete: React.FC = () => {

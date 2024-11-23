@@ -1,5 +1,5 @@
-import Button from '../Button'
-import Input from '../Input'
+import Button from '../common/Button'
+import Input from '../common/Input'
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useCallback } from 'react'
 import axios from 'axios'
@@ -44,7 +44,7 @@ const PwFindForm: React.FC = () => {
         email: email,
       })
 
-      const { isSuccess, message, code } = response.data
+      const { isSuccess, code } = response.data
 
       if (isSuccess) {
         setMessage(

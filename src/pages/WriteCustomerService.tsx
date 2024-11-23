@@ -1,5 +1,5 @@
 import Contents from '../components/customerService/write/Content'
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
 
 const WriteCustomerService: React.FC = () => {

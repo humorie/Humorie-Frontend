@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Calendar from '../components/reservation/Calendar'
 import CardReservation from '../components/reservation/CardReservation'
 import Header from '../components/reservation/Header'
@@ -11,6 +11,7 @@ import LoginForm from '../components/login/LoginForm'
 
 const Reservation: React.FC = () => {
   const { counselorId } = useParams()
+  const numCounselorId = Number(counselorId)
   const { isLoggedIn, checkAuth } = useAuthStore()
 
   if (!counselorId) {
@@ -26,15 +27,15 @@ const Reservation: React.FC = () => {
     <div className="flex flex-col items-center justify-center">
       {isLoggedIn ? (
         <>
-          <Header counselorId={counselorId} />
+          <Header counselorId={numCounselorId} />
           <div className="flex w-[1440px] flex-col items-start justify-start bg-gray-50 px-[170px] pb-[150px] pt-[80px]">
             <div className="flex flex-row items-start justify-center gap-[90px]">
               <div className="flex flex-col items-center justify-center gap-[110px]">
-                <Calendar counselorId={counselorId} />
-                <TimeTable counselorId={counselorId} />
+                <Calendar counselorId={numCounselorId} />
+                <TimeTable counselorId={numCounselorId} />
                 <Place />
               </div>
-              <CardReservation counselorId={counselorId} />
+              <CardReservation counselorId={numCounselorId} />
             </div>
           </div>
           <Footer />

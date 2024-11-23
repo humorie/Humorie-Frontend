@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
 import '../index.css'
 import { useParams } from 'react-router-dom'
@@ -12,7 +12,7 @@ interface Counselor {
   reviewCount: string
 }
 
-const MoreReviews: React.FC = () => {
+const CounselorReviews: React.FC = () => {
   const [counselor, setCounselor] = useState<Counselor | null>(null)
   const { counselorId } = useParams<{ counselorId: string }>()
 
@@ -56,4 +56,4 @@ const MoreReviews: React.FC = () => {
   )
 }
 
-export default MoreReviews
+export default CounselorReviews

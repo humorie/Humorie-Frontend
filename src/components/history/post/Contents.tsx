@@ -12,23 +12,20 @@ interface ConsultDetail {
   id: number
   counselorId: number
   counselorName: string
-  status: boolean
-  symptom: string
   symptoms: string[]
   isOnline: boolean
+  location: string
+  status: boolean
+  title: string
+  symptomCategory: string
+  symptomDetail: string
+  content: string
   counselDate: string
   counselTime: string
-  location: string
-  title: string
-  content: string
 }
 
 interface ConsultDetailsResponse {
   consultDetail: ConsultDetail
-  pageNumber: number
-  pageSize: number
-  totalElements: number
-  totalPages: number
   accountName: string
 }
 
@@ -40,9 +37,15 @@ const Contents: React.FC<PostProps> = ({ id }) => {
   // 특정 상담사의 상담내역 API
   useEffect(() => {
     const fetchData = async () => {
+      const accessToken = localStorage.getItem('accessToken')
+
       try {
-        const response = await axios.get(`/api/consult-detail/${id}`)
-        console.log('특정 상담 내역 조회 API 결과: ', response.data)
+        const response = await axios.get(`/api/consult-detail/${id}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        // console.log('특정 상담 내역 조회 API 결과: ', response.data)
         setContent(response.data)
       } catch (error) {
         console.log('특정 상담 내역 조회 API 에러: ', error)
@@ -97,7 +100,9 @@ const Contents: React.FC<PostProps> = ({ id }) => {
             상담사 보기
           </div>
         </div>
+        {/* 상담내용 */}
         {selectTab === 'Details' && contents ? <Details contents={contents.consultDetail} /> : null}
+        {/* 상담사 보기  */}
         {selectTab === 'Profile' && contents ? (
           <Profile
             consultId={contents.consultDetail.id}
@@ -115,10 +120,6 @@ const Contents: React.FC<PostProps> = ({ id }) => {
         </div>
         <div className="flex flex-col items-start justify-center">
           <p className="bodymdmedium">지역</p>
-          <p className="bodysmsemibold text-gray-400">{contents?.consultDetail.location}</p>
-        </div>
-        <div className="flex flex-col items-start justify-center">
-          <p className="bodymdmedium">이용권</p>
           <p className="bodysmsemibold text-gray-400">{contents?.consultDetail.location}</p>
         </div>
         <div className="flex flex-col items-start justify-center">

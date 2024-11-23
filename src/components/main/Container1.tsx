@@ -4,7 +4,7 @@ import { useModalStore, useTagsStore } from '../../store/store'
 import { useFetchUser } from '../../hooks/useFetchUser'
 import SearchinModal from '../counseling/Modal/searchinmodal'
 import Table from '../counseling/Modal/table'
-import Button from '../Button'
+import Button from '../common/Button'
 
 const Container1: React.FC = () => {
   const modalBackground = useRef(null)

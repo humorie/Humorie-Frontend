@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import '../../index.css'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import Button from '../Button'
+import Button from '../common/Button'
 
 interface Counselor {
   counselorId: number

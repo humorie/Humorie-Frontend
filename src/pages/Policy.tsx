@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import FirstArticle from '../components/policy/FirstArticle'
 import PolicyHeader from '../components/policy/PolicyHeader'
 

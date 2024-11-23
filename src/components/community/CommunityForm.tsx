@@ -1,6 +1,10 @@
 const CommunityForm: React.FC = () => {
   return (
-    <div className="relative h-[700px] w-[1100px] bg-[url('/src/assets/images/community/community_image.svg')] bg-cover bg-[top] bg-no-repeat text-center text-gray-700"></div>
+    <>
+      <div className="flex h-[800px] w-full flex-col items-center justify-center px-[170px] pb-[370px] pt-[228px]">
+        <img src="/src/assets/images/community/community_img1.png" />
+      </div>
+    </>
   )
 }
 export default CommunityForm

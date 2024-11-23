@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom'
-import Button from '../Button'
-import Header from '../header/Header'
-import Footer from '../Footer'
+import Button from '../components/common/Button'
+import Footer from '../components/common/Footer'
+import Header from '../components/header/Header'
 
-const GoToHome: React.FC = () => {
+const NotDeveloped: React.FC = () => {
   const navigate = useNavigate()
   return (
     <>
       <Header />
-      <div className="flex h-[700px] w-full flex-col items-center justify-center px-[170px] pb-[370px] pt-[128px]">
+      <div className="flex h-[800px] w-full flex-col items-center justify-center px-[170px] pb-[370px] pt-[228px]">
         <div className="mdbold mb-[16px] flex flex-row items-center justify-center gap-2 self-stretch text-gray-700">
           <div>🏗️</div>이 페이지는 공사중입니다.
         </div>
@@ -23,4 +23,4 @@ const GoToHome: React.FC = () => {
   )
 }
 
-export default GoToHome
+export default NotDeveloped

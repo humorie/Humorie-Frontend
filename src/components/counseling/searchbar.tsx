@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import '../../index.css'
 import SearchinModal from './Modal/searchinmodal'
 import Table from './Modal/table'
-import Button from '../Button'
+import Button from '../common/Button'
 import { useTagsStore, Tag } from '../../store/store'
 import SearchResults from './Modal/searchResults'
 
@@ -73,12 +73,10 @@ const SearchBar = () => {
             }
           }}>
           <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
-
             <SearchinModal onSearchInputChange={handleSearchInputhChange} />
             {searchQuery ? <SearchResults query={searchQuery} /> : <Table />}
 
             <div className="  overflow-x ms-[45px] mt-[25px]  flex w-full flex-row flex-wrap justify-start space-x-[12px]">
-
               {tags.map((tag, index) => (
                 <div
                   key={index}

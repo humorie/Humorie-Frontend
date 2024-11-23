@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
 import { useTimeStore, useDateStore } from '../../store/store'
-import { ResvationType } from '../Types'
+import { ResvationType } from '../common/Types'
 import TimeSlot from './TimeSlot'
 
 const TimeTable: React.FC<ResvationType> = ({ counselorId }) => {

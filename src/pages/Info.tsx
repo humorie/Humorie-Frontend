@@ -1,4 +1,4 @@
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
 import Container4 from '../components/info/Container4'
 import Container1 from '../components/info/Container1'

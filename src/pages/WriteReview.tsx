@@ -1,12 +1,13 @@
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import Button from '../components/Button'
+import Button from '../components/common/Button'
 import MakeTagModal from '../components/review/MyTagModal'
 import { useModalStore } from '../store/store'
 import axios from 'axios'
-import Tag from '../components/Tag'
+import Tag from '../components/common/Tag'
+import { useFetchUser } from '../hooks/useFetchUser'
 
 // 태그의 타입 정의
 interface TagType {
@@ -15,17 +16,13 @@ interface TagType {
   tagContent: string
 }
 
-interface UserType {
-  name: string
-}
-
-const Review: React.FC = () => {
+const WriteReview: React.FC = () => {
   const { consultId } = useParams()
   const [title, setTitle] = useState('') // 리뷰 제목
   const [contents, setContents] = useState('') // 리뷰 콘텐츠
   const [rating, setRating] = useState(0) // 별점
   const [tags, setTags] = useState<TagType[]>([]) // 태그 목록
-  const [user, setUser] = useState<UserType>()
+  const user = useFetchUser()
   const { modalOpen, openModal, closeModal } = useModalStore()
   const navigate = useNavigate()
 
@@ -55,7 +52,7 @@ const Review: React.FC = () => {
         },
       )
       if (response.data.isSuccess) {
-        console.log('리뷰작성 API 결과: ', response.data)
+        // console.log('리뷰작성 API 결과: ', response.data)
         navigate('/review/complete')
       }
     } catch (error) {
@@ -75,7 +72,7 @@ const Review: React.FC = () => {
           },
         })
         if (response.data.isSuccess) {
-          console.log('태그 목록 조회 API 결과: ', response.data.result)
+          // console.log('태그 목록 조회 API 결과: ', response.data.result)
           setTags(response.data.result)
         }
       } catch (error) {
@@ -98,32 +95,12 @@ const Review: React.FC = () => {
       if (response.data.isSuccess) {
         // 태그 삭제 성공 시, 태그 목록에서 해당 태그를 제거
         setTags((prevTags) => prevTags.filter((tag) => tag.tagId !== tagId))
-        console.log('태그 삭제 API 결과: ', response.data.message)
+        // console.log('태그 삭제 API 결과: ', response.data.message)
       }
     } catch (error) {
       console.error('태그 삭제 API 에러: ', error)
     }
   }
-  // 회원정보조회 API 요청
-  useEffect(() => {
-    const fetchData = async () => {
-      const accessToken = localStorage.getItem('accessToken')
-      try {
-        const response = await axios.get('/api/mypage/get', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        if (response.data.isSuccess) {
-          setUser(response.data.result)
-          console.log('회원정보조회 API 결과: ', response.data.result)
-        }
-      } catch (error) {
-        console.log('회원정보조회 API 에러: ', error)
-      }
-    }
-    fetchData()
-  }, [])
 
   // 태그 추가 핸들러
   const handleTagAdded = (newTag: TagType) => {
@@ -235,4 +212,4 @@ const Review: React.FC = () => {
   )
 }
 
-export default Review
+export default WriteReview

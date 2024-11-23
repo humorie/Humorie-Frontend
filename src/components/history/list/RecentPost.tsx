@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../Button'
+import Button from '../../common/Button'
 import axios from 'axios'
 
 interface ConsultDetail {
@@ -26,11 +26,11 @@ const RecentPost: React.FC = () => {
         const accessToken = localStorage.getItem('accessToken')
         const response = await axios.get('/api/consult-detail/latest', {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `${accessToken}`,
           },
         })
         setContents(response.data)
-        console.log('최근 상담 내역 조회 API 결과: ', response.data)
+        // console.log('최근 상담 내역 조회 API 결과: ', response.data)
       } catch (error) {
         console.log('최근 상담 내역 조회 API 에러: ', error)
       }
