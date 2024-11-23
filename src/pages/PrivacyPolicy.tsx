@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import Footer from '../components/Footer'
-import PrivacyContents from '../components/privacy_policy/PrivacyContents'
-import PrivacyHeader from '../components/privacy_policy/PrivacyHeader'
+import Footer from '../components/common/Footer'
+import PrivacyContents from '../components/privacyPolicy/PrivacyContents'
+import PrivacyHeader from '../components/privacyPolicy/PrivacyHeader'
 
 const PrivacyPolicy: React.FC = () => {
   useEffect(() => {

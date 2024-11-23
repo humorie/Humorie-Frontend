@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import EmptyPost from './EmptyPost'
 import axios from 'axios'
 import RecentPost from './RecentPost'
-import Pagination from '../Pagenation'
-import Button from '../Button'
+import Pagination from '../../common/Pagenation'
+import Button from '../../common/Button'
+import { useFetchUser } from '../../../hooks/useFetchUser'
 
 interface ConsultDetail {
   id: number
@@ -29,6 +30,9 @@ const Contents: React.FC = () => {
   const [historyList, setHistoryList] = useState<ConsultDetailsResponse>() // 전체 상담 목록 상태관리
   const [currentPage, setCurrentPage] = useState(1) // 현재 페이지
   const [totalPages, setTotalPages] = useState(0) // 전체 페이지
+
+  const user = useFetchUser()
+
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const Contents: React.FC = () => {
         const accessToken = localStorage.getItem('accessToken')
         const response = await axios.get('/api/consult-detail/list', {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: accessToken,
           },
           params: {
             page: currentPage - 1, // 페이지 번호
@@ -46,7 +50,7 @@ const Contents: React.FC = () => {
         })
         setHistoryList(response.data)
         setTotalPages(response.data.totalPages) // 총 페이지 수 업데이트
-        console.log('전체 상담 내역 조회 API 결과: ', response.data)
+        // console.log('전체 상담 내역 조회 API 결과: ', response.data)
       } catch (error) {
         console.log('전체 상담 내역 조회 API 에러: ', error)
       }
@@ -73,11 +77,11 @@ const Contents: React.FC = () => {
 
         {/* 전체 상담 목록 */}
         <div className="bodymdmedium flex h-[78px] w-full flex-row items-center justify-evenly gap-[100px] bg-neutral-100 text-center text-stone-500">
-          <p className="w-[100px]">담당자명</p>
-          <p className="w-[100px]">상담상태</p>
-          <p className="w-[150px]">상담영역</p>
-          <p className="w-[100px]">상담방법</p>
-          <p className="w-[100px]">상담일</p>
+          <ul className="w-[100px]">담당자명</ul>
+          <ul className="w-[100px]">상담상태</ul>
+          <ul className="w-[150px]">상담영역</ul>
+          <ul className="w-[100px]">상담방법</ul>
+          <ul className="w-[100px]">상담일</ul>
         </div>
 
         {historyList.totalElements > 0 ? (
@@ -87,21 +91,24 @@ const Contents: React.FC = () => {
                 key={post.id}
                 className="bodysmmedium flex w-full cursor-pointer flex-row items-center justify-evenly gap-[100px] py-[60px] text-center text-stone-500"
                 onClick={() => navigate(`/history/${post.id}`)}>
-                <p className="w-[100px]">{post.counselorName}</p>
-                <p className="w-[100px]">{post.status === true ? '상담완료' : '상담진행'}</p>
-                <p className="w-[150px] truncate">{post.symptoms.join(' / ')}</p>
-                <p className="w-[100px]">{post.isOnline === true ? '온라인' : '오프라인'}</p>
-                <p className="w-[100px]">{post.counselDate}</p>
+                <ul className="w-[100px]">{post.counselorName}</ul>
+                <ul className="w-[100px]">{post.status === true ? '상담완료' : '상담진행'}</ul>
+                <ul className="w-[150px] truncate">{post.symptoms.join(' / ')}</ul>
+                <ul className="w-[100px]">{post.isOnline === true ? '온라인' : '오프라인'}</ul>
+                <ul className="w-[100px]">{post.counselDate}</ul>
               </div>
             ))}
-            <div className="flex items-center justify-end">
-              <Button
-                label="글쓰기"
-                size="Small"
-                color="gray"
-                onClick={() => navigate('/history/wirte')}
-              />
-            </div>
+            {/* 관리자 계정일 경우 글쓰기 버튼 활성화 */}
+            {user?.accountName == 'admin' && (
+              <div className="flex items-center justify-end">
+                <Button
+                  label="글쓰기"
+                  size="Small"
+                  color="gray"
+                  onClick={() => navigate('/history/wirte')}
+                />
+              </div>
+            )}
             <div className="mb-[170px] mt-[80px] flex items-center justify-center">
               <Pagination
                 totalPages={totalPages}

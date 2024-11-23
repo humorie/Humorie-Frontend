@@ -24,7 +24,7 @@ const Notice: React.FC = () => {
           },
         })
         setAllNotice(response.data.notices)
-        console.log('전체 공지사항 API 결과', response.data)
+        // console.log('전체 공지사항 API 결과', response.data)
       } catch (error) {
         console.log('전체 공지사항 API 에러: ', error)
       }

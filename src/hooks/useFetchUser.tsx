@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { UserType } from '../components/Types'
+
+interface UserType {
+  id: number
+  email: string
+  accountName: string
+  name: string
+  emailSubscription: boolean
+}
 
 export const useFetchUser = () => {
-  const [user, setUser] = useState<UserType | null>(null)
+  const [user, setUser] = useState<UserType>()
 
   useEffect(() => {
     const fetchData = async () => {
       const accessToken = localStorage.getItem('accessToken')
+
       try {
         const response = await axios.get('/api/mypage/get', {
           headers: {
@@ -18,7 +26,7 @@ export const useFetchUser = () => {
           setUser(response.data.result)
         }
       } catch (error) {
-        console.log('회원정보조회 API 에러: ', error)
+        console.log('회원정보 조회 API 에러: ', error)
       }
     }
     fetchData()

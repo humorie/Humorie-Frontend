@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useFetchUser } from '../../hooks/useFetchUser'
 import axios from 'axios'
-import Pagination from '../Pagenation'
-import Input from '../Input'
-import Button from '../Button'
+import Pagination from '../common/Pagenation'
+import Input from '../common/Input'
+import Button from '../common/Button'
 
 interface NoticeTypes {
   id: number
@@ -26,7 +27,10 @@ const List = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
   const [keyword, setKeyword] = useState('')
+
   const navigate = useNavigate()
+
+  const user = useFetchUser()
 
   // 전체 공지사항 전체 조회 API
   useEffect(() => {
@@ -94,15 +98,18 @@ const List = () => {
         )}
       </div>
       <div className="border border-gray-300" />
-
-      <div className="my-[80px] flex items-center justify-end">
-        <Button
-          label="글쓰기"
-          size="Small"
-          color="gray"
-          onClick={() => navigate('/customerservice/write')}
-        />
-      </div>
+      {/* 글쓰기 버튼*/}
+      {/* admin 계정으로 로그인시 렌더링 */}
+      {user?.accountName == 'admin' && (
+        <div className="my-[80px] flex items-center justify-end">
+          <Button
+            label="글쓰기"
+            size="Small"
+            color="gray"
+            onClick={() => navigate('/customerservice/write')}
+          />
+        </div>
+      )}
 
       <div className="my-[60px] flex flex-col items-center justify-center gap-[60px]">
         {allNotice.length > 0 ? (

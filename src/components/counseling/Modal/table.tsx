@@ -82,12 +82,14 @@ const Table: React.FC<TableProps> = ({ onKeywordsChange = () => {} }) => {
   } = useTagsStore()
 
   useEffect(() => {
-    console.log('Active Main Tab on Mount:', activeMainTab)
-    console.log('Active Sub Tab on Mount:', activeSubTab)
+    // console.log('Active Main Tab on Mount:', activeMainTab)
+    // console.log('Active Sub Tab on Mount:', activeSubTab)
   }, [activeMainTab, activeSubTab])
-  console.log('Active Main Tab:', activeMainTab)
-  console.log('Active Sub Tab:', activeSubTab)
-  console.log('Selected Symptoms:', selectedSymptoms)
+
+  // console.log('Active Main Tab:', activeMainTab)
+  // console.log('Active Sub Tab:', activeSubTab)
+  // console.log('Selected Symptoms:', selectedSymptoms)
+
   const mainTabs = ['개인', '가족']
   const privatetabs = ['개인 문제']
   const familytabs = ['가족 문제', '부부 문제', '자녀 문제']

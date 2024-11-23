@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Button from '../Button'
-import Input from '../Input'
-import { useDateStore, useTimeStore, useMeetingStore } from '../../store/store'
-import PortOne from '../../services/PortOneApi'
-import { ResvationType } from '../Types'
+import Button from '../common/Button'
+import Input from '../common/Input'
+import { useDateStore, useTimeStore, useMeetingStore, useModalStore } from '../../store/store'
+// import PortOne from '../../services/PortOneApi'
+import { ResvationType } from '../common/Types'
 import { useFetchCounselor } from '../../hooks/useFetchCounselor'
+import CompleteModal from './CompleteModal'
 
 interface PointProps {
   totalPoints: number
 }
 
 const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
-  const price = 50000
+  const price = 0
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
   const { meetingType, onlineOption } = useMeetingStore() // 저장된 장소 불러오기
@@ -23,6 +24,7 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
   const [usedPoints, setUsedPoints] = useState<number>(0) // 사용 포인트
   const counselContent = counselor?.symptoms.join(', ') // 상담 분야
   const address: string = '서울특별시 강남구 학동로 426'
+  const { modalOpen, openModal } = useModalStore() // complete 모달창 store
 
   // 날짜를 "YYYY.MM.DD" 형식으로 포맷
   const formatDateDot = (date: Date) => {
@@ -51,7 +53,7 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
             Authorization: `Bearer ${accessToken}`,
           },
         })
-        console.log('보유 포인트 조회 API 결과: ', response.data.result)
+        // console.log('보유 포인트 조회 API 결과: ', response.data.result)
         setPoint(response.data.result)
       } catch (error) {
         console.log('보유 포인트 조회 API 에러: ', error)
@@ -95,7 +97,6 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
       point: usedPoints,
       finalPrice: finalPrice,
     }
-    console.log(reservationData)
     try {
       const accessToken = localStorage.getItem('accessToken')
       const response = await axios.post('/api/reservation/create', reservationData, {
@@ -105,7 +106,7 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
       })
 
       if (response.data.isSuccess) {
-        console.log('상담예약 생성 API 결과: ', response.data)
+        // console.log('상담예약 생성 API 결과: ', response.data)
         setReservationUid(response.data.result.reservationUid)
       }
     } catch (error) {
@@ -143,10 +144,10 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-[8px]">
+        {/* <div className="flex flex-col gap-[8px]">
           <div className="bodysmsemibold text-gray-600">상담 내용</div>
           <div className="bodymdsemibold text-gray-900">{counselContent}</div>
-        </div>
+        </div> */}
       </div>
       {/* 결제 정보 */}
       <div className="xsbold">결제 정보</div>
@@ -162,7 +163,7 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
         <div className="bodysmsemibold text-gray-600">사용 포인트</div>
         <Input
           type="Button"
-          placeholder="0원"
+          placeholder="1231231"
           value={usedPoints.toLocaleString()}
           btnLabel="전액사용"
           btnEvent={handleUseAllPoints}
@@ -174,17 +175,18 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
         <div className="bodysmsemibold text-gray-600">결제 금액</div>
         <div className="bodymdsemibold text-gray-900">{finalPrice.toLocaleString()}원</div>
       </div>
-      <div className="flex flex-row items-center justify-between text-center">
+      {/* <div className="flex flex-row items-center justify-between text-center">
         <div className="bodysmsemibold text-gray-600">카드결제</div>
         <img src="/src/assets/images/icon/icon_checked_pink.svg" alt="체크" />
-      </div>
+      </div> */}
       <div className="flex items-center justify-center">
         {selectedDate != null && selectedTime != null ? (
           <Button
             label="다음"
             size="XLarge"
             color="pink"
-            onClick={handleReservationClick} // 예약 처리 함수 호출
+            // onClick={handleReservationClick} // 예약 처리 함수 호출
+            onClick={openModal} // 결제시스템 중단 이슈로 예약완료 모달 오픈
           />
         ) : (
           <Button
@@ -195,7 +197,8 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
           />
         )}
       </div>
-      {reservationUid && <PortOne reservationUid={reservationUid} />}
+      {/* {reservationUid && <PortOne reservationUid={reservationUid} />} */}
+      {modalOpen ? <CompleteModal /> : null}
     </div>
   )
 }

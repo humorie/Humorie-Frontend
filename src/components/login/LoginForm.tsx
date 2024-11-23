@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../index.css'
 import { useNavigate } from 'react-router-dom'
-import Button from '../Button'
+import Button from '../common/Button'
 import axios from 'axios'
 
 const LoginForm = () => {
@@ -80,7 +80,7 @@ const LoginForm = () => {
           const { accessToken, refreshToken } = result
           localStorage.setItem('accessToken', accessToken)
           localStorage.setItem('refreshToken', refreshToken)
-          console.log('로그인 성공:', { accessToken, refreshToken })
+          // console.log('로그인 성공:', { accessToken, refreshToken })
 
           navigate('/')
 
@@ -93,7 +93,7 @@ const LoginForm = () => {
         }
       }
     } catch (error) {
-      console.error('로그인 오류:', error)
+      // console.error('로그인 오류:', error)
       setErrorMessage(
         '아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.',
       )

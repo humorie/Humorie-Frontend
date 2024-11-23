@@ -1,5 +1,5 @@
-import Button from '../Button'
-import Input from '../Input'
+import Button from '../common/Button'
+import Input from '../common/Input'
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useCallback } from 'react'
 import axios from 'axios'
@@ -79,7 +79,7 @@ const IdFindForm: React.FC = () => {
           <div className="box-border flex h-24 w-[880px] flex-row items-center justify-start gap-[8px] border-solid border-gray-200 px-12 py-6">
             <div className="flex w-[120px] flex-row items-center justify-start">
               <div className="bodymdmedium relative text-gray-900">이메일</div>
-              <div className="text-status-4 bodymdsemibold relative">*</div>
+              <div className="bodymdsemibold relative text-status-4">*</div>
             </div>
             <div className="box-border flex h-12 w-[312px] flex-row items-center justify-center border-solid border-gray-200 bg-white text-sm">
               <Input
@@ -98,7 +98,7 @@ const IdFindForm: React.FC = () => {
 
         {/* 성공 메시지 */}
         {isSuccess && (
-          <div className="bg-point-6 relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-point-5 p-6 text-center">
+          <div className="relative left-[110px] top-[270px] box-border flex w-[880px] flex-row items-center justify-center border-[1px] border-solid border-point-5 bg-point-6 p-6 text-center">
             <div className="bodyxsregular relative text-gray-800">
               회원님의 아이디는 {foundId}입니다.
             </div>

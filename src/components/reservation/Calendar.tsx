@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import axios from 'axios'
 import { useDateStore } from '../../store/store'
-import { ResvationType } from '../Types'
+import { ResvationType } from '../common/Types'
 
 // 상수와 유틸리티 함수 분리
 const DAYS_OF_WEEK = ['일', '월', '화', '수', '목', '금', '토']
@@ -89,7 +89,7 @@ const Calendar: React.FC<ResvationType> = ({ counselorId }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/reservation/available/date/${counselorId}`)
-        console.log('상담 가능 날짜 API 결과: ', response.data.result)
+        // console.log('상담 가능 날짜 API 결과: ', response.data.result)
         const availableDatesFromApi = response.data.result.availableDates.map(
           (dateStr: string) => new Date(dateStr),
         )

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import Counselorlist from '../components/counseling/counselorlist'
 import Dropdown from '../components/counseling/dropdown'
 import FindCounselor from '../components/counseling/findcounselor'

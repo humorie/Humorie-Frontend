@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import '../../index.css'
-import Button from '../Button'
+import Button from '../common/Button'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useFiltersStore, useTagsStore } from '../../store/store'

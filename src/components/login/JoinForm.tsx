@@ -1,8 +1,8 @@
 import '../../index.css'
-import Button from '../Button'
-import Input from '../Input'
+import Button from '../common/Button'
+import Input from '../common/Input'
 import { useNavigate } from 'react-router-dom'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import axios from 'axios'
 
 const JoinForm = () => {
@@ -48,13 +48,13 @@ const JoinForm = () => {
 
   // 유효성 검사
   const [isEmail, setIsEmail] = useState<boolean>(false)
-  const [isCode, setIsCode] = useState<string>('')
+  // const [isCode, setIsCode] = useState<string>('')
   const [isCodeValid, setIsCodeValid] = useState<boolean>(false) // 인증 코드 유효성 상태
   const [isVerifying, setIsVerifying] = useState(false) // 인증 코드 확인 서버 요청 중 여부 상태
-  const [isId, setIsId] = useState<boolean>(false)
+  // const [isId, setIsId] = useState<boolean>(false)
   const [isPassword, setIsPassword] = useState<boolean>(false)
   const [isPasswordConfirm, setIsPasswordConfirm] = useState<boolean>(false)
-  const [isName, setIsName] = useState<string>('')
+  // const [isName, setIsName] = useState<string>('')
 
   // 이메일
   const onChangeEmail = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,30 +73,30 @@ const JoinForm = () => {
   }, [])
 
   // 인증코드
-  const onChangeCode = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const codeCurrent = e.target.value
-    setCode(codeCurrent)
+  // const onChangeCode = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const codeCurrent = e.target.value
+  //   setCode(codeCurrent)
 
-    if (codeCurrent.trim().length === 0) {
-      setCodeMessage('인증 코드를 입력해주세요.')
-    } else {
-      setCodeMessage('')
-    }
-  }, [])
+  //   if (codeCurrent.trim().length === 0) {
+  //     setCodeMessage('인증 코드를 입력해주세요.')
+  //   } else {
+  //     setCodeMessage('')
+  //   }
+  // }, [])
 
   // 아이디
-  const onChangeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const idCurrent = e.target.value
-    setId(idCurrent)
+  // const onChangeId = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const idCurrent = e.target.value
+  //   setId(idCurrent)
 
-    if (idCurrent.trim().length === 0 && idCurrent.length > 0) {
-      setIdMessage('아이디를 입력해주세요.')
-      setIsId(false)
-    } else {
-      setIdMessage('')
-      setIsId(true)
-    }
-  }, [])
+  //   if (idCurrent.trim().length === 0 && idCurrent.length > 0) {
+  //     setIdMessage('아이디를 입력해주세요.')
+  //     setIsId(false)
+  //   } else {
+  //     setIdMessage('')
+  //     setIsId(true)
+  //   }
+  // }, [])
 
   // 비밀번호
   const onChangePassword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -207,11 +207,11 @@ const JoinForm = () => {
     if (!email) {
       setEmailMessage('이메일을 입력해주세요.')
       isValid = false
-      console.log('Email is missing')
+      // console.log('Email is missing')
     } else if (!isEmail) {
       setEmailMessage('이메일 형식을 확인해주세요.')
       isValid = false
-      console.log('Email format is invalid')
+      // console.log('Email format is invalid')
     } else {
       setEmailMessage('')
     }
@@ -219,19 +219,19 @@ const JoinForm = () => {
     if (!code) {
       setCodeMessage('인증 코드를 입력해주세요.')
       isValid = false
-      console.log('Code is missing')
+      // console.log('Code is missing')
     } else if (codeMessage !== '인증 코드가 일치합니다.') {
       isValid = false
-      console.log('Code does not match')
+      // console.log('Code does not match')
     }
 
     if (!id) {
       setIdMessage('아이디를 입력해주세요.')
       isValid = false
-      console.log('ID is missing')
+      // console.log('ID is missing')
     } else if (!validateIdFormat(id)) {
       isValid = false
-      console.log('ID format is invalid')
+      // console.log('ID format is invalid')
     } else {
       setIdMessage('')
     }
@@ -239,10 +239,10 @@ const JoinForm = () => {
     if (!password) {
       setPasswordMessage('비밀번호를 입력해주세요.')
       isValid = false
-      console.log('PW is missing')
+      // console.log('PW is missing')
     } else if (!isPassword) {
       isValid = false
-      console.log('PW format is invalid')
+      // console.log('PW format is invalid')
     } else {
       setPasswordMessage('')
     }
@@ -250,11 +250,11 @@ const JoinForm = () => {
     if (!passwordConfirm) {
       setPasswordConfirmMessage('비밀번호가 일치하지 않습니다.')
       isValid = false
-      console.log('Password confirmation is missing')
+      // console.log('Password confirmation is missing')
     } else if (!isPasswordConfirm) {
       setPasswordConfirmMessage('비밀번호가 일치하지 않습니다.')
       isValid = false
-      console.log('Password confirmation does not match')
+      // console.log('Password confirmation does not match')
     } else {
       setPasswordConfirmMessage('')
     }
@@ -262,7 +262,7 @@ const JoinForm = () => {
     if (!name) {
       setNameMessage('이름을 입력해주세요.')
       isValid = false
-      console.log('Name is missing')
+      // console.log('Name is missing')
     } else {
       setNameMessage('')
     }
@@ -286,7 +286,7 @@ const JoinForm = () => {
       })
 
       if (response.status === 200 && response.data.isSuccess) {
-        console.log('회원가입 성공')
+        // console.log('회원가입 성공')
         navigate('/joinsuccess')
       } else {
         console.error('회원가입 실패:', response.data.message)
@@ -392,7 +392,7 @@ const JoinForm = () => {
   }
 
   return (
-    <div className="relative flex h-[2026px] w-screen items-center justify-center overflow-hidden bg-gray-50">
+    <div className="relative flex h-[1540px] w-screen items-center justify-center overflow-hidden bg-gray-50">
       <div className="absolute top-0 inline-flex h-[60px] w-full flex-col items-center justify-center">
         <div className="flex h-[60px] flex-col items-center justify-center self-stretch backdrop-blur-3xl">
           <img
@@ -446,7 +446,7 @@ const JoinForm = () => {
           <div className="inline-flex h-20 w-[880px] items-center justify-start gap-2 border-b border-gray-200 px-12 py-6">
             <div className="relative flex h-6 shrink grow basis-0 items-center justify-start">
               <div className="bodymdmedium text-gray-900">개인정보 처리방침</div>
-              <div className="bodymdsemibold text-status-4 text-center">*</div>
+              <div className="bodymdsemibold text-center text-status-4">*</div>
               <div className="absolute top-full">
                 {checkboxMessage2 && (
                   <div className="bodyxsmedium text-status-4">{checkboxMessage2}</div>
@@ -528,7 +528,7 @@ const JoinForm = () => {
               <div>
                 {emailMessage && (
                   <div
-                    className={`bodyxsmedium text-status-3 mt-1 ${isEmail ? 'success' : 'text-status-3'}`}>
+                    className={`bodyxsmedium mt-1 text-status-3 ${isEmail ? 'success' : 'text-status-3'}`}>
                     {emailMessage}
                   </div>
                 )}
@@ -662,7 +662,7 @@ const JoinForm = () => {
         </div>
 
         {/* 마케팅 수신 동의 */}
-        <div className="bodylsemibold absolute left-[394px] top-[1250px] w-[312px] text-center text-gray-900">
+        {/* <div className="bodylsemibold absolute left-[394px] top-[1250px] w-[312px] text-center text-gray-900">
           마케팅 수신 동의
         </div>
         <div className="absolute left-[110px] top-[1320px] inline-flex h-20 w-[880px] items-center justify-start gap-2 border border-gray-200 bg-gray-100 px-12 py-6">
@@ -683,9 +683,9 @@ const JoinForm = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="absolute left-[110px] top-[1440px] inline-flex w-[880px] items-center justify-start gap-8 px-12">
+        {/* <div className="absolute left-[110px] top-[1440px] inline-flex w-[880px] items-center justify-start gap-8 px-12">
           <div className="flex items-center justify-start gap-2">
             <div className="bodymdmedium w-[120px] text-gray-600">이용목적</div>
             <img src="src/assets/images/login/divide_login.svg" alt="" />
@@ -693,11 +693,12 @@ const JoinForm = () => {
           <div className="bodymdmedium shrink grow basis-0 text-gray-400">
             이벤트 및 맞춤 서비스 제공 안내
           </div>
-        </div>
-        <div className="absolute left-[400px] top-[1758px] inline-flex h-12 w-[312px] items-center justify-center gap-2">
+        </div> */}
+
+        <div className="absolute left-[400px] top-[1258px] inline-flex h-12 w-[312px] items-center justify-center gap-2">
           <Button label="다음" size="XLarge" color="pink" onClick={handleSubmit} />
         </div>
-        <div className="absolute left-1/2 top-[1900px] flex -translate-x-1/2 flex-row items-center justify-start gap-[16px]">
+        <div className="absolute left-1/2 top-[1400px] flex -translate-x-1/2 flex-row items-center justify-start gap-[16px]">
           <button
             type="button"
             className="bodysmsemibold flex h-[20px] w-[49px] shrink-0 flex-row items-center justify-center whitespace-nowrap border-none bg-transparent text-center text-gray-400 hover:text-primary-700 focus:outline-none"

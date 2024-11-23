@@ -1,5 +1,5 @@
 import React from 'react'
-import RadioButton from '../RadioButton'
+import RadioButton from '../common/RadioButton'
 import { useMeetingStore } from '../../store/store'
 import KakaoMapApi from '../../services/KakaoMapApi'
 

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ResvationType } from '../Types'
+import { ResvationType } from '../common/Types'
 import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 
 const Header: React.FC<ResvationType> = ({ counselorId }) => {

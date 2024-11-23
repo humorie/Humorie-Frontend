@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import Contents from '../components/history/Contents'
+import Contents from '../components/history/list/Contents'
 import Header from '../components/header/Header'
-import Footer from '../components/Footer'
-import GoToLogin from '../components/history/GoToLogin'
+import Footer from '../components/common/Footer'
+import GoToLogin from '../components/history/list/GoToLogin'
 import { useAuthStore } from '../store/store'
 
 const History: React.FC = () => {

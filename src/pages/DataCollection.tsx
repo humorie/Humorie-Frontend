@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import Footer from '../components/Footer'
-import DataContents from '../components/data_collection/DataContents'
-import DataHeader from '../components/data_collection/DataHeader'
+import Footer from '../components/common/Footer'
+import DataContents from '../components/dataCollection/DataContents'
+import DataHeader from '../components/dataCollection/DataHeader'
 
 const Policy: React.FC = () => {
   useEffect(() => {

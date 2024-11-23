@@ -1,5 +1,5 @@
 import '../../index.css'
-import Button from '../Button'
+import Button from '../common/Button'
 import { useNavigate } from 'react-router-dom'
 
 const JoinSuccess = () => {
@@ -38,13 +38,7 @@ const JoinSuccess = () => {
           <div className="flex w-[375px] flex-col items-center justify-start gap-[16px]">
             <div className="mdbold text-center text-gray-700">회원가입을 축하합니다 🎉</div>
             <div className="bodysmmedium text-center">
-              <span className="text-gray-400">웰컴 포인트 </span>
-              <span className="text-primary-600">100,000p</span>
-              <span className="text-gray-400">
-                를 적립해 드렸습니다.
-                <br />
-                지금 바로 상담하러 가볼까요?
-              </span>
+              <div className="text-gray-400"> 지금 바로 다양한 상담 서비스를 경험해 보세요!</div>
             </div>
           </div>
         </div>

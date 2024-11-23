@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useCategoryStore } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
 import { useFetchAllCounselor } from '../../hooks/useFetchAllCounselor'
-import { CounselorsType } from '../Types'
+import { CounselorsType } from '../common/Types'
 
 const CardRecommend: React.FC = () => {
   const counselors = useFetchAllCounselor() // 전체 상담사 커스텀훅 호출

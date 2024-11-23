@@ -1,5 +1,5 @@
 import Header from '../components/header/Header'
-import Footer from '../components/Footer'
+import Footer from '../components/common/Footer'
 import CommunityForm from '../components/community/CommunityForm'
 
 const Community: React.FC = () => {
