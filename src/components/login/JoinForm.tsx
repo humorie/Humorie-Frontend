@@ -39,7 +39,7 @@ const JoinForm = () => {
   // 오류메세지 상태 저장
   const [emailMessage, setEmailMessage] = useState<string>('')
   const [verificationMessage, setVerificationMessage] = useState('') //이메일 본인 인증
-  const [codeValidMessage, setCodeValidMessage] = useState('') //인증코드
+  const [codeValidMessage] = useState('') //인증코드
   const [codeMessage, setCodeMessage] = useState<string>('')
   const [idMessage, setIdMessage] = useState<string>('')
   const [passwordMessage, setPasswordMessage] = useState<string>('')
@@ -49,7 +49,7 @@ const JoinForm = () => {
   // 유효성 검사
   const [isEmail, setIsEmail] = useState<boolean>(false)
   // const [isCode, setIsCode] = useState<string>('')
-  const [isCodeValid, setIsCodeValid] = useState<boolean>(false) // 인증 코드 유효성 상태
+  const [isCodeValid] = useState<boolean>(false) // 인증 코드 유효성 상태
   const [isVerifying, setIsVerifying] = useState(false) // 인증 코드 확인 서버 요청 중 여부 상태
   // const [isId, setIsId] = useState<boolean>(false)
   const [isPassword, setIsPassword] = useState<boolean>(false)

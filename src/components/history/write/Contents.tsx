@@ -13,7 +13,7 @@ const Contents: React.FC = () => {
   const [isOnline, setIsOnline] = useState(true) //온라인, 오프라인 상태
   const [accountName, setAccountName] = useState('') // 고객(상담자) 아이디
   const [location, setLocation] = useState('') // 지역
-  const [counselDate, setCounselDate] = useState('') // 상담날짜
+  const [, setCounselDate] = useState('') // 상담날짜
   const [symptomCategory, setSymptomCategory] = useState('') // 카테고리
   const [title, setTitle] = useState('') // 제목
   const [symptomDetail, setSymptomDetail] = useState('') // 상담증상

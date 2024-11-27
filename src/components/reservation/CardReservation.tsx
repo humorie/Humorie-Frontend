@@ -5,24 +5,25 @@ import Input from '../common/Input'
 import { useDateStore, useTimeStore, useMeetingStore, useModalStore } from '../../store/store'
 // import PortOne from '../../services/PortOneApi'
 import { ResvationType } from '../common/Types'
-import { useFetchCounselor } from '../../hooks/useFetchCounselor'
+// import { useFetchCounselor } from '../../hooks/useFetchCounselor'
 import CompleteModal from './CompleteModal'
 
 interface PointProps {
   totalPoints: number
 }
 
-const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
+// const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
+const CardReservation: React.FC<ResvationType> = () => {
   const price = 0
   const selectedDate = useDateStore((state) => state.selectedDate) // 저장된 날짜 불러오기
   const selectedTime = useTimeStore((state) => state.selectedTime) // 저장된 시간 불러오기
   const { meetingType, onlineOption } = useMeetingStore() // 저장된 장소 불러오기
-  const { counselor } = useFetchCounselor(counselorId)
-  const [reservationUid, setReservationUid] = useState<string | null>(null) // 예약 UID 상태 추가
+  // const { counselor } = useFetchCounselor(counselorId)
+  // const [reservationUid, setReservationUid] = useState<string | null>(null) // 예약 UID 상태 추가
   const [point, setPoint] = useState<PointProps>({ totalPoints: 0 }) // 기본값 0으로 설정
   const [finalPrice, setFinalPrice] = useState<number>(price) // 결제 금액
   const [usedPoints, setUsedPoints] = useState<number>(0) // 사용 포인트
-  const counselContent = counselor?.symptoms.join(', ') // 상담 분야
+  // const counselContent = counselor?.symptoms.join(', ') // 상담 분야
   const address: string = '서울특별시 강남구 학동로 426'
   const { modalOpen, openModal } = useModalStore() // complete 모달창 store
 
@@ -31,17 +32,17 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
     return `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`
   }
   // 날짜를 "YYYY-MM-DD" 형식으로 포맷
-  const formatDateSlash = (date: Date) => {
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, '0') // 두 자리수로 맞추기
-    const day = String(date.getDate()).padStart(2, '0') // 두 자리수로 맞추기
-    return `${year}-${month}-${day}`
-  }
+  // const formatDateSlash = (date: Date) => {
+  //   const year = date.getFullYear()
+  //   const month = String(date.getMonth() + 1).padStart(2, '0') // 두 자리수로 맞추기
+  //   const day = String(date.getDate()).padStart(2, '0') // 두 자리수로 맞추기
+  //   return `${year}-${month}-${day}`
+  // }
 
   // 시간을 "HH:MM:SS.00" 형식으로 포맷
-  const formatTime = (time: string) => {
-    return `${time}`
-  }
+  // const formatTime = (time: string) => {
+  //   return `${time}`
+  // }
 
   // 보유 포인트 조회 API
   useEffect(() => {
@@ -81,39 +82,39 @@ const CardReservation: React.FC<ResvationType> = ({ counselorId }) => {
   }
 
   // 상담예약생성 API 요청
-  const handleReservationClick = async () => {
-    if (!selectedDate || !selectedTime) {
-      alert('상담 날짜와 시간을 선택해 주세요.')
-      return
-    }
+  // const handleReservationClick = async () => {
+  //   if (!selectedDate || !selectedTime) {
+  //     alert('상담 날짜와 시간을 선택해 주세요.')
+  //     return
+  //   }
 
-    const reservationData = {
-      counselorId,
-      counselDate: formatDateSlash(selectedDate), // "YYYY-MM-DD" 형식
-      counselTime: formatTime(selectedTime), // "HH:MM:SS.00" 형식
-      counselContent,
-      location: meetingType === '온라인' ? onlineOption : address,
-      price: price,
-      point: usedPoints,
-      finalPrice: finalPrice,
-    }
-    try {
-      const accessToken = localStorage.getItem('accessToken')
-      const response = await axios.post('/api/reservation/create', reservationData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+  //   const reservationData = {
+  //     counselorId,
+  //     counselDate: formatDateSlash(selectedDate), // "YYYY-MM-DD" 형식
+  //     counselTime: formatTime(selectedTime), // "HH:MM:SS.00" 형식
+  //     counselContent,
+  //     location: meetingType === '온라인' ? onlineOption : address,
+  //     price: price,
+  //     point: usedPoints,
+  //     finalPrice: finalPrice,
+  //   }
+  //   try {
+  //     const accessToken = localStorage.getItem('accessToken')
+  //     const response = await axios.post('/api/reservation/create', reservationData, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     })
 
-      if (response.data.isSuccess) {
-        // console.log('상담예약 생성 API 결과: ', response.data)
-        setReservationUid(response.data.result.reservationUid)
-      }
-    } catch (error) {
-      console.error('상담예약 생성 API 에러: ', error)
-      alert('예약 요청에 실패했습니다. 다시 시도해 주세요.')
-    }
-  }
+  //     if (response.data.isSuccess) {
+  //       // console.log('상담예약 생성 API 결과: ', response.data)
+  //       setReservationUid(response.data.result.reservationUid)
+  //     }
+  //   } catch (error) {
+  //     console.error('상담예약 생성 API 에러: ', error)
+  //     alert('예약 요청에 실패했습니다. 다시 시도해 주세요.')
+  //   }
+  // }
 
   return (
     <div className="sticky top-[80px] z-10 flex h-auto w-[430px] flex-col gap-[24px] rounded-[10px] bg-white p-[20px] text-black shadow">

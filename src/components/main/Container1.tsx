@@ -138,7 +138,7 @@ const Container1: React.FC = () => {
           }}>
           <div className="flex h-[655px] w-[540px] flex-col items-center bg-white">
             <SearchinModal
-              onSearchInputChange={function (e: React.ChangeEvent<HTMLInputElement>): void {
+              onSearchInputChange={function (): void {
                 throw new Error('Function not implemented.')
               }}
             />
