@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Button from '../common/Button'
