@@ -1,7 +1,7 @@
 import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
-import List from '../components/customerService/List'
 import { Banner } from '../components/customerService/Banner'
+import List from '../components/customerService/List'
 import { useNavigate } from 'react-router-dom'
 
 const CustomerServcie: React.FC = () => {
