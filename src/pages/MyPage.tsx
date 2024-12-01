@@ -1,8 +1,8 @@
 import Footer from '../components/common/Footer'
 import Header from '../components/header/Header'
-import UserInfo from '../components/myPage/UserInfo'
-import PointDetail from '../components/myPage/PointDetail'
-import PaymentDetail from '../components/myPage/PaymentDetail'
+import UserInfo from '../components/mypage/UserInfo'
+import PointDetail from '../components/mypage/PointDetail'
+import PaymentDetail from '../components/mypage/PaymentDetail'
 
 const MyPage: React.FC = () => {
   return (
