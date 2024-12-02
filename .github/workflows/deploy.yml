@@ -3,46 +3,37 @@ name: Deploy to Lightsail
 on:
   push:
     branches:
-      - main  # main 브랜치에 푸시될 때 트리거
+      - main # main 브랜치에 푸쉬할 때 실행
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Repository Checkout
-      - name: Checkout Code
+      # 1. 레포지토리 체크아웃
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Node.js 설치 및 빌드
+      # 2. Node.js 18 설치
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: '18' # 프로젝트에 맞는 Node.js 버전 설정
+          cache: 'yarn' # Yarn 캐시 활성화
 
-      - name: Install Dependencies
-        run: yarn install
+      # 3. 의존성 설치 및 빌드
+      - name: Install dependencies and build
+        run: |
+          yarn install
+          yarn build
 
-      - name: Build Project
-        run: yarn build
-
-      # 3. AWS CLI 설정
-      - name: Configure AWS CLI
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-2  # 해당 AWS 리전
-
-      # 4. Lightsail에 배포
+      # 4. Lightsail 서버로 파일 전송
       - name: Deploy to Lightsail
+        env:
+          LIGHTSAIL_IP: ${{ secrets.LIGHTSAIL_IP }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          aws lightsail push-container-image --service-name humorie-frontend \
-            --image image_name:latest --label latest
-
-      # 5. Lightsail 서비스 업데이트
-      - name: Update Lightsail Service
-        run: |
-          aws lightsail update-container-service \
-            --service-name humorie-frontend \
-            --public-endpoint json_file_with_config
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/lightsail.pem
+          chmod 600 ~/.ssh/lightsail.pem
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/lightsail.pem ubuntu@$LIGHTSAIL_IP "rm -rf /var/www/html/*"
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/lightsail.pem -r ./dist/* ubuntu@$LIGHTSAIL_IP:/var/www/html
